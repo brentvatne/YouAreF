@@ -9,20 +9,24 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import CampaignsScreen from '../screens/CampaignsScreen';
+import ChatScreen from '../screens/ChatScreen';
 
 export default TabNavigator(
   {
     Home: {
       screen: HomeScreen,
     },
-    Profile: {
-      screen: LinksScreen,
-    },
     Campaigns: {
       screen: CampaignsScreen,
     },
-    Discussions: {
+    Deals: {
       screen: SettingsScreen,
+    },
+    Chat: {
+      screen: ChatScreen,
+    },
+    Profile: {
+      screen: LinksScreen,
     },
   },
   {
@@ -33,22 +37,29 @@ export default TabNavigator(
         switch (routeName) {
           case 'Home':
             iconName = Platform.OS === 'ios'
-              ? `ios-information-circle${focused ? '' : '-outline'}`
-              : 'md-information-circle';
-            break;
-          case 'Profile':
-            iconName = Platform.OS === 'ios'
-              ? `ios-link${focused ? '' : '-outline'}`
-              : 'md-link';
+              ? `ios-home${focused ? '' : '-outline'}`
+              : 'md-home';
             break;
           case 'Campaigns':
             iconName = Platform.OS === 'ios'
-              ? `ios-options${focused ? '' : '-outline'}`
-              : 'md-options';
-          case 'Discussions':
+              ? `ios-search${focused ? '' : '-outline'}`
+              : 'md-search';
+              break;
+          case 'Deals':
             iconName = Platform.OS === 'ios'
-              ? `ios-options${focused ? '' : '-outline'}`
-              : 'md-options';
+              ? `ios-checkbox${focused ? '' : '-outline'}`
+              : 'md-checkbox';
+              break;
+          case 'Chat':
+            iconName = Platform.OS === 'ios'
+              ? `ios-chatboxes${focused ? '' : '-outline'}`
+              : 'md-chatboxes';
+            break;
+          case 'Profile':
+            iconName = Platform.OS === 'ios'
+              ? `ios-person${focused ? '' : '-outline'}`
+              : 'md-person';
+            break;
         }
         return (
           <Ionicons
@@ -62,7 +73,7 @@ export default TabNavigator(
     }),
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
-    animationEnabled: false,
+    animationEnabled: true,
     swipeEnabled: false,
   }
 );

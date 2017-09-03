@@ -22,10 +22,7 @@ import {
   Icon, 
   Text,
   Card,
-  CardItem,
-  H1,
-  H2,
-  H3 } from 'native-base';
+  CardItem} from 'native-base';
 
 import { Font } from 'expo';
 
@@ -37,5 +34,15 @@ export default class HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'Deals',
   };
+
+  render() {
+    var deals = [    {"name":"Anshul Mehta","details":"Anshul Mehta 123"},
+                    {"name":"Alok Singh","details":"Anshul 123"}
+                ];
+    return(
+      
+    );
+  }
+}
 
   

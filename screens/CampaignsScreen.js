@@ -17,7 +17,6 @@ export default class CampaignsScreen extends Component {
                     {"name":"Amazon","details":"Amazon 123"},
                     {"name":"Flipkart","details":"Anirudh 123"},
                     {"name":"Snapdeal","details":"Snapdeal 123"}
-
                 ];
     return (
       <Container style={styles.container} >
