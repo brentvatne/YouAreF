@@ -23,9 +23,9 @@ import {
   Text,
   Card,
   CardItem,
-  H1,
-  H2,
-  H3 } from 'native-base';
+  List, 
+  ListItem, 
+  Thumbnail } from 'native-base';
 
 import { Font } from 'expo';
 
@@ -50,41 +50,57 @@ export default class HomeScreen extends React.Component {
   // }
 
   render() {
+    const { navigate } = this.props.navigation;
+    var camp = [    {"name":"Anshul Mehta","details":"Anshul Mehta 123"},
+                    {"name":"Alok Singh","details":"Anshul 123"},
+                    {"name":"Anirudh Khandelwal","details":"Anirudh 123"},
+                    {"name":"Amazon","details":"Amazon 123"}
+
+                ];
+
     return (
       <Container style={styles.container}>
         <Content>
           <Card>
             <CardItem header style={styles.headerText}>
-              <H1> YouAreF </H1>
+              <Text style={{ fontSize:50 }}> YouAreF </Text>
+            </CardItem>
+            <CardItem style={{ alignItems: 'center',justifyContent: 'center' }}>
+              <Text style={{ fontSize:20 }}> Hello Alok !</Text>
             </CardItem>
             <CardItem style={styles.normalText}>
-              <Text> Hello Alok !</Text>
+              <Text style={{ fontSize:30 }}> 0 </Text>
+              <Text style={{ fontSize:30 }}> INR </Text>
             </CardItem>
-            <CardItem style={styles.normalText}>
-              <Text> 0 </Text>
-              <Text> INR </Text>
+            <CardItem style={{alignItems: 'center',justifyContent: 'center',paddingTop:0}}>
+              <View style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderBottomColor: 'black',
+                borderBottomWidth: 0.5,
+                width: 250}}/>
             </CardItem>
-            <CardItem style={styles.normalText}>
+            <CardItem style={{alignItems: 'center',justifyContent: 'center',paddingTop:0}}>
               <Text> earnings so far </Text>
             </CardItem>
           </Card>
 
           <View style={{flex: 1, flexDirection: 'row'}}>
-            <View style={{width: 115, height: 130}}>
+            <View style={{width: 117, height: 110}}>
               <Card>
                 <CardItem style={{ alignItems:"center",justifyContent:"center",paddingTop:40 }}>
                   <Text>Campaigns</Text>
                 </CardItem>
               </Card> 
             </View>
-            <View style={{width: 115, height: 130}}>
+            <View style={{width: 117, height: 110}}>
               <Card>
                 <CardItem style={{ alignItems:"center",justifyContent:"center",paddingTop:40 }}>
                   <Text>Deals</Text>
                 </CardItem>
               </Card> 
             </View>  
-            <View style={{width: 115, height: 130}}>
+            <View style={{width: 117, height: 110}}>
               <Card>
                 <CardItem style={{ alignItems:"center",justifyContent:"center",paddingTop:40 }}>
                   <Text>Approved</Text>
@@ -127,11 +143,21 @@ export default class HomeScreen extends React.Component {
           </Card>
 
           <Text style={{paddingTop:30}}> Campaigns recommended for you </Text>
+            <List dataArray={camp}
+              renderRow={(camp) =>
+                <ListItem onPress={() => navigate('CampaignsDetScreen', { name: `${camp.name}`})}>
+                  <Thumbnail circle size={80} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
+                  <Body>
+                    <Text>{camp.name}</Text>
+                    <Text note>{camp.details}</Text>
+                  </Body>
+                </ListItem>
+              }>
+            </List>
 
+          <Text style={{paddingTop:30}}> Activity around you </Text>
           <Card>
-
           </Card>
-
         </Content>
       </Container>
     );
@@ -141,7 +167,7 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f5f5f5',
   },
   headerText :{
     alignItems: 'center',

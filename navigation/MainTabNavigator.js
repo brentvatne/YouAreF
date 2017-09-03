@@ -8,6 +8,7 @@ import Colors from '../constants/Colors';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import CampaignsScreen from '../screens/CampaignsScreen';
 
 export default TabNavigator(
   {
@@ -17,8 +18,8 @@ export default TabNavigator(
     Profile: {
       screen: LinksScreen,
     },
-    Deals: {
-      screen: SettingsScreen,
+    Campaigns: {
+      screen: CampaignsScreen,
     },
     Discussions: {
       screen: SettingsScreen,
@@ -40,7 +41,7 @@ export default TabNavigator(
               ? `ios-link${focused ? '' : '-outline'}`
               : 'md-link';
             break;
-          case 'Deals':
+          case 'Campaigns':
             iconName = Platform.OS === 'ios'
               ? `ios-options${focused ? '' : '-outline'}`
               : 'md-options';
