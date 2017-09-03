@@ -4,10 +4,31 @@ import {
   Platform,
   ScrollView,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
+
+import { 
+  Container, 
+  Header, 
+  Title, 
+  Content, 
+  Footer, 
+  FooterTab, 
+  Button, 
+  Left, 
+  Right, 
+  Body, 
+  Icon, 
+  Text,
+  Card,
+  CardItem,
+  List, 
+  ListItem, 
+  Thumbnail } from 'native-base';
+
+import { Font } from 'expo';
+
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
@@ -17,100 +38,144 @@ export default class HomeScreen extends React.Component {
     header: null,
   };
 
+  // state = {
+  //   fontLoaded: false,
+  // };
+
+  // componentDidMount() {
+  //   Font.loadAsync({
+  //     'Insanibu': require('./assets/fonts/Insanibu.ttf'),
+  //   });
+  //   this.setState({ fontLoaded: true });
+  // }
+
   render() {
+    const { navigate } = this.props.navigation;
+    var camp = [    {"name":"Anshul Mehta","details":"Anshul Mehta 123"},
+                    {"name":"Alok Singh","details":"Anshul 123"},
+                    {"name":"Anirudh Khandelwal","details":"Anirudh 123"},
+                    {"name":"Amazon","details":"Amazon 123"}
+
+                ];
+
     return (
-      <View style={styles.container}>
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}>
-          
-          <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
+      <Container style={styles.container}>
+        <Content>
+          <Card>
+            <CardItem header style={styles.headerText}>
+              <Text style={{ fontSize:50 }}> YouAreF </Text>
+            </CardItem>
+            <CardItem style={{ alignItems: 'center',justifyContent: 'center' }}>
+              <Text style={{ fontSize:20 }}> Hello Alok !</Text>
+            </CardItem>
+            <CardItem style={styles.normalText}>
+              <Text style={{ fontSize:30 }}> 0 </Text>
+              <Text style={{ fontSize:30 }}> INR </Text>
+            </CardItem>
+            <CardItem style={{alignItems: 'center',justifyContent: 'center',paddingTop:0}}>
+              <View style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderBottomColor: 'black',
+                borderBottomWidth: 0.5,
+                width: 250}}/>
+            </CardItem>
+            <CardItem style={{alignItems: 'center',justifyContent: 'center',paddingTop:0}}>
+              <Text> earnings so far </Text>
+            </CardItem>
+          </Card>
 
-            <Text style={styles.getStartedText}>Hey how you doing</Text>
-
-            <View
-              style={[
-                styles.codeHighlightContainer,
-                styles.homeScreenFilename,
-              ]}>
-              <MonoText style={styles.codeHighlightText}>
-                screens/HomeScreen.js
-              </MonoText>
+          <View style={{flex: 1, flexDirection: 'row'}}>
+            <View style={{width: 117, height: 110}}>
+              <Card>
+                <CardItem style={{ alignItems:"center",justifyContent:"center",paddingTop:40 }}>
+                  <Text>Campaigns</Text>
+                </CardItem>
+              </Card> 
             </View>
-
-            <Text style={styles.getStartedText}>
-              Hello
-            </Text>
+            <View style={{width: 117, height: 110}}>
+              <Card>
+                <CardItem style={{ alignItems:"center",justifyContent:"center",paddingTop:40 }}>
+                  <Text>Deals</Text>
+                </CardItem>
+              </Card> 
+            </View>  
+            <View style={{width: 117, height: 110}}>
+              <Card>
+                <CardItem style={{ alignItems:"center",justifyContent:"center",paddingTop:40 }}>
+                  <Text>Approved</Text>
+                </CardItem>
+              </Card> 
+            </View>
           </View>
 
-          <View style={styles.helpContainer}>
-            <TouchableOpacity
-              onPress={this._handleHelpPress}
-              style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>
-                Help, it didn’t automatically reload!
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
+          <Card>
+            <CardItem>
+              <Text>Campaigns</Text>
+              <Right>
+                <Icon name="arrow-forward" />
+              </Right>
+            </CardItem>
+            <CardItem>
+              <Text>Deals</Text>
+              <Right>
+                <Icon name="arrow-forward" />
+              </Right>
+            </CardItem>
+            <CardItem>
+              <Text>Chats</Text>
+              <Right>
+                <Icon name="arrow-forward" />
+              </Right>
+            </CardItem>
+            <CardItem>
+              <Text>Discussions</Text>
+              <Right>
+                <Icon name="arrow-forward" />
+              </Right>
+            </CardItem>
+            <CardItem>
+              <Text>Notifications</Text>
+              <Right>
+                <Icon name="arrow-forward" />
+              </Right>
+            </CardItem>
+          </Card>
 
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>
-            This is a tab bar. You can edit it in:
-          </Text>
+          <Text style={{paddingTop:30}}> Campaigns recommended for you </Text>
+            <List dataArray={camp}
+              renderRow={(camp) =>
+                <ListItem onPress={() => navigate('CampaignsDetScreen', { name: `${camp.name}`})}>
+                  <Thumbnail circle size={80} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
+                  <Body>
+                    <Text>{camp.name}</Text>
+                    <Text note>{camp.details}</Text>
+                  </Body>
+                </ListItem>
+              }>
+            </List>
 
-          <View
-            style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>
-              navigation/MainTabNavigator.js
-            </MonoText>
-          </View>
-        </View>
-      </View>
+          <Text style={{paddingTop:30}}> Activity around you </Text>
+          <Card>
+          </Card>
+        </Content>
+      </Container>
     );
   }
-
-  _maybeRenderDevelopmentModeWarning() {
-    if (__DEV__) {
-      const learnMoreButton = (
-        <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
-          Learn more
-        </Text>
-      );
-
-      return (
-        <Text style={styles.developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use
-          useful development tools. {learnMoreButton}
-        </Text>
-      );
-    } else {
-      return (
-        <Text style={styles.developmentModeText}>
-          You are not in development mode, your app will run at full speed.
-        </Text>
-      );
-    }
-  }
-
-  _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/development-mode'
-    );
-  };
-
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
-    );
-  };
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f5f5f5',
+  },
+  headerText :{
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  normalText :{
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   developmentModeText: {
     marginBottom: 20,

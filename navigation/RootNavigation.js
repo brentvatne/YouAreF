@@ -3,6 +3,7 @@ import React from 'react';
 import { StackNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
+import CampaignsDetScreen from '../screens/CampaignsDetScreen';
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
 const RootStackNavigator = StackNavigator(
@@ -10,6 +11,10 @@ const RootStackNavigator = StackNavigator(
     Main: {
       screen: MainTabNavigator,
     },
+    CampaignsDetScreen: {
+      screen: CampaignsDetScreen,
+    },
+
   },
   {
     navigationOptions: () => ({
