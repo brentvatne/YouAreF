@@ -86,21 +86,21 @@ export default class HomeScreen extends React.Component {
           </Card>
 
           <View style={{flex: 1, flexDirection: 'row'}}>
-            <View style={{width: 117, height: 110}}>
+            <View style={{width: 118, height: 110}}>
               <Card>
                 <CardItem style={{ alignItems:"center",justifyContent:"center",paddingTop:40 }}>
                   <Text>Campaigns</Text>
                 </CardItem>
               </Card> 
             </View>
-            <View style={{width: 117, height: 110}}>
+            <View style={{width: 118, height: 110}}>
               <Card>
                 <CardItem style={{ alignItems:"center",justifyContent:"center",paddingTop:40 }}>
                   <Text>Deals</Text>
                 </CardItem>
               </Card> 
             </View>  
-            <View style={{width: 117, height: 110}}>
+            <View style={{width: 118, height: 110}}>
               <Card>
                 <CardItem style={{ alignItems:"center",justifyContent:"center",paddingTop:40 }}>
                   <Text>Approved</Text>
