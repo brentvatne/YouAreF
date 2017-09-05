@@ -9,10 +9,11 @@ export default class CampaignsDetScreen extends Component {
 
   render() {
     const { params } = this.props.navigation.state;
+    const { navigate } = this.props.navigation;
     return (
       <Container style={styles.container}>
         <Content>
-          <Thumbnail style={styles.image} large source={{uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg'}} />
+          <Image style={styles.image}  borderRadius={10} source={{uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg'}} />
           <Text style={styles.thumbnailText}> {params.name} </Text>
           
           <List>
@@ -73,7 +74,7 @@ export default class CampaignsDetScreen extends Component {
               <Icon ios='ios-paper' android="md-paper" style={{fontSize: 20}}/>
               <Text>Training</Text>
             </Button>
-            <Button light>
+            <Button light onPress={() => navigate('PlansScreen')}>
               <Icon ios='ios-alarm' android="md-alarm" style={{fontSize: 20}}/>
               <Text>Plans</Text>
             </Button>
@@ -133,8 +134,11 @@ const styles = StyleSheet.create({
   alignSelf: 'center', 
   marginTop: 10,
   marginBottom: 10,  
+  resizeMode: 'contain',
   borderColor: '#ddd',
-  borderWidth: 2
+  borderWidth: 1,
+  height: 100,
+  width: 100,
   },
 
   thumbnailText: {

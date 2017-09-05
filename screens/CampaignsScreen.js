@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body } from 'native-base';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 export default class CampaignsScreen extends Component {
   
   static navigationOptions = {
@@ -24,7 +24,7 @@ export default class CampaignsScreen extends Component {
           <List dataArray={camp}
             renderRow={(camp) =>
             <ListItem onPress={() => navigate('CampaignsDetScreen', { name: `${camp.name}`})}>
-              <Thumbnail circle size={80} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
+              <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
               <Body>
                 <Text>{camp.name}</Text>
                 <Text note>{camp.details}</Text>
@@ -41,5 +41,12 @@ export default class CampaignsScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ffffff',
+  },
+  thumbnailStyle: {
+    resizeMode: 'contain',
+    borderColor: '#ddd',
+    borderWidth: 1,
+    height: 60,
+    width: 60,
   },
 });
