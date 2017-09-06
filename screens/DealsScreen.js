@@ -1,48 +1,53 @@
 import React from 'react';
-import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { StyleSheet,View } from 'react-native';
+import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body } from 'native-base';
 
-import { 
-  Container, 
-  Header, 
-  Title, 
-  Content, 
-  Footer, 
-  FooterTab, 
-  Button, 
-  Left, 
-  Right, 
-  Body, 
-  Icon, 
-  Text,
-  Card,
-  CardItem} from 'native-base';
-
-import { Font } from 'expo';
-
-import { WebBrowser } from 'expo';
-
-import { MonoText } from '../components/StyledText';
-
-export default class HomeScreen extends React.Component {
+export default class SettingsScreen extends React.Component {
   static navigationOptions = {
     title: 'Deals',
   };
 
   render() {
-    var deals = [    {"name":"Anshul Mehta","details":"Anshul Mehta 123"},
-                    {"name":"Alok Singh","details":"Anshul 123"}
-                ];
-    return(
-      
+    const { navigate } = this.props.navigation;
+    var deals = [{"name":"Amazon","status":"Approved","buyer":"Anirudh Khandelwal","date":"28th August 2017"},
+                {"name":"Snapdeal","status":"Rejected","buyer":"Anshul Mehta","date":"28th August 2017"},
+                {"name":"MOD","status":"Floating","buyer":"Alok Singh","date":"28th August 2017"}];
+    return (
+      <Container style={styles.container}>
+        <Content>
+          <List dataArray={deals}
+            renderRow={(deals) =>
+            <ListItem onPress={() => navigate('DealsDetScreen', { name: `${deals.name}`})}>
+              <Body>
+                <View style={{ flex:1,flexDirection: 'row',alignItems:'flex-start',justifyContent:'flex-start' }}>
+                  <Text> {deals.name} </Text> 
+                  <Text style={{backgroundColor:'#696969',color:'#ffffff'}}>  {deals.status} </Text>
+                </View>
+                <View style={{ flex:1,flexDirection: 'row',alignItems:'flex-start',justifyContent:'flex-start' }}>
+                  <Text style={{ fontSize: 12,color: '#778899' }}> Buyer: </Text> 
+                  <Text style={{ fontSize: 12,color: '#778899' }}>  {deals.buyer} </Text>
+                </View>
+                <View style={{ flex:1,flexDirection: 'row',alignItems:'flex-start',justifyContent:'flex-start' }}>
+                  <Text style={{ fontSize: 12,color: '#778899' }}> Date: </Text> 
+                  <Text style={{ fontSize: 12,color: '#778899' }}> {deals.date} </Text>
+                </View>
+              </Body>
+            </ListItem>
+          }>
+          </List>
+        </Content>
+      </Container>    
     );
   }
 }
 
-  
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#ffffff',
+  },
+  status: {
+
+  }
+});
+
+
