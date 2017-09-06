@@ -24,12 +24,12 @@ export default class SettingsScreen extends React.Component {
                   <Text style={{backgroundColor:'#696969',color:'#ffffff'}}>  {deals.status} </Text>
                 </View>
                 <View style={{ flex:1,flexDirection: 'row',alignItems:'flex-start',justifyContent:'flex-start' }}>
-                  <Text style={{ fontSize: 12,color: '#778899' }}> Buyer: </Text> 
-                  <Text style={{ fontSize: 12,color: '#778899' }}>  {deals.buyer} </Text>
+                  <Text style={{ fontSize: 12,color: '#007bb6' }}> Buyer: </Text> 
+                  <Text style={{ fontSize: 12,color: '#007bb6' }}>  {deals.buyer} </Text>
                 </View>
                 <View style={{ flex:1,flexDirection: 'row',alignItems:'flex-start',justifyContent:'flex-start' }}>
-                  <Text style={{ fontSize: 12,color: '#778899' }}> Date: </Text> 
-                  <Text style={{ fontSize: 12,color: '#778899' }}> {deals.date} </Text>
+                  <Text style={{ fontSize: 12,color: '#007bb6' }}> Date: </Text> 
+                  <Text style={{ fontSize: 12,color: '#007bb6' }}> {deals.date} </Text>
                 </View>
               </Body>
             </ListItem>

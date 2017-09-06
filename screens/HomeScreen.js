@@ -61,49 +61,58 @@ export default class HomeScreen extends React.Component {
     return (
       <Container style={styles.container}>
         <Content>
-          <Card>
-            <CardItem header style={styles.headerText}>
-              <Text style={{ fontSize:50 }}> YouAreF </Text>
-            </CardItem>
-            <CardItem style={{ alignItems: 'center',justifyContent: 'center' }}>
-              <Text style={{ fontSize:20 }}> Hello Alok !</Text>
-            </CardItem>
-            <CardItem style={styles.normalText}>
-              <Text style={{ fontSize:30 }}> 0 </Text>
-              <Text style={{ fontSize:30 }}> INR </Text>
-            </CardItem>
-            <CardItem style={{alignItems: 'center',justifyContent: 'center',paddingTop:0}}>
-              <View style={{
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderBottomColor: 'black',
-                borderBottomWidth: 0.5,
-                width: 250}}/>
-            </CardItem>
-            <CardItem style={{alignItems: 'center',justifyContent: 'center',paddingTop:0}}>
-              <Text> earnings so far </Text>
-            </CardItem>
-          </Card>
+            <Card style={{backgroundColor:"#0077b5"}}>
+              <CardItem header style={styles.headerText}>
+                <Text style={{ fontSize:50,color:'#ffffff' }}> YouAreF </Text>
+              </CardItem>
+              <CardItem style={{ alignItems: 'center',justifyContent: 'center',backgroundColor:'#0077b5' }}>
+                <Text style={{ fontSize:20,color:'#ffffff' }}> Hello Alok !</Text>
+              </CardItem>
+              <CardItem style={styles.normalText}>
+                <Text style={{ fontSize:30,color:'#ffffff' }}> 0 </Text>
+                <Text style={{ fontSize:30,color:'#ffffff' }}> INR </Text>
+              </CardItem>
+              <CardItem style={{alignItems: 'center',justifyContent: 'center',paddingTop:0,backgroundColor:'#0077b5'}}>
+                <View style={{
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderBottomColor: 'black',
+                  borderBottomWidth: 1.0,
+                  width: 250}}/>
+              </CardItem>
+              <CardItem style={{ alignItems: 'center',justifyContent: 'center',paddingTop:0,backgroundColor:'#0077b5' }}>
+                <Text style={{ color:'#ffffff' }}> earnings so far </Text>
+              </CardItem>
+            </Card>
 
           <View style={{flex: 1, flexDirection: 'row'}}>
             <View style={{width: 118, height: 110}}>
               <Card>
-                <CardItem style={{ alignItems:"center",justifyContent:"center",paddingTop:40 }}>
-                  <Text>Campaigns</Text>
+                <CardItem>
+                  <Body style={{ alignItems:"center",justifyContent:"center",paddingTop:10 }}>
+                    <Text style={{fontSize: 30}}> 2 </Text>
+                    <Text  style={styles.smallText}>campaigns</Text>
+                  </Body>
                 </CardItem>
               </Card> 
             </View>
             <View style={{width: 118, height: 110}}>
               <Card>
-                <CardItem style={{ alignItems:"center",justifyContent:"center",paddingTop:40 }}>
-                  <Text>Deals</Text>
+                <CardItem>
+                  <Body style={{ alignItems:"center",justifyContent:"center",paddingTop:10 }}>
+                    <Text style={{fontSize: 30}}> 1 </Text>
+                    <Text  style={styles.smallText}>total deals</Text>
+                  </Body>
                 </CardItem>
               </Card> 
             </View>  
             <View style={{width: 118, height: 110}}>
               <Card>
-                <CardItem style={{ alignItems:"center",justifyContent:"center",paddingTop:40 }}>
-                  <Text>Approved</Text>
+                <CardItem>
+                  <Body style={{ alignItems:"center",justifyContent:"center",paddingTop:10 }}>
+                    <Text style={{fontSize: 30}}> 0 </Text>
+                    <Text  style={styles.smallText}>approved</Text>
+                  </Body>
                 </CardItem>
               </Card> 
             </View>
@@ -172,10 +181,16 @@ const styles = StyleSheet.create({
   headerText :{
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor:'#0077b5',
   },
   normalText :{
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor:'#0077b5',
+  },
+  smallText :{
+    fontSize: 12,
+    color: '#0077b5'
   },
   thumbnailStyle: {
     resizeMode: 'contain',
