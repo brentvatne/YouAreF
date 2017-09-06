@@ -7,9 +7,9 @@ import Colors from '../constants/Colors';
 
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
 import CampaignsScreen from '../screens/CampaignsScreen';
 import ChatScreen from '../screens/ChatScreen';
+import DealsScreen from '../screens/DealsScreen';
 
 export default TabNavigator(
   {
@@ -20,7 +20,7 @@ export default TabNavigator(
       screen: CampaignsScreen,
     },
     Deals: {
-      screen: SettingsScreen,
+      screen: DealsScreen,
     },
     Chat: {
       screen: ChatScreen,
@@ -73,7 +73,7 @@ export default TabNavigator(
     }),
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
-    animationEnabled: true,
+    animationEnabled: false,
     swipeEnabled: false,
   }
 );

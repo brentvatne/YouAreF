@@ -5,6 +5,7 @@ import { StackNavigator } from 'react-navigation';
 import MainTabNavigator from './MainTabNavigator';
 import CampaignsDetScreen from '../screens/CampaignsDetScreen';
 import PlansScreen from '../screens/PlansScreen';
+import DealsDetScreen from '../screens/DealsDetScreen';
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
 const RootStackNavigator = StackNavigator(
@@ -18,7 +19,9 @@ const RootStackNavigator = StackNavigator(
     PlansScreen: {
       screen: PlansScreen,
     },
-
+    DealsDetScreen: {
+      screen: DealsDetScreen,
+    }
   },
   {
     navigationOptions: () => ({
