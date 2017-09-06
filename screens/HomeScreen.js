@@ -146,7 +146,7 @@ export default class HomeScreen extends React.Component {
             <List dataArray={camp}
               renderRow={(camp) =>
                 <ListItem onPress={() => navigate('CampaignsDetScreen', { name: `${camp.name}`})}>
-                  <Thumbnail circle size={80} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
+                  <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
                   <Body>
                     <Text>{camp.name}</Text>
                     <Text note>{camp.details}</Text>
@@ -176,6 +176,13 @@ const styles = StyleSheet.create({
   normalText :{
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  thumbnailStyle: {
+    resizeMode: 'contain',
+    borderColor: '#ddd',
+    borderWidth: 1,
+    height: 60,
+    width: 60,
   },
   developmentModeText: {
     marginBottom: 20,
