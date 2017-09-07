@@ -6,7 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
-} from 'react-native';
+  TouchableHighlight,} from 'react-native';
 
 import { 
   Container, 
@@ -28,10 +28,10 @@ import {
   Thumbnail } from 'native-base';
 
 import { Font } from 'expo';
-
 import { WebBrowser } from 'expo';
-
 import { MonoText } from '../components/StyledText';
+import ActionButton from 'react-native-action-button';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -59,116 +59,124 @@ export default class HomeScreen extends React.Component {
                 ];
 
     return (
-      <Container style={styles.container}>
-        <Content>
-            <Card style={{backgroundColor:"#0077b5"}}>
-              <CardItem header style={styles.headerText}>
-                <Text style={{ fontSize:50,color:'#ffffff' }}> YouAreF </Text>
+        <Container style={styles.container}>
+          <Content>
+              <Card style={{backgroundColor:"#0077b5"}}>
+                <CardItem header style={styles.headerText}>
+                  <Text style={{ fontSize:50,color:'#ffffff' }}> YouAreF </Text>
+                </CardItem>
+                <CardItem style={{ alignItems: 'center',justifyContent: 'center',backgroundColor:'#0077b5' }}>
+                  <Text style={{ fontSize:20,color:'#ffffff' }}> Hello Alok !</Text>
+                </CardItem>
+                <CardItem style={styles.normalText}>
+                  <Text style={{ fontSize:30,color:'#ffffff' }}> 0 </Text>
+                  <Text style={{ fontSize:30,color:'#ffffff' }}> INR </Text>
+                </CardItem>
+                <CardItem style={{alignItems: 'center',justifyContent: 'center',paddingTop:0,backgroundColor:'#0077b5'}}>
+                  <View style={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderBottomColor: 'black',
+                    borderBottomWidth: 1.0,
+                    width: 250}}/>
+                </CardItem>
+                <CardItem style={{ alignItems: 'center',justifyContent: 'center',paddingTop:0,backgroundColor:'#0077b5' }}>
+                  <Text style={{ color:'#ffffff' }}> earnings so far </Text>
+                </CardItem>
+              </Card>
+
+            <View style={{flex: 1, flexDirection: 'row'}}>
+              <View style={{width: 118, height: 110}}>
+                <Card>
+                  <CardItem>
+                    <Body style={{ alignItems:"center",justifyContent:"center",paddingTop:10 }}>
+                      <Text style={{fontSize: 30}}> 2 </Text>
+                      <Text  style={styles.smallText}>campaigns</Text>
+                    </Body>
+                  </CardItem>
+                </Card> 
+              </View>
+              <View style={{width: 118, height: 110}}>
+                <Card>
+                  <CardItem>
+                    <Body style={{ alignItems:"center",justifyContent:"center",paddingTop:10 }}>
+                      <Text style={{fontSize: 30}}> 1 </Text>
+                      <Text  style={styles.smallText}>total deals</Text>
+                    </Body>
+                  </CardItem>
+                </Card> 
+              </View>  
+              <View style={{width: 118, height: 110}}>
+                <Card>
+                  <CardItem>
+                    <Body style={{ alignItems:"center",justifyContent:"center",paddingTop:10 }}>
+                      <Text style={{fontSize: 30}}> 0 </Text>
+                      <Text  style={styles.smallText}>approved</Text>
+                    </Body>
+                  </CardItem>
+                </Card> 
+              </View>
+            </View>
+
+            <Card>
+              <CardItem>
+                <Text>Campaigns</Text>
+                <Right>
+                  <Icon name="arrow-forward" />
+                </Right>
               </CardItem>
-              <CardItem style={{ alignItems: 'center',justifyContent: 'center',backgroundColor:'#0077b5' }}>
-                <Text style={{ fontSize:20,color:'#ffffff' }}> Hello Alok !</Text>
+              <CardItem>
+                <Text>Deals</Text>
+                <Right>
+                  <Icon name="arrow-forward" />
+                </Right>
               </CardItem>
-              <CardItem style={styles.normalText}>
-                <Text style={{ fontSize:30,color:'#ffffff' }}> 0 </Text>
-                <Text style={{ fontSize:30,color:'#ffffff' }}> INR </Text>
+              <CardItem>
+                <Text>Chats</Text>
+                <Right>
+                  <Icon name="arrow-forward" />
+                </Right>
               </CardItem>
-              <CardItem style={{alignItems: 'center',justifyContent: 'center',paddingTop:0,backgroundColor:'#0077b5'}}>
-                <View style={{
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderBottomColor: 'black',
-                  borderBottomWidth: 1.0,
-                  width: 250}}/>
+              <CardItem>
+                <Text>Discussions</Text>
+                <Right>
+                  <Icon name="arrow-forward" />
+                </Right>
               </CardItem>
-              <CardItem style={{ alignItems: 'center',justifyContent: 'center',paddingTop:0,backgroundColor:'#0077b5' }}>
-                <Text style={{ color:'#ffffff' }}> earnings so far </Text>
+              <CardItem>
+                <Text>Notifications</Text>
+                <Right>
+                  <Icon name="arrow-forward" />
+                </Right>
               </CardItem>
             </Card>
 
-          <View style={{flex: 1, flexDirection: 'row'}}>
-            <View style={{width: 118, height: 110}}>
-              <Card>
-                <CardItem>
-                  <Body style={{ alignItems:"center",justifyContent:"center",paddingTop:10 }}>
-                    <Text style={{fontSize: 30}}> 2 </Text>
-                    <Text  style={styles.smallText}>campaigns</Text>
-                  </Body>
-                </CardItem>
-              </Card> 
-            </View>
-            <View style={{width: 118, height: 110}}>
-              <Card>
-                <CardItem>
-                  <Body style={{ alignItems:"center",justifyContent:"center",paddingTop:10 }}>
-                    <Text style={{fontSize: 30}}> 1 </Text>
-                    <Text  style={styles.smallText}>total deals</Text>
-                  </Body>
-                </CardItem>
-              </Card> 
-            </View>  
-            <View style={{width: 118, height: 110}}>
-              <Card>
-                <CardItem>
-                  <Body style={{ alignItems:"center",justifyContent:"center",paddingTop:10 }}>
-                    <Text style={{fontSize: 30}}> 0 </Text>
-                    <Text  style={styles.smallText}>approved</Text>
-                  </Body>
-                </CardItem>
-              </Card> 
-            </View>
-          </View>
+            <Text style={{paddingTop:30}}> Campaigns recommended for you </Text>
+              <List dataArray={camp}
+                renderRow={(camp) =>
+                  <ListItem onPress={() => navigate('CampaignsDetScreen', { name: `${camp.name}`})}>
+                    <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
+                    <Body>
+                      <Text>{camp.name}</Text>
+                      <Text note>{camp.details}</Text>
+                    </Body>
+                  </ListItem>
+                }>
+              </List>
 
-          <Card>
-            <CardItem>
-              <Text>Campaigns</Text>
-              <Right>
-                <Icon name="arrow-forward" />
-              </Right>
-            </CardItem>
-            <CardItem>
-              <Text>Deals</Text>
-              <Right>
-                <Icon name="arrow-forward" />
-              </Right>
-            </CardItem>
-            <CardItem>
-              <Text>Chats</Text>
-              <Right>
-                <Icon name="arrow-forward" />
-              </Right>
-            </CardItem>
-            <CardItem>
-              <Text>Discussions</Text>
-              <Right>
-                <Icon name="arrow-forward" />
-              </Right>
-            </CardItem>
-            <CardItem>
-              <Text>Notifications</Text>
-              <Right>
-                <Icon name="arrow-forward" />
-              </Right>
-            </CardItem>
-          </Card>
-
-          <Text style={{paddingTop:30}}> Campaigns recommended for you </Text>
-            <List dataArray={camp}
-              renderRow={(camp) =>
-                <ListItem onPress={() => navigate('CampaignsDetScreen', { name: `${camp.name}`})}>
-                  <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
-                  <Body>
-                    <Text>{camp.name}</Text>
-                    <Text note>{camp.details}</Text>
-                  </Body>
-                </ListItem>
-              }>
-            </List>
-
-          <Text style={{paddingTop:30}}> Activity around you </Text>
-          <Card>
-          </Card>
-        </Content>
-      </Container>
+            <Text style={{paddingTop:30}}> Activity around you </Text>
+            <Card>
+            </Card>
+          </Content>
+          <ActionButton buttonColor="rgba(231,76,60,1)">
+            <ActionButton.Item buttonColor='#9b59b6' title="Call" onPress={() => console.log("notes tapped!")}>
+              <Ionicons name="md-call" style={styles.actionButtonIcon} />
+            </ActionButton.Item>
+            <ActionButton.Item buttonColor='#1abc9c' title="Chat" onPress={() => {}}>
+              <Ionicons name="md-chatboxes" style={styles.actionButtonIcon} />
+            </ActionButton.Item>
+          </ActionButton>
+        </Container>
     );
   }
 }
@@ -198,6 +206,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     height: 60,
     width: 60,
+  },
+  actionButtonIcon: {
+    fontSize: 20,
+    height: 22,
+    color: 'white',
   },
   developmentModeText: {
     marginBottom: 20,
