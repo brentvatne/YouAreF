@@ -32,6 +32,7 @@ import { WebBrowser } from 'expo';
 import { MonoText } from '../components/StyledText';
 import ActionButton from 'react-native-action-button';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import call from 'react-native-phone-call'
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -51,6 +52,11 @@ export default class HomeScreen extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
+    const args = {
+      number: '8505960948', // String value with the number to call 
+      prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call  
+    }
+
     var camp = [    {"name":"Anshul Mehta","details":"Anshul Mehta 123"},
                     {"name":"Alok Singh","details":"Anshul 123"},
                     {"name":"Anirudh Khandelwal","details":"Anirudh 123"},
@@ -169,7 +175,7 @@ export default class HomeScreen extends React.Component {
             </Card>
           </Content>
           <ActionButton buttonColor="rgba(231,76,60,1)">
-            <ActionButton.Item buttonColor='#9b59b6' title="Call" onPress={() => console.log("notes tapped!")}>
+            <ActionButton.Item buttonColor='#9b59b6' title="Call" onPress={() => call(args).catch(console.error)}>
               <Ionicons name="md-call" style={styles.actionButtonIcon} />
             </ActionButton.Item>
             <ActionButton.Item buttonColor='#1abc9c' title="Chat" onPress={() => {}}>
