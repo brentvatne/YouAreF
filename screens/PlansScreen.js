@@ -24,7 +24,7 @@ export default class PlansScreen extends Component {
             
             <View style={styles.listStyle} >
                 <Separator bordered>
-                  <Text style={{ fontSize: 15 }} >Plan #123</Text>
+                  <Text style={{ fontSize: 15 }} >Plan #1234</Text>
                 </Separator>
                 <ListItem>
                   <Body>
