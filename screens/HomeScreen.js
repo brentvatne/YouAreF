@@ -25,30 +25,28 @@ import {
   CardItem,
   List, 
   ListItem, 
-  Thumbnail } from 'native-base';
+  Thumbnail,
+  Fab,
+  Badge } from 'native-base';
 
 import { Font } from 'expo';
 import { WebBrowser } from 'expo';
 import { MonoText } from '../components/StyledText';
 import ActionButton from 'react-native-action-button';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import call from 'react-native-phone-call'
+import call from 'react-native-phone-call';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
 
-  // state = {
-  //   fontLoaded: false,
-  // };
-
-  // componentDidMount() {
-  //   Font.loadAsync({
-  //     'Insanibu': require('./assets/fonts/Insanibu.ttf'),
-  //   });
-  //   this.setState({ fontLoaded: true });
-  // }
+  constructor() {
+    super();
+    this.state = {
+      active: 'true'
+    };
+  }
 
   render() {
     const { navigate } = this.props.navigation;
@@ -91,48 +89,48 @@ export default class HomeScreen extends React.Component {
                 </CardItem>
               </Card>
 
-            <View style={{flex: 1, flexDirection: 'row'}}>
-              <View style={{width: 118, height: 110}}>
+            <View style={{ flex: 1, flexDirection: 'row', alignSelf:'stretch' ,position:'relative'}}>
+              <View style={{ flex:1,height: 110, alignSelf:'stretch', position:'relative' }}>
                 <Card>
                   <CardItem>
                     <Body style={{ alignItems:"center",justifyContent:"center",paddingTop:10 }}>
-                      <Text style={{fontSize: 30}}> 2 </Text>
-                      <Text  style={styles.smallText}>campaigns</Text>
+                      <Text style={{fontSize: 30}} onPress={() => navigate('CampaignsScreen')}> 2 </Text>
+                      <Text  style={styles.smallText} onPress={() => navigate('CampaignsScreen')}>campaigns</Text>
                     </Body>
                   </CardItem>
                 </Card> 
               </View>
-              <View style={{width: 118, height: 110}}>
+              <View style={{ flex:1, alignSelf:'stretch',position:'relative'}}>
                 <Card>
                   <CardItem>
                     <Body style={{ alignItems:"center",justifyContent:"center",paddingTop:10 }}>
-                      <Text style={{fontSize: 30}}> 1 </Text>
-                      <Text  style={styles.smallText}>total deals</Text>
+                      <Text style={{fontSize: 30}} onPress={() => navigate('DealsScreen')}> 1 </Text>
+                      <Text  style={styles.smallText} onPress={() => navigate('DealsScreen')}>total deals</Text>
                     </Body>
                   </CardItem>
                 </Card> 
               </View>  
-              <View style={{width: 118, height: 110}}>
+              <View style={{ flex:1, alignSelf:'stretch',position:'relative'}}>
                 <Card>
                   <CardItem>
                     <Body style={{ alignItems:"center",justifyContent:"center",paddingTop:10 }}>
-                      <Text style={{fontSize: 30}}> 0 </Text>
-                      <Text  style={styles.smallText}>approved</Text>
+                      <Text style={{fontSize: 30}} onPress={() => navigate('DealsScreen')}> 0 </Text>
+                      <Text  style={styles.smallText} onPress={() => navigate('DealsScreen')}>approved</Text>
                     </Body>
                   </CardItem>
                 </Card> 
               </View>
             </View>
 
-            <Card>
-              <CardItem>
-                <Text>Campaigns</Text>
+            {/*<Card>
+              <CardItem onPress={() => navigate('CampaignsScreen')}>
+                <Text onPress={() => navigate('CampaignsScreen')}>Campaigns</Text>
                 <Right>
                   <Icon name="arrow-forward" />
                 </Right>
               </CardItem>
-              <CardItem>
-                <Text>Deals</Text>
+              <CardItem onPress={() => navigate('DealsScreen')}>
+                <Text onPress={() => navigate('DealsScreen')}>Deals</Text>
                 <Right>
                   <Icon name="arrow-forward" />
                 </Right>
@@ -155,20 +153,44 @@ export default class HomeScreen extends React.Component {
                   <Icon name="arrow-forward" />
                 </Right>
               </CardItem>
-            </Card>
+            </Card>*/}
+
+            <List>
+            <ListItem onPress={() => navigate('CampaignsScreen')}>
+              <Text>Campaigns</Text>
+              <Right>
+                <Icon name="arrow-forward" />
+              </Right>
+            </ListItem>
+            <ListItem onPress={() => navigate('DealsScreen')}>
+              <Text>Deals</Text>
+              <Right>
+                <Icon name="arrow-forward" />
+              </Right>
+            </ListItem>
+            <ListItem onPress={() => navigate('ChatScreen')}>
+              <Text>Chats</Text>
+            </ListItem>
+            <ListItem>
+              <Text>Discussions</Text>
+            </ListItem>
+            <ListItem>
+              <Text>Notifications</Text>
+            </ListItem>
+          </List>
 
             <Text style={{paddingTop:30}}> Campaigns recommended for you </Text>
-              <List dataArray={camp}
-                renderRow={(camp) =>
-                  <ListItem onPress={() => navigate('CampaignsDetScreen', { name: `${camp.name}`})}>
-                    <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
-                    <Body>
-                      <Text>{camp.name}</Text>
-                      <Text note>{camp.details}</Text>
-                    </Body>
-                  </ListItem>
-                }>
-              </List>
+            <List dataArray={camp}
+              renderRow={(camp) =>
+                <ListItem onPress={() => navigate('CampaignsDetScreen', { name: `${camp.name}`})}>
+                  <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
+                  <Body>
+                    <Text>{camp.name}</Text>
+                    <Text note>{camp.details}</Text>
+                  </Body>
+                </ListItem>
+              }>
+            </List>
 
             <Text style={{paddingTop:30}}> Activity around you </Text>
             <Card>
@@ -178,10 +200,28 @@ export default class HomeScreen extends React.Component {
             <ActionButton.Item buttonColor='#9b59b6' title="Call" onPress={() => call(args).catch(console.error)}>
               <Ionicons name="md-call" style={styles.actionButtonIcon} />
             </ActionButton.Item>
-            <ActionButton.Item buttonColor='#1abc9c' title="Chat" onPress={() => {}}>
+            <ActionButton.Item buttonColor='#1abc9c' title="Chat" onPress={() => navigate('ChatScreen')}>
               <Ionicons name="md-chatboxes" style={styles.actionButtonIcon} />
             </ActionButton.Item>
           </ActionButton>
+          {/*<Fab
+            active={this.state.active}
+            direction="up"
+            containerStyle={{ }}
+            style={{ backgroundColor: '#5067FF' }}
+            position="bottomRight"
+            onPress={() => this.setState({ active: !this.state.active })}>
+            <Icon name="share" />
+            <Button style={{ backgroundColor: '#34A34F' }}>
+              <Icon name="logo-whatsapp" />
+            </Button>
+            <Button style={{ backgroundColor: '#3B5998' }}>
+              <Icon name="logo-facebook" />
+            </Button>
+            <Button disabled style={{ backgroundColor: '#DD5144' }}>
+              <Icon name="mail" />
+            </Button>
+          </Fab>*/}
         </Container>
     );
   }

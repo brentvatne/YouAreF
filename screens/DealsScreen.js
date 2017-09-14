@@ -4,7 +4,7 @@ import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body } fro
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
-    title: 'Deals',
+    title: 'Your Deals',
   };
 
   render() {

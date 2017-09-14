@@ -6,6 +6,9 @@ import MainTabNavigator from './MainTabNavigator';
 import CampaignsDetScreen from '../screens/CampaignsDetScreen';
 import PlansScreen from '../screens/PlansScreen';
 import DealsDetScreen from '../screens/DealsDetScreen';
+import ChatScreen from '../screens/ChatScreen';
+import DealsScreen from '../screens/DealsScreen';
+import CampaignsScreen from '../screens/CampaignsScreen';
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
 const RootStackNavigator = StackNavigator(
@@ -21,7 +24,16 @@ const RootStackNavigator = StackNavigator(
     },
     DealsDetScreen: {
       screen: DealsDetScreen,
-    }
+    },
+    ChatScreen: {
+      screen: ChatScreen,
+    },
+    CampaignsScreen: {
+      screen: CampaignsScreen,
+    },
+    DealsScreen: {
+      screen: DealsScreen,
+    },
   },
   {
     navigationOptions: () => ({
