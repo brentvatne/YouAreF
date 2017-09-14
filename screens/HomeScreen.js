@@ -72,7 +72,7 @@ export default class HomeScreen extends React.Component {
                 <CardItem style={{ alignItems: 'center',justifyContent: 'center',backgroundColor:'#0077b5' }}>
                   <Text style={{ fontSize:20,color:'#ffffff' }}> Hello Alok !</Text>
                 </CardItem>
-                <CardItem style={styles.normalText}>
+                <CardItem  style={styles.normalText}>
                   <Text style={{ fontSize:30,color:'#ffffff' }}> 0 </Text>
                   <Text style={{ fontSize:30,color:'#ffffff' }}> INR </Text>
                 </CardItem>
