@@ -6,9 +6,9 @@ import { TabNavigator, TabBarBottom } from 'react-navigation';
 import Colors from '../constants/Colors';
 
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import MenuScreen from '../screens/MenuScreen';
 import CampaignsScreen from '../screens/CampaignsScreen';
-import ChatScreen from '../screens/ChatScreen';
+import AllPlansScreen from '../screens/AllPlansScreen';
 import DealsScreen from '../screens/DealsScreen';
 
 export default TabNavigator(
@@ -19,14 +19,11 @@ export default TabNavigator(
     Campaigns: {
       screen: CampaignsScreen,
     },
-    Deals: {
-      screen: DealsScreen,
+    AllPlans: {
+      screen: AllPlansScreen,
     },
-    Chat: {
-      screen: ChatScreen,
-    },
-    Profile: {
-      screen: LinksScreen,
+    Menu: {
+      screen: MenuScreen,
     },
   },
   {
@@ -45,20 +42,15 @@ export default TabNavigator(
               ? `ios-search${focused ? '' : '-outline'}`
               : 'md-search';
               break;
-          case 'Deals':
-            iconName = Platform.OS === 'ios'
-              ? `ios-checkbox${focused ? '' : '-outline'}`
-              : 'md-checkbox';
-              break;
-          case 'Chat':
+          case 'AllPlans':
             iconName = Platform.OS === 'ios'
               ? `ios-chatboxes${focused ? '' : '-outline'}`
               : 'md-chatboxes';
             break;
-          case 'Profile':
+          case 'Menu':
             iconName = Platform.OS === 'ios'
-              ? `ios-person${focused ? '' : '-outline'}`
-              : 'md-person';
+              ? `ios-menu${focused ? '' : '-outline'}`
+              : 'md-menu';
             break;
         }
         return (
