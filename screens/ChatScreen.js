@@ -4,7 +4,7 @@ import { ExpoLinksView } from '@expo/samples';
 
 export default class ChatScreen extends React.Component {
   static navigationOptions = {
-    title: 'Chat',
+    title: 'Plans',
   };
 
   render() {

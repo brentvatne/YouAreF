@@ -22,7 +22,7 @@ export default TabNavigator(
     Deals: {
       screen: DealsScreen,
     },
-    Chat: {
+    Plans: {
       screen: ChatScreen,
     },
     Profile: {
@@ -50,7 +50,7 @@ export default TabNavigator(
               ? `ios-checkbox${focused ? '' : '-outline'}`
               : 'md-checkbox';
               break;
-          case 'Chat':
+          case 'Plans':
             iconName = Platform.OS === 'ios'
               ? `ios-chatboxes${focused ? '' : '-outline'}`
               : 'md-chatboxes';
