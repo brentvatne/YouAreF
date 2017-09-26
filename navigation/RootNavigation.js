@@ -6,7 +6,7 @@ import MainTabNavigator from './MainTabNavigator';
 import CampaignsDetScreen from '../screens/CampaignsDetScreen';
 import PlansScreen from '../screens/PlansScreen';
 import DealsDetScreen from '../screens/DealsDetScreen';
-import ChatScreen from '../screens/ChatScreen';
+import AllPlansScreen from '../screens/AllPlansScreen';
 import DealsScreen from '../screens/DealsScreen';
 import CampaignsScreen from '../screens/CampaignsScreen';
 import TrainingScreen from '../screens/TrainingScreen';
@@ -26,8 +26,8 @@ const RootStackNavigator = StackNavigator(
     DealsDetScreen: {
       screen: DealsDetScreen,
     },
-    ChatScreen: {
-      screen: ChatScreen,
+    AllPlansScreen: {
+      screen: AllPlansScreen,
     },
     CampaignsScreen: {
       screen: CampaignsScreen,

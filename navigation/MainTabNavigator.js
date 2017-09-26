@@ -8,7 +8,7 @@ import Colors from '../constants/Colors';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import CampaignsScreen from '../screens/CampaignsScreen';
-import ChatScreen from '../screens/ChatScreen';
+import AllPlansScreen from '../screens/AllPlansScreen';
 import DealsScreen from '../screens/DealsScreen';
 
 export default TabNavigator(
@@ -22,8 +22,8 @@ export default TabNavigator(
     Deals: {
       screen: DealsScreen,
     },
-    Plans: {
-      screen: ChatScreen,
+    AllPlans: {
+      screen: AllPlansScreen,
     },
     Profile: {
       screen: LinksScreen,
@@ -50,7 +50,7 @@ export default TabNavigator(
               ? `ios-checkbox${focused ? '' : '-outline'}`
               : 'md-checkbox';
               break;
-          case 'Plans':
+          case 'AllPlans':
             iconName = Platform.OS === 'ios'
               ? `ios-chatboxes${focused ? '' : '-outline'}`
               : 'md-chatboxes';
