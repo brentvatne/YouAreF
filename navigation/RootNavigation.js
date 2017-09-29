@@ -10,10 +10,14 @@ import AllPlansScreen from '../screens/AllPlansScreen';
 import DealsScreen from '../screens/DealsScreen';
 import CampaignsScreen from '../screens/CampaignsScreen';
 import TrainingScreen from '../screens/TrainingScreen';
+import LoginScreen from '../screens/LoginScreen';
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
 const RootStackNavigator = StackNavigator(
   {
+    Login: {
+      screen: LoginScreen,
+    },
     Main: {
       screen: MainTabNavigator,
     },

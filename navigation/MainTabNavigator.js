@@ -5,14 +5,15 @@ import { TabNavigator, TabBarBottom } from 'react-navigation';
 
 import Colors from '../constants/Colors';
 
-import HomeScreen from '../screens/HomeScreen';
 import MenuScreen from '../screens/MenuScreen';
+import HomeScreen from '../screens/HomeScreen';
 import CampaignsScreen from '../screens/CampaignsScreen';
 import AllPlansScreen from '../screens/AllPlansScreen';
 import DealsScreen from '../screens/DealsScreen';
 
 export default TabNavigator(
   {
+    
     Home: {
       screen: HomeScreen,
     },
@@ -32,16 +33,16 @@ export default TabNavigator(
         const { routeName } = navigation.state;
         let iconName;
         switch (routeName) {
-          case 'Home':
-            iconName = Platform.OS === 'ios'
-              ? `ios-home${focused ? '' : '-outline'}`
-              : 'md-home';
-            break;
           case 'Campaigns':
             iconName = Platform.OS === 'ios'
               ? `ios-search${focused ? '' : '-outline'}`
               : 'md-search';
               break;
+          case 'Home':
+            iconName = Platform.OS === 'ios'
+              ? `ios-home${focused ? '' : '-outline'}`
+              : 'md-home';
+            break;    
           case 'AllPlans':
             iconName = Platform.OS === 'ios'
               ? `ios-chatboxes${focused ? '' : '-outline'}`
