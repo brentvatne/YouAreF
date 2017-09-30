@@ -4,8 +4,10 @@ import { StyleSheet, Image } from 'react-native';
 export default class CampaignsScreen extends Component {
   
   static navigationOptions = {
-    title: 'Campaigns',
+    title: 'Companies',
   };
+
+  
 
   render() {
     
