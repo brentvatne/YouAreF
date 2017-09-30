@@ -68,7 +68,7 @@ export default class HomeScreen extends React.Component {
           <Content>
               <Card style={{backgroundColor:"#0077b5"}}>
                 <CardItem header style={styles.headerText}>
-                  <Text style={{ fontSize:50,color:'#ffffff' }}> Hello Anshul </Text>
+                  <Text style={{ fontSize:50,color:'#ffffff' }}> YouAreF </Text>
                 </CardItem>
                 <CardItem style={{ alignItems: 'center',justifyContent: 'center',backgroundColor:'#0077b5' }}>
                   <Text style={{ fontSize:20,color:'#ffffff' }}> Hello Alok !</Text>
