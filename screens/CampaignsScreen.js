@@ -15,24 +15,24 @@ export default class CampaignsScreen extends Component {
     
     const { navigate } = this.props.navigation;
 
-    var camp = [    {"name":"Amazon","type":"Wholesale","rating":"4.6","enrolled":"933"},
-                    {"name":"Tesla","type":"Cars","rating":"4.1","enrolled":"522"},
-                    {"name":"SpaceX","type":"Rockets","rating":"4.8","enrolled":"296"},
-                    {"name":"Adidas","type":"Retail","rating":"5.0","enrolled":"844"},
-                    {"name":"Flipkart","type":"Ecommerce","rating":"3.9","enrolled":"326"},
-                    {"name":"Snapdeal","type":"Ecommerce","rating":"4.3","enrolled":"147"}
+    var camp = [    {"id":"1","name":"Amazon","type":"Wholesale","rating":"4.6","enrolled":"933"},
+                    {"id":"2","name":"Tesla","type":"Cars","rating":"4.1","enrolled":"522"},
+                    {"id":"3","name":"SpaceX","type":"Rockets","rating":"4.8","enrolled":"296"},
+                    {"id":"4","name":"Adidas","type":"Retail","rating":"5.0","enrolled":"844"},
+                    {"id":"5","name":"Flipkart","type":"Ecommerce","rating":"3.9","enrolled":"326"},
+                    {"id":"6","name":"Snapdeal","type":"Ecommerce","rating":"4.3","enrolled":"147"}
                 ];
     return (
       <Container style={styles.container} >
         <Content>
           <List dataArray={camp}
             renderRow={(camp) =>
-            <ListItem onPress={() => navigate('CampaignsDetScreen', { name: `${camp.name}`})}>
+            <ListItem onPress={() => navigate('CampaignsDetScreen', { id: `${camp.id}`, name: `${camp.name}`})}>
               <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
               <Body>
                 <View style={styles.viewTextStyle}>
                   <Text>{camp.name}</Text>
-                  <Text style={styles.ratingTextStyle} note>{camp.rating}/5.0</Text>
+                  <Text note>{camp.rating}/5.0</Text>
                 </View>
                 <View style={styles.viewTextStyle}>
                   <Text note>{camp.type}</Text>
@@ -58,9 +58,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     height: 60,
     width: 60,
-  },
-  ratingTextStyle: {
-    textAlign: 'right'
   },
   viewTextStyle: {
     flexDirection: 'row',
