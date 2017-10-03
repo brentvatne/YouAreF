@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Icon } from 'native-base';
-import { StyleSheet, Image, View } from 'react-native';
+import { StyleSheet, Image, View, TabNavigator } from 'react-native';
 export default class CampaignsScreen extends Component {
   
   static navigationOptions = {
     title: 'Plans',
+
   };
 
   render() {
@@ -23,7 +24,7 @@ export default class CampaignsScreen extends Component {
         <Content>
           <List dataArray={plan}
             renderRow={(plan) =>
-            <ListItem onPress={() => navigate('CampaignsDetScreen', { name: `${plan.name}`})}>
+            <ListItem onPress={() => navigate('PlansScreen', { name: `${plan.name}`})}>
               <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
               <Body>
                 <View style={styles.viewTextStyle}>
@@ -61,5 +62,4 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  
 });

@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator } from 'native-base';
 import { StyleSheet, View } from 'react-native';
+
 export default class PlansScreen extends Component {
   
   static navigationOptions = {
     title: 'Plans',
   };
+
+  
 
   render() {
     
