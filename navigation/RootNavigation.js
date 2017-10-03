@@ -12,6 +12,8 @@ import CampaignsScreen from '../screens/CampaignsScreen';
 import TrainingScreen from '../screens/TrainingScreen';
 import LoginScreen from '../screens/LoginScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import BankDetailsScreen from '../screens/BankDetailsScreen';
+import FaqScreen from '../screens/FaqScreen';
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
 const RootStackNavigator = StackNavigator(
@@ -45,6 +47,12 @@ const RootStackNavigator = StackNavigator(
     },
     ProfileScreen: {
       screen: ProfileScreen,
+    },
+    BankDetailsScreen: {
+      screen: BankDetailsScreen,
+    },
+    FaqScreen: {
+      screen: FaqScreen,
     },
   },
   {
