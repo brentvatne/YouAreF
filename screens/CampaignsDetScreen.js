@@ -1,124 +1,116 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, List, Icon, ListItem, Thumbnail, Text, Body, Card, CardItem, Button } from 'native-base';
+import { Container, Header, Content, List, Icon, ListItem, Thumbnail, Body, Card, CardItem, Button, Text } from 'native-base';
 import { View, Image, StyleSheet } from 'react-native';
+import StarRating from 'react-native-star-rating';
+
 
 export default class CampaignsDetScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: `${navigation.state.params.name}`,
+    title: `${navigation.state.params.name}`
+    
   });
+
+constructor(props) {
+    super(props);
+    this.state = {
+      starCount: 0
+    };
+  }  
+
+
+onStarRatingPress(rating) {
+  this.setState({
+    starCount: rating
+  });
+}            
 
   render() {
     const { params } = this.props.navigation.state;
     const { navigate } = this.props.navigation;
+    var company = {
+                   "id":"1",
+                   "name":"Amazon",
+                   "logo":"asas",
+                   "type":"Wholesale",
+                   "rating":"4.6",
+                   "enrolled":"933",
+                   "about":"Amazon.com, Inc., doing business as Amazon, is an American electronic commerce and cloud computing company based in Seattle, Washington that was founded by Jeff Bezos on July 5, 1994",
+                   "plans": [
+                    {
+                     "id":1,
+                     "name":"Plan A",
+                     "price":"200",
+                     "difficulty":"Easy",
+                     "conversion":100,
+                     "likes":10
+                    },
+                    {
+                     "id":2,
+                     "name":"Plan B",
+                     "price":"230",
+                     "difficulty":"Easy",
+                     "conversion":100,
+                     "likes":10
+                    },
+                    {
+                     "id":3,
+                     "name":"Plan C",
+                     "price":"360",
+                     "difficulty":"Easy",
+                     "conversion":100,
+                     "likes":10
+                    },
+                   ]
+                  }
     return (
       <Container style={styles.container}>
         <Content>
           <Image style={styles.image}  borderRadius={10} source={{uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg'}} />
-          <Text style={styles.thumbnailText}> {params.name} </Text>
+          <Text style={styles.thumbnailText}>{params.name}</Text>
+
+          <View style={styles.viewSubHeadStyle}>
+            <Text note>{company.enrolled} enrolled | </Text>
+            <Text note>{company.plans.length} plans | </Text>
+            <Text note>{company.rating}/5.0</Text>
+          </View>
+
+          <View style={styles.aboutViewStyle}>
+              <Text style={styles.aboutTextStyle} note>{company.about}</Text>
+            </View>
+
+          <Text note style={{textAlign:'center'}}>Rate this company</Text>
+
+          <View style={styles.ratingViewStyle}>
+            <View style={styles.ratingStyle}>
+              <StarRating
+                disabled={false}
+                maxStars={5}
+                starSize={18}
+                rating={this.state.starCount}
+                selectedStar={(rating) => this.onStarRatingPress(rating)}
+              />
+            </View>
+          </View>
           
-          <List>
-              <View style={styles.viewStyle}>
-              <Body>
-                <Text>6776</Text>
-                <Text style={styles.paraFont} >enrolled</Text>
-              </Body>
-              
-              <Body>
-                <Text>6776</Text>
-                <Text style={styles.paraFont} >reviews</Text>
-              </Body>
-              
-              <Body>
-                <Text>6776</Text>
-                <Text style={styles.paraFont} >ratings</Text>
-              </Body>
-            </View>
-            
+          <List dataArray={company.plans}
+            renderRow={(plan) =>
             <ListItem>
-            <Body>
-                <Text>Difficulty Level</Text>
-                <Text style={styles.paraFont} >Easy</Text>
-              </Body>
-              
+              <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
               <Body>
-                <Text>Closure Time</Text>
-                <Text style={styles.paraFont} >1 Day</Text>
+                <View style={styles.viewTextStyle}>
+                  <Text>{plan.name}</Text>
+                  <Text note>Rs {plan.price}</Text>
+                </View>
+                <View style={styles.viewTextStyle}>
+                  <Text note>{plan.difficulty}</Text>
+                  <Text note> 
+                    {plan.likes}
+                  </Text>
+                </View>
               </Body>
             </ListItem>
-
-            <ListItem>
-            <Body>
-                <Text>What is a conversion?</Text>
-                <Text style={styles.paraFont} >When the prospect you refer signs up for Preventive health checkup from Thyrocare.</Text>
-              </Body>
-            </ListItem>
-
-            <ListItem>
-            <Body>
-                <Text>How much can I earn ?</Text>
-                <Text style={styles.paraFont}>Up to Rs.2500 per conversion.</Text>
-              </Body>
-            </ListItem>
-
-            <ListItem>
-            <Body>
-                <Text>How do I get started ?</Text>
-                <Text style={styles.paraFont}>Meet offline retail stores and convince them to sell online.</Text>
-              </Body>
-            </ListItem>
-            
+          }>
           </List>
-
-          <View style={styles.viewStyle}>
-            <Button light>
-              <Icon ios='ios-paper' android="md-paper" style={{fontSize: 20}}/>
-              <Text>Training</Text>
-            </Button>
-            <Button light onPress={() => navigate('PlansScreen')}>
-              <Icon ios='ios-alarm' android="md-alarm" style={{fontSize: 20}}/>
-              <Text>Plans</Text>
-            </Button>
-            <Button light>
-              <Icon ios='ios-chatboxes' android="md-chatboxes" style={{fontSize: 20}}/>
-              <Text>Discuss</Text>
-            </Button>
-          </View>
-
-          <Text style={{ paddingLeft: 20, paddingTop: 20,}}>Reviews</Text>
-
-          <View style={{ padding: 20, paddingTop: 5,}}>
-            <View style={styles.reviewsStyle} >
-              <List>
-                <ListItem>
-                  <Text>Simon Mignolet</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>Nathaniel Clyne</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>Dejan Lovren</Text>
-                </ListItem>
-              </List>
-            </View>
-          </View>
-
-          <Text style={{ paddingLeft: 20, paddingTop: 20,}}>Discussions</Text>
-
-          <View style={{ padding: 20, paddingTop: 5,}}>
-            <View style={styles.reviewsStyle} >
-              <List>
-                <ListItem>
-                  <Text>Simon Mignolet</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>Nathaniel Clyne</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>Dejan Lovren</Text>
-                </ListItem>
-              </List>
-            </View>
-          </View>
         </Content>
       </Container>
     );
@@ -132,7 +124,7 @@ const styles = StyleSheet.create({
 
   image: {
   alignSelf: 'center', 
-  marginTop: 10,
+  marginTop: 20,
   marginBottom: 10,  
   resizeMode: 'contain',
   borderColor: '#ddd',
@@ -150,29 +142,37 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    padding: 20,
-    borderBottomColor: '#ddd',
-    borderBottomWidth: 1,
+  },
+  ratingStyle: {
+    width:130,
+  },
+  ratingViewStyle: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    paddingBottom:15,
+    paddingTop:8
   },
 
-  reviewsStyle: {
-    borderColor: '#ddd',
-    borderWidth: 1,
-    borderRadius: 5
+  aboutViewStyle: {
+    paddingLeft: 30,
+    paddingRight: 30,
+    paddingBottom:20,
   },
-
-  headFont: {
+  aboutTextStyle: {
+    textAlign: 'justify',
+    fontWeight: '100',
+    lineHeight: 22
   },
-
-  paraFont: {
-    fontSize: 13,
-    color : '#5f7f94',
-    lineHeight: 25,
-    fontWeight: '100'
+  viewTextStyle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
-  CardItemStyle: {
-    borderBottomColor: '#ddd',
-    borderBottomWidth: 1,
+  viewSubHeadStyle: {
+    paddingTop: 10,
+    paddingBottom: 15,
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
+  
 
 });
