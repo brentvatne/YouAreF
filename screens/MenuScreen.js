@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView, StyleSheet, View, Image } from 'react-native';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Icon } from 'native-base';
 
-export default class LinksScreen extends React.Component {
+export default class MenuScreen extends React.Component {
   static navigationOptions = {
     title: 'Menu',
     headerLeft: null,
@@ -11,7 +11,7 @@ export default class LinksScreen extends React.Component {
   render() {
 
     const { navigate } = this.props.navigation;
-    
+
     return (
       <Container style={styles.container} >
         <Content>

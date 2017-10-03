@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Button } from 'native-base';
 import { ScrollView, StyleSheet, View, Image } from 'react-native';
 
-export default class PlansScreen extends Component {
+export default class ProfileScreen extends Component {
   
   static navigationOptions = {
     title: 'Profile',
@@ -42,11 +42,20 @@ export default class PlansScreen extends Component {
             </ListItem>
           </List>
 
-          <Button info rounded style={styles.loginButton}>
+          <Button 
+           info 
+           rounded 
+           style={styles.loginButton}
+           onPress={() => navigate('BankDetailsScreen')}
+           >
               <Text style={styles.loginButtonText}> Add Bank Details </Text>
           </Button>
 
-          <Button danger rounded style={styles.loginButton}>
+          <Button 
+           danger 
+           rounded 
+           style={styles.loginButton}
+           >
               <Text style={styles.loginButtonText}> Logout </Text>
           </Button>
         </Content>
