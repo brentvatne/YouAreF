@@ -1,12 +1,29 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, Icon, ListItem, Thumbnail, Body, Card, CardItem, Button, Text } from 'native-base';
 import { View, Image, StyleSheet } from 'react-native';
+import StarRating from 'react-native-star-rating';
+
 
 export default class CampaignsDetScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: `${navigation.state.params.name}`
     
   });
+
+
+constructor(props) {
+    super(props);
+    this.state = {
+      starCount: 0
+    };
+  }  
+
+
+onStarRatingPress(rating) {
+  this.setState({
+    starCount: rating
+  });
+}            
 
   render() {
     const { params } = this.props.navigation.state;
@@ -22,7 +39,7 @@ export default class CampaignsDetScreen extends Component {
                    "plans": [
                     {
                      "id":1,
-                     "name":"Ayush",
+                     "name":"Plan A",
                      "price":"200",
                      "difficulty":"Easy",
                      "conversion":100,
@@ -30,7 +47,7 @@ export default class CampaignsDetScreen extends Component {
                     },
                     {
                      "id":2,
-                     "name":"Anshul",
+                     "name":"Plan B",
                      "price":"230",
                      "difficulty":"Easy",
                      "conversion":100,
@@ -38,7 +55,7 @@ export default class CampaignsDetScreen extends Component {
                     },
                     {
                      "id":3,
-                     "name":"Anirudh",
+                     "name":"Plan C",
                      "price":"360",
                      "difficulty":"Easy",
                      "conversion":100,
@@ -58,10 +75,24 @@ export default class CampaignsDetScreen extends Component {
             <Text note>{company.rating}/5.0</Text>
           </View>
 
-            <View style={styles.aboutViewStyle}>
+          <View style={styles.aboutViewStyle}>
               <Text style={styles.aboutTextStyle} note>{company.about}</Text>
             </View>
 
+          <Text note style={{textAlign:'center'}}>Rate this company</Text>
+
+          <View style={styles.ratingViewStyle}>
+            <View style={styles.ratingStyle}>
+              <StarRating
+                disabled={false}
+                maxStars={5}
+                starSize={18}
+                rating={this.state.starCount}
+                selectedStar={(rating) => this.onStarRatingPress(rating)}
+              />
+            </View>
+          </View>
+          
           <List dataArray={company.plans}
             renderRow={(plan) =>
             <ListItem>
@@ -94,7 +125,7 @@ const styles = StyleSheet.create({
 
   image: {
   alignSelf: 'center', 
-  marginTop: 10,
+  marginTop: 20,
   marginBottom: 10,  
   resizeMode: 'contain',
   borderColor: '#ddd',
@@ -113,13 +144,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
+  ratingStyle: {
+    width:130,
+  },
+  ratingViewStyle: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    paddingBottom:15,
+    paddingTop:8
+  },
+
   aboutViewStyle: {
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingLeft: 30,
+    paddingRight: 30,
+    paddingBottom:20,
   },
   aboutTextStyle: {
     textAlign: 'justify',
-    fontWeight: '100'
+    fontWeight: '100',
+    lineHeight: 22
   },
   viewTextStyle: {
     flexDirection: 'row',
@@ -127,7 +170,7 @@ const styles = StyleSheet.create({
   },
   viewSubHeadStyle: {
     paddingTop: 10,
-    paddingBottom: 20,
+    paddingBottom: 15,
     flexDirection: 'row',
     justifyContent: 'center',
   },
