@@ -57,12 +57,12 @@ export default class HomeScreen extends React.Component {
       prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call  
     }
 
-    var plan = [    {"name":"Amazon A","difficulty":"Easy",likes:"20",price:"200",logo:"http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg"},
-                    {"name":"Snapdeal B","difficulty":"Easy",likes:"63",price:"350",logo:"http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg"},
-                    {"name":"Flipkart A","difficulty":"Medium",likes:"36",price:"400",logo:"http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg"},
-                    {"name":"Instamojo A","difficulty":"Easy",likes:"2",price:"2000",logo:"http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg"},
-                    {"name":"Thyrocare C","difficulty":"Hard",likes:"59",price:"2400",logo:"http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg"},
-                    {"name":"MakeMyTrips B","difficulty":"Easy",likes:"12",price:"1200",logo:"http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg"},
+    var plan = [    {"name":"Amazon A","difficulty":"Easy",likes:"20",price:"200"},
+                    {"name":"Snapdeal B","difficulty":"Easy",likes:"63",price:"350"},
+                    {"name":"Flipkart A","difficulty":"Medium",likes:"36",price:"400"},
+                    {"name":"Instamojo A","difficulty":"Easy",likes:"2",price:"2000"},
+                    {"name":"Thyrocare C","difficulty":"Hard",likes:"59",price:"2400"},
+                    {"name":"MakeMyTrips B","difficulty":"Easy",likes:"12",price:"1200"},
                 ];
 
     var myplans = [ {"name":"Amazon A","status":"Accepted","date":"30 Sep 2017"},

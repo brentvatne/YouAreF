@@ -5,9 +5,44 @@ import { ScrollView, StyleSheet, View, Image, TextInput } from 'react-native';
 export default class PlanTabAbout extends Component {
 
   render() {
+
     return (
       <Container style={styles.container} >
         <Content>
+          <List>
+            <ListItem>
+              <Body>
+                <View>
+                  <Text>About the plan</Text>
+                  <Text note>Basic 15-34 products to sell</Text>
+                </View>
+              </Body>
+            </ListItem>
+            <ListItem>
+              <Body>
+                <View>
+                  <Text>Conversion</Text>
+                  <Text note>Sign up offline merchant to sell on amazon. Get paid when seller is active for 30 days</Text>
+                </View>
+              </Body>
+            </ListItem>
+            <ListItem>
+              <Body>
+                <View>
+                  <Text>Earn per conversion</Text>
+                  <Text note>Rs. 500 per conversion</Text>
+                </View>
+              </Body>
+            </ListItem>
+            <ListItem>
+              <Body>
+                <View>
+                  <Text>Price of the product</Text>
+                  <Text note>Free to sign up</Text>
+                </View>
+              </Body>
+            </ListItem>
+          </List>
 
         </Content>
       </Container>
@@ -19,32 +54,5 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ffffff',
   },
-  thumbnailStyle: {
-    resizeMode: 'contain',
-    marginTop: 20,
-    borderColor: '#ddd',
-    borderWidth: 1,
-    height: 100,
-    width: 100,
-    alignSelf:'center'
-  },
-  Button: {
-    marginTop:5,
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 300,
-  },
-  ButtonText: {
-    fontSize: 18,
-  },
-  textInputViewStyle: {
-    padding:20,
-  },
-  textInputStyle: {
-    fontSize: 18,
-    marginBottom:12,
-    height:50,
-    fontWeight: '100'
-  },
+
 });
