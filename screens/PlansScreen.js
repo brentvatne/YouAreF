@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator } from 'native-base';
+import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator,Tab,Tabs,ScrollableTab } from 'native-base';
 import { StyleSheet, View } from 'react-native';
+import PlanTabAbout from './PlanTabAbout';
+import PlanTabTraining from './PlanTabTraining';
+import PlanTabReviews from './PlanTabReviews';
+import PlanTabDiscuss from './PlanTabDiscuss';
 
 export default class PlansScreen extends Component {
   
@@ -8,46 +12,25 @@ export default class PlansScreen extends Component {
     title: 'Plans',
   };
 
-  
-
   render() {
-    
     const { navigate } = this.props.navigation;
 
     return (
       <Container style={styles.container} >
-        <Content>
-        
-        <Thumbnail style={styles.image} large source={{uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg'}} />
-        <Text style={styles.thumbnailText}> Amazon </Text>
-        
-        <View style={{ padding: 20, paddingTop: 5,}}>
-            
-            <Text style={styles.headTextStyle}>The campaign has multiple plans.Each plan has different payout as mention below.</Text>
-            
-            <View style={styles.listStyle} >
-                <Separator bordered>
-                  <Text style={{ fontSize: 15 }} >Plan #12345</Text>
-                </Separator>
-                <ListItem>
-                  <Body>
-                    <Text style={styles.listHeadText}>Plan Name</Text>
-                    <Text note style={styles.listDetailsText}>Basic</Text>
-                  </Body>
-                </ListItem>
-                <ListItem>
-                  <Body>
-                    <Text style={styles.listHeadText}>What is a conversion?</Text>
-                    <Text note style={styles.listDetailsText}>When the prospect you refer signs up for Preventive health checkup from Thyrocare.</Text>
-                  </Body>
-                </ListItem>
-                <ListItem>
-                  <Text>Dejan Lovren</Text>
-                </ListItem>
-              
-            </View>
-          </View>
-        </Content>
+        <Tabs renderTabBar={()=> <ScrollableTab />}>
+          <Tab heading="About" tabStyle={{backgroundColor: '#fad30a'}} textStyle={{color: '#000000'}} activeTabStyle={{backgroundColor: '#fad30a'}} activeTextStyle={{color: '#000000', fontWeight: 'bold'}}>
+            <PlanTabAbout />
+          </Tab>
+          <Tab heading="Training" tabStyle={{backgroundColor: '#fad30a'}} textStyle={{color: '#000000'}} activeTabStyle={{backgroundColor: '#fad30a'}} activeTextStyle={{color: '#000000', fontWeight: 'bold'}}>
+            <PlanTabTraining />
+          </Tab>
+          <Tab heading="Reviews" tabStyle={{backgroundColor: '#fad30a'}} textStyle={{color: '#000000'}} activeTabStyle={{backgroundColor: '#fad30a'}} activeTextStyle={{color: '#000000', fontWeight: 'bold'}}>
+            <PlanTabReviews />
+          </Tab>
+          <Tab heading="Discuss" tabStyle={{backgroundColor: '#fad30a'}} textStyle={{color: '#000000'}} activeTabStyle={{backgroundColor: '#fad30a'}} activeTextStyle={{color: '#000000', fontWeight: 'bold'}}>
+            <PlanTabDiscuss />
+          </Tab>
+        </Tabs>
       </Container>
     );
   }

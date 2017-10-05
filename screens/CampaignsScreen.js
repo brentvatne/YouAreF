@@ -9,8 +9,6 @@ export default class CampaignsScreen extends Component {
     headerTitleStyle: { alignSelf: 'center' },
   };
 
-  
-
   render() {
     
     const { navigate } = this.props.navigation;
