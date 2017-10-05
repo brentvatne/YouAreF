@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Icon } from 'native-base';
-import { StyleSheet, Image, View, TabNavigator } from 'react-native';
+import { StyleSheet, Image, View, TabNavigator, ListView, ActivityIndicator } from 'react-native';
 export default class CampaignsScreen extends Component {
   
   static navigationOptions = {
@@ -8,7 +8,40 @@ export default class CampaignsScreen extends Component {
 
   };
 
-  render() {
+   constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true,
+      plans:{}
+    }
+  }
+
+  componentDidMount() {
+    return fetch('http://192.168.43.197/api/public/plans')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          isLoading: false,
+          plans: responseJson.data
+        }, function() {
+          
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+
+	render() {	
+
+	if (this.state.isLoading) {
+      return (
+        <View style={{flex: 1, paddingTop: 20}}>
+          <ActivityIndicator />
+        </View>
+      );
+    }	
     
     const { navigate } = this.props.navigation;
 
@@ -19,17 +52,22 @@ export default class CampaignsScreen extends Component {
                     {"name":"Thyrocare C","difficulty":"Hard",likes:"59",price:"2400"},
                     {"name":"MakeMyTrips B","difficulty":"Easy",likes:"12",price:"1200"},
                 ];
+    console.log(this.state.plans);
+    console.log(plan);
     return (
       <Container style={styles.container} >
         <Content>
-          <List dataArray={plan}
+
+        
+
+          <List dataArray={this.state.plans}
             renderRow={(plan) =>
-            <ListItem onPress={() => navigate('PlansScreen', { name: `${plan.name}`})}>
-              <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
+            <ListItem onPress={() => navigate('PlansScreen')}>
+              <Image style={styles.thumbnailStyle} source={{ uri: plan.logo }} />
               <Body>
                 <View style={styles.viewTextStyle}>
                   <Text>{plan.name}</Text>
-                  <Text note>Rs {plan.price}</Text>
+                  <Text note>Rs {plan.price_of_product}</Text>
                 </View>
                 <View style={styles.viewTextStyle}>
                   <Text note>{plan.difficulty}</Text>
