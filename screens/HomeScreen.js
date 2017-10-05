@@ -62,6 +62,15 @@ export default class HomeScreen extends React.Component {
                     {"name":"Plan C","date":"7 Oct 2017","status":"Approved"}
                 ];
 
+    var plan = [    {"name":"Amazon A","status":"Accepted","date":"30 Sep 2017"},
+                    {"name":"Snapdeal B","status":"Accepted","date":"30 Sep 2017"},
+                    {"name":"Flipkart A","status":"Rejected","date":"30 Sep 2017"},
+                    {"name":"Instamojo A","status":"Accepted","date":"30 Sep 2017"},
+                    {"name":"Thyrocare C","status":"Accepted","date":"30 Sep 2017"},
+                    {"name":"MakeMyTrips B","status":"Rejected","date":"30 Sep 2017"},
+                ];
+
+
     return (
         <Container style={styles.container}>
           <Content>
@@ -81,29 +90,32 @@ export default class HomeScreen extends React.Component {
                     width: 250}}/>
                 </CardItem>
                 <CardItem  style={styles.normalText}>
-                  <Text style={{ fontSize:30,color:'#ffffff' }}> 110 </Text>
-                 {/* <Body style={{ alignItems:"center",justifyContent:"center"}}>
-                    <Text style={{ fontSize:15,color:'#ffffff' }}> earnings so far </Text>
-                  </Body>*/}
-                    <FontAwesomeIcons name="rupee" size={30} color="#ffffff" /> 
-                    <Text style={{ fontSize:15,color:'#ffffff' }}> {'\n'}earnings so far</Text>
+                  <Body style={{ alignItems:"center",justifyContent:"center"}}>
+                    <View style={{flexDirection:'column',justifyContent:'center'}}>
+                      <View style={{flexDirection:'row',alignItems:'center'}}>
+                        <Text style={{ fontSize:35,color:'#ffffff' }}> 110 </Text>
+                        <FontAwesomeIcons name="rupee" size={30} color="#ffffff" /> 
+                      </View>
+                        <Text style={{ fontSize:15,color:'#ffffff' }}> earnings so far</Text>
+                    </View>
+                  </Body>
                 </CardItem>
               </Card>
 
             <View style={{ flex: 1, flexDirection: 'row', alignSelf:'stretch' ,position:'relative'}}>
-              <View style={{ flex:1,height: 110, alignSelf:'stretch', position:'relative' }}>
+              <View style={{ flex:1,height: 80, alignSelf:'stretch', position:'relative' }}>
                 <Body style={{ alignItems:"center",justifyContent:"center" }}>
                   <Text style={{fontSize: 30}}> 2 </Text>
                   <Text  style={styles.smallText}>campaigns</Text>
                 </Body>
               </View>
-              <View style={{ flex:1, alignSelf:'stretch',position:'relative'}}>
+              <View style={{ flex:1,height: 80, alignSelf:'stretch',position:'relative'}}>
                 <Body style={{ alignItems:"center",justifyContent:"center"}}>
                   <Text style={{fontSize: 30}}> 1 </Text>
                   <Text  style={styles.smallText}>total deals</Text>
                 </Body>
               </View>  
-              <View style={{ flex:1, alignSelf:'stretch',position:'relative'}}>
+              <View style={{ flex:1,height: 80, alignSelf:'stretch',position:'relative'}}>
                 <Body style={{ alignItems:"center",justifyContent:"center"}}>
                   <Text style={{fontSize: 30}}> 0 </Text>
                   <Text  style={styles.smallText} >approved</Text>
@@ -112,15 +124,30 @@ export default class HomeScreen extends React.Component {
             </View>
 
           <Text style={{paddingTop:10}}> Your Plans </Text>
-            <List dataArray={camp}
-              renderRow={(camp) =>
-                <ListItem onPress={() => navigate('CampaignsDetScreen', { name: `${camp.name}`})}>
+            <List dataArray={plan}
+              renderRow={(plan) =>
+                <ListItem onPress={() => navigate('CampaignsDetScreen', { name: `${plan.name}`})}>
                   <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
                   <Body>
-                    <Text>{camp.name}</Text>
-                    <Text note>{camp.date}</Text>
-                    <Right>
-                    </Right>
+                    <View style={styles.viewTextStyle}>
+                      <Text>{plan.name}</Text>
+                      {
+                        plan.status == 'Accepted' ? (
+                          <Badge style={{ backgroundColor: 'green' }}>
+                            <Text style={{ color: 'white' }}>{plan.status}</Text>
+                          </Badge>
+                          )
+                          :
+                          (
+                          <Badge style={{ backgroundColor: 'red' }}>
+                            <Text style={{ color: 'white' }}>{plan.status}</Text>
+                          </Badge>
+                          )
+                      }
+                    </View>
+                    <View style={styles.viewTextStyle}>
+                      <Text note>{plan.date}</Text>
+                    </View>
                   </Body>
                 </ListItem>
               }>
@@ -162,6 +189,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor:'#0077b5',
+  },
+  viewTextStyle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   normalText :{
     alignItems: 'center',
