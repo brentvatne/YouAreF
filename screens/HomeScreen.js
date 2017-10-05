@@ -65,7 +65,7 @@ export default class HomeScreen extends React.Component {
                     {"name":"MakeMyTrips B","difficulty":"Easy",likes:"12",price:"1200",logo:"http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg"},
                 ];
 
-    var myplans = [    {"name":"Amazon A","status":"Accepted","date":"30 Sep 2017"},
+    var myplans = [ {"name":"Amazon A","status":"Accepted","date":"30 Sep 2017"},
                     {"name":"Snapdeal B","status":"Accepted","date":"30 Sep 2017"},
                     {"name":"Flipkart A","status":"Rejected","date":"30 Sep 2017"},
                     {"name":"Instamojo A","status":"Accepted","date":"30 Sep 2017"},
