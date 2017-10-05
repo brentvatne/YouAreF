@@ -36,6 +36,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import fontawesomeIcon from 'react-native-vector-icons/FontAwesome';
 import call from 'react-native-phone-call';
 import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
+import IconBadge from 'react-native-icon-badge';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -56,13 +57,15 @@ export default class HomeScreen extends React.Component {
       prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call  
     }
 
-    var camp = [    {"name":"Plan B","date":"30 Sep 2017","status":"Approved"},
-                    {"name":"Plan A","date":"31 Sep 2017","status":"Rejected"},
-                    {"name":"Plan D","date":"5 Oct 2017","status":"Approved"},
-                    {"name":"Plan C","date":"7 Oct 2017","status":"Approved"}
+    var plan = [    {"name":"Amazon A","difficulty":"Easy",likes:"20",price:"200",logo:"http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg"},
+                    {"name":"Snapdeal B","difficulty":"Easy",likes:"63",price:"350",logo:"http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg"},
+                    {"name":"Flipkart A","difficulty":"Medium",likes:"36",price:"400",logo:"http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg"},
+                    {"name":"Instamojo A","difficulty":"Easy",likes:"2",price:"2000",logo:"http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg"},
+                    {"name":"Thyrocare C","difficulty":"Hard",likes:"59",price:"2400",logo:"http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg"},
+                    {"name":"MakeMyTrips B","difficulty":"Easy",likes:"12",price:"1200",logo:"http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg"},
                 ];
 
-    var plan = [    {"name":"Amazon A","status":"Accepted","date":"30 Sep 2017"},
+    var myplans = [    {"name":"Amazon A","status":"Accepted","date":"30 Sep 2017"},
                     {"name":"Snapdeal B","status":"Accepted","date":"30 Sep 2017"},
                     {"name":"Flipkart A","status":"Rejected","date":"30 Sep 2017"},
                     {"name":"Instamojo A","status":"Accepted","date":"30 Sep 2017"},
@@ -74,18 +77,18 @@ export default class HomeScreen extends React.Component {
     return (
         <Container style={styles.container}>
           <Content>
-              <Card style={{backgroundColor:"#0077b5"}}>
+              <Card style={{backgroundColor:"#fad30a"}}>
                 <View style={ styles.notificationActionButtonView }>
                   <Ionicons name="md-notifications" style={styles.notificationButtonIcon} />
                 </View>
-                <CardItem style={{ alignItems: 'center',justifyContent: 'center',backgroundColor:'#0077b5' }}>
-                  <Text style={{ fontSize:30,color:'#ffffff' }}> Hello Alok !</Text>
+                <CardItem style={{ alignItems: 'center',justifyContent: 'center',backgroundColor:'#fad30a' }}>
+                  <Text style={{ fontSize:30,color:'#000000' }}> Hello Alok !</Text>
                 </CardItem>
-                <CardItem style={{alignItems: 'center',justifyContent: 'center',paddingTop:0,backgroundColor:'#0077b5'}}>
+                <CardItem style={{alignItems: 'center',justifyContent: 'center',paddingTop:0,backgroundColor:'#fad30a'}}>
                   <View style={{
                     alignItems: 'center',
                     justifyContent: 'center',
-                    borderBottomColor: 'white',
+                    borderBottomColor: 'black',
                     borderBottomWidth: 1.0,
                     width: 250}}/>
                 </CardItem>
@@ -93,10 +96,10 @@ export default class HomeScreen extends React.Component {
                   <Body style={{ alignItems:"center",justifyContent:"center"}}>
                     <View style={{flexDirection:'column',justifyContent:'center'}}>
                       <View style={{flexDirection:'row',alignItems:'center'}}>
-                        <Text style={{ fontSize:35,color:'#ffffff' }}> 110 </Text>
-                        <FontAwesomeIcons name="rupee" size={30} color="#ffffff" /> 
+                        <Text style={{ fontSize:35,color:'#000000' }}> 110 </Text>
+                        <FontAwesomeIcons name="rupee" size={30} color="#000000" /> 
                       </View>
-                        <Text style={{ fontSize:15,color:'#ffffff' }}> earnings so far</Text>
+                        <Text style={{ fontSize:15,color:'#000000' }}> earnings so far</Text>
                     </View>
                   </Body>
                 </CardItem>
@@ -124,6 +127,36 @@ export default class HomeScreen extends React.Component {
             </View>
 
           <Text style={{paddingTop:10}}> Your Plans </Text>
+            <List dataArray={myplans}
+              renderRow={(myplans) =>
+                <ListItem onPress={() => navigate('CampaignsDetScreen', { name: `${myplans.name}`})}>
+                  <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
+                  <Body>
+                    <View style={styles.viewTextStyle}>
+                      <Text>{myplans.name}</Text>
+                      {
+                        myplans.status == 'Accepted' ? (
+                          <Badge style={{ backgroundColor: '#388e3c' }}>
+                            <Text style={{ color: 'white' }}>{myplans.status}</Text>
+                          </Badge>
+                          )
+                          :
+                          (
+                          <Badge style={{ backgroundColor: '#ef5350' }}>
+                            <Text style={{ color: 'white' }}>{myplans.status}</Text>
+                          </Badge>
+                          )
+                      }
+                    </View>
+                    <View style={styles.viewTextStyle}>
+                      <Text note>{myplans.date}</Text>
+                    </View>
+                  </Body>
+                </ListItem>
+              }>
+            </List>
+
+          <Text style={{paddingTop:30}}> Plans recommended for you </Text>
             <List dataArray={plan}
               renderRow={(plan) =>
                 <ListItem onPress={() => navigate('CampaignsDetScreen', { name: `${plan.name}`})}>
@@ -131,43 +164,21 @@ export default class HomeScreen extends React.Component {
                   <Body>
                     <View style={styles.viewTextStyle}>
                       <Text>{plan.name}</Text>
-                      {
-                        plan.status == 'Accepted' ? (
-                          <Badge style={{ backgroundColor: 'green' }}>
-                            <Text style={{ color: 'white' }}>{plan.status}</Text>
-                          </Badge>
-                          )
-                          :
-                          (
-                          <Badge style={{ backgroundColor: 'red' }}>
-                            <Text style={{ color: 'white' }}>{plan.status}</Text>
-                          </Badge>
-                          )
-                      }
+                      <Text note>Rs {plan.price}</Text>
                     </View>
                     <View style={styles.viewTextStyle}>
-                      <Text note>{plan.date}</Text>
+                      <Text note>{plan.difficulty}</Text>
+                      <Text note> 
+                        {plan.likes}
+                      </Text>
                     </View>
-                  </Body>
-                </ListItem>
-              }>
-            </List>
-
-          <Text style={{paddingTop:30}}> Campaigns recommended for you </Text>
-            <List dataArray={camp}
-              renderRow={(camp) =>
-                <ListItem onPress={() => navigate('CampaignsDetScreen', { name: `${camp.name}`})}>
-                  <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
-                  <Body>
-                    <Text> {camp.name} </Text>
-                    <Text note> {camp.date} </Text>
                   </Body>
                 </ListItem>
               }>
             </List>
           </Content>
           
-          <ActionButton buttonColor="rgba(231,76,60,1)" degrees={0} icon={<Ionicons name="md-call" style={styles.actionButtonIcon} /> }>
+          <ActionButton buttonColor="rgba(250,211,10,1)" degrees={0} icon={<Ionicons name="md-call" style={styles.floatingActionButtonIcon} /> }>
             <ActionButton.Item buttonColor='#9b59b6' title="Call" onPress={() => call(args).catch(console.error)}>
               <Ionicons name="md-call" style={styles.actionButtonIcon} />
             </ActionButton.Item>
@@ -197,11 +208,11 @@ const styles = StyleSheet.create({
   normalText :{
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor:'#0077b5',
+    backgroundColor:'#fad30a',
   },
   smallText :{
     fontSize: 12,
-    color: '#0077b5'
+    color: '#000000'
   },
   thumbnailStyle: {
     resizeMode: 'contain',
@@ -215,10 +226,15 @@ const styles = StyleSheet.create({
     height: 22,
     color: 'white',
   },
+  floatingActionButtonIcon: {
+    fontSize: 20,
+    height: 22,
+    color: 'black',
+  },
   notificationButtonIcon: {
     fontSize: 28,
     height: 30,
-    color: 'white',
+    color: 'black',
   },
   notificationActionButtonView: {
     height: 50,
