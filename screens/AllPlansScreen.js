@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Icon } from 'native-base';
 import { StyleSheet, Image, View, TabNavigator, ListView, ActivityIndicator } from 'react-native';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 export default class CampaignsScreen extends Component {
   
   static navigationOptions = {
@@ -72,6 +73,7 @@ export default class CampaignsScreen extends Component {
                 <View style={styles.viewTextStyle}>
                   <Text note>{plan.difficulty}</Text>
                   <Text note> 
+                    <EvilIcons name="like" size={18} color="#000000" />
                     {plan.likes}
                   </Text>
                 </View>
