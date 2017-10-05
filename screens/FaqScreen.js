@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Button } from 'native-base';
-import { ScrollView, StyleSheet, View, Image, TextInput } from 'react-native';
+import { Container, Header, Content, List, ListItem, Thumbnail, Body, Separator, Button } from 'native-base';
+import { ScrollView, StyleSheet, View, Image, Text, TextInput } from 'react-native';
 
 export default class FaqScreen extends Component {
   
@@ -19,6 +19,27 @@ export default class FaqScreen extends Component {
       <Container style={styles.container} >
         <Content>
 
+        <List>
+            <ListItem>
+              <Body>
+                <Text style={styles.questionStyle} >What is YouAreF ?</Text>
+                <Text style={styles.answerStyle} >Its an app to connect offline retailers to online sellers.</Text>
+              </Body>
+            </ListItem>
+            <ListItem>
+              <Body>
+                <Text style={styles.questionStyle}>Where is it available ?</Text>
+                <Text style={styles.answerStyle} >Its an app to connect offline retailers to online sellers.</Text>
+              </Body>
+            </ListItem>
+            <ListItem>
+              <Body>
+                <Text style={styles.questionStyle}>How will i get my money ?</Text>
+                <Text style={styles.answerStyle} >Its an app to connect offline retailers to online sellers.</Text>
+              </Body>
+            </ListItem>
+          </List>
+
         </Content>
       </Container>
     );
@@ -29,32 +50,11 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ffffff',
   },
-  thumbnailStyle: {
-    resizeMode: 'contain',
-    marginTop: 20,
-    borderColor: '#ddd',
-    borderWidth: 1,
-    height: 100,
-    width: 100,
-    alignSelf:'center'
+  questionStyle: {
+    fontWeight:'bold',
+    fontSize:18
   },
-  Button: {
-    marginTop:5,
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 300,
-  },
-  ButtonText: {
-    fontSize: 18,
-  },
-  textInputViewStyle: {
-    padding:20,
-  },
-  textInputStyle: {
-    fontSize: 18,
-    marginBottom:12,
-    height:50,
-    fontWeight: '100'
+  answerStyle: {
+    fontSize:16
   },
 });
