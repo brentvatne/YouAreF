@@ -1,65 +1,51 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
-import { Container, Content, Button, Input, Item } from 'native-base';
+import React from 'react'
+import Expo from 'expo'
+import Button from 'react-native-button'
 
 export default class LoginScreen extends React.Component {
+
   static navigationOptions = {
     header: null,
-  };
-  
-  render() {
+  }
 
-    const { navigate } = this.props.navigation;
-    
+  signInWithGoogleAsync = async () => {
+    try {
+      const result = await Expo.Google.logInAsync({
+        androidClientId: "612669964630-04vbqsbsvt3mjv0nr7nsa77erika2f9p.apps.googleusercontent.com",
+        iosClientId: "612669964630-68qv7vej51qnlkccrdbu7jo2s4v4a1c2.apps.googleusercontent.com",
+        scopes: ['profile','email'],
+        behavior: "web",
+      })
+
+      if (result.type === 'success') {
+        return result
+      }
+      return { cancelled: true }
+    } catch (e) {
+      return { error: e }
+    }
+  }
+
+
+  onLoginPress = async () => {
+    const result = await this.signInWithGoogleAsync();
+   
+    if (result.type === 'success') {
+        this.props.navigation.navigate('Main')
+      }
+
+    // if there is no result.error or result.cancelled, the user is logged in
+    // do something with the result
+  }
+
+  render() {
+  	 const { navigate } = this.props.navigation;
+
     return (
-      <Container style={styles.container}>
-        <Content>
-          <View >
-            <Image 
-             style={styles.image} 
-             source={require('../logo.jpg')} 
-             />
-             <Item>
-              <Input placeholder="Email" />
-            </Item>
-            <Item>
-              <Input placeholder="Password" />
-            </Item>
-            <Button info style={styles.loginButton} onPress={() => navigate('Main')}>
-              <Text style={styles.loginButtonText}> Login </Text>
-            </Button>
-          </View>
-        </Content>
-      </Container>
-    );
+    	<Button 
+    	 onPress={this.onLoginPress}>
+    	 Login
+    	 </Button>
+    )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  image: {
-  alignSelf: 'center',
-  marginTop: 20, 
-  resizeMode: 'contain',
-  height: 300,
-  width: 300,
-  },
-  loginButton: {
-  alignItems: 'center',  
-  alignSelf: 'center',
-  marginTop: 20, 
-  width: 300,
-  },
-  loginButtonText: {
-    textAlign: 'center',
-    color:'#fff',
-    fontSize: 18,
-    fontWeight: '200'
-  },
-});
