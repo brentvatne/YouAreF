@@ -17,6 +17,7 @@ import FaqScreen from '../screens/FaqScreen';
 import SingleDiscussion from '../screens/SingleDiscussion';
 import SignUpScreen from '../screens/SignUpScreen';
 import TutorialsScreen from '../screens/TutorialsScreen';
+import approveScreen from '../screens/approveScreen';
 
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
@@ -66,6 +67,9 @@ const RootStackNavigator = StackNavigator(
     },
     TutorialsScreen: {
       screen: TutorialsScreen, 
+    },
+    approveScreen: {
+      screen: approveScreen, 
     },
   },
   {

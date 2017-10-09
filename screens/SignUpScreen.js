@@ -73,6 +73,7 @@ export default class SignUpScreen extends Component {
            info 
            rounded 
            style={styles.signupButton}
+           onPress={() => navigate('approveScreen')}
            >
               <Text style={styles.signupButtonText}>Sign Up</Text>
           </Button>
