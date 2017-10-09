@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Input, Item } from 'native-base';
 import { ScrollView, StyleSheet, View, Image, TextInput, Button} from 'react-native';
-import PopupDialog from 'react-native-popup-dialog';
 
 export default class PlanTabDiscuss extends Component {
 
