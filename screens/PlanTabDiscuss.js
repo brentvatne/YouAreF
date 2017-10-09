@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Input, Item } from 'native-base';
 import { ScrollView, StyleSheet, View, Image, TextInput, Button} from 'react-native';
+import PopupDialog from 'react-native-popup-dialog';
 
 export default class PlanTabDiscuss extends Component {
 
@@ -35,7 +36,7 @@ export default class PlanTabDiscuss extends Component {
                 <Input placeholder='Ask a question' />
               </Item>
             </View>
-            <View style={{ flex:1, alignSelf:'stretch',position:'relative',paddingTop:8,paddingLeft:5}}> 
+            <View style={{ flex:1, alignSelf:'stretch',position:'relative',paddingTop:9,paddingLeft:10}}> 
               <Button
                 title="Submit"
                 color="#000000"

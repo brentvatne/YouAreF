@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator } from 'native-base';
+import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Input, Item, Label } from 'native-base';
 import { ScrollView, StyleSheet, View, Image, TextInput, Button } from 'react-native';
+import PopupDialog, { DialogTitle } from 'react-native-popup-dialog';
 
 export default class PlanTabReviews extends Component {
 
@@ -18,10 +19,32 @@ export default class PlanTabReviews extends Component {
         <Content>
           <View  style={styles.reviewButtonStyle}>
             <Button
+              onPress={() => {this.popupDialog.show();}}
               title="ADD A REVIEW"
               color="#000000"
-              accessibilityLabel="Learn more about this purple button"
             />
+            <PopupDialog dialogTitle={<DialogTitle title="Add review" />} width={330} height={250} ref={(popupDialog) => { this.popupDialog = popupDialog; }}>
+              <View>
+                <Item>
+                  <Input placeholder='Title' />
+                </Item>
+                <Item floatingLabel>
+                  <Input 
+                    placeholder='Description'
+                    multiline={true}
+                    numberOfLines={5}
+                    style={{ height: 80}}
+                    />
+                </Item>
+                <View  style={{ top:30,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+                  <Button
+                    title="SUBMIT"
+                    color="#000000"
+                  />
+                </View>
+
+              </View>
+            </PopupDialog>
           </View>
 
           <View>
