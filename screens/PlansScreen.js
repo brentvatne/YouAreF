@@ -8,9 +8,9 @@ import PlanTabDiscuss from './PlanTabDiscuss';
 
 export default class PlansScreen extends Component {
   
-  static navigationOptions = {
-    title: 'Plans',
-  };
+  static navigationOptions = ({ navigation }) => ({
+    title: `${navigation.state.params.name}`
+  });
 
   render() {
     const { navigate } = this.props.navigation;
