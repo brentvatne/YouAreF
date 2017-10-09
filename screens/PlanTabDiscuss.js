@@ -31,11 +31,11 @@ export default class PlanTabDiscuss extends Component {
           
           <View style={ {flex:1, flexDirection:'row', alignSelf:'stretch' ,position:'relative',paddingTop: 15,paddingLeft:5} }>
             <View style={{ flex:3,height:60, alignSelf:'stretch', position:'relative' }}>
-              <Item regular size = 10>
+              <Item regular>
                 <Input placeholder='Ask a question' />
               </Item>
             </View>
-            <View style={{ flex:1, alignSelf:'stretch',position:'relative',paddingTop:5,paddingLeft:5}}> 
+            <View style={{ flex:1, alignSelf:'stretch',position:'relative',paddingTop:8,paddingLeft:5}}> 
               <Button
                 title="Submit"
                 color="#000000"
