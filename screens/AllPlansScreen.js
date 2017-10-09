@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Icon } from 'native-base';
+import { StyleSheet, Image, View, TabNavigator } from 'react-native';
 import { StyleSheet, Image, View, TabNavigator, ListView, ActivityIndicator } from 'react-native';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 export default class CampaignsScreen extends Component {

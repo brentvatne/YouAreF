@@ -14,6 +14,8 @@ import LoginScreen from '../screens/LoginScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import BankDetailsScreen from '../screens/BankDetailsScreen';
 import FaqScreen from '../screens/FaqScreen';
+import SingleDiscussion from '../screens/SingleDiscussion';
+
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
 const RootStackNavigator = StackNavigator(
@@ -53,6 +55,9 @@ const RootStackNavigator = StackNavigator(
     },
     FaqScreen: {
       screen: FaqScreen,
+    },
+    SingleDiscussion: {
+      screen: SingleDiscussion,
     },
   },
   {

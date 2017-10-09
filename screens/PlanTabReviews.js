@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Button } from 'native-base';
-import { ScrollView, StyleSheet, View, Image, TextInput } from 'react-native';
+import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator } from 'native-base';
+import { ScrollView, StyleSheet, View, Image, TextInput, Button } from 'react-native';
 
 export default class PlanTabReviews extends Component {
+
   render() {
 
     var reviews = [{reviewHead:"Really worth it",description:"It was good experience working with amazon. All the payments and transactions were on time",user:"Alok Singh", date:"9/6/2017"},
@@ -13,12 +14,21 @@ export default class PlanTabReviews extends Component {
                   ]; 
 
     return (
-      <Container style={styles.container} >
+      <Container style={styles.container}>
         <Content>
-          <List dataArray={reviews}
+          <View  style={styles.reviewButtonStyle}>
+            <Button
+              title="ADD A REVIEW"
+              color="#000000"
+              accessibilityLabel="Learn more about this purple button"
+            />
+          </View>
+
+          <View>
+            <List dataArray={reviews}
               renderRow={(reviews) =>
                 <ListItem>
-                  <Body>
+                  <Body> 
                     <View style={styles.viewTextStyle}>
                       <Text>{reviews.reviewHead}</Text>
                       <Text note>{reviews.description}</Text>
@@ -29,8 +39,8 @@ export default class PlanTabReviews extends Component {
                   </Body>
                 </ListItem>
               }>
-            </List>
-
+            </List>  
+          </View>
         </Content>
       </Container>
     );
@@ -47,5 +57,12 @@ const styles = StyleSheet.create({
   },
   nameTextStyle:{
     paddingTop: 8,
+  },
+  reviewButtonStyle:{
+    flex:1,
+    flexDirection:'row',
+    paddingTop: 20,
+    justifyContent:'center',
+    alignItems:'center',
   }
 });

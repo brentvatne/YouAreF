@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body } from 'native-base';
 import { StyleSheet, Image, View } from 'react-native';
+
 export default class CampaignsScreen extends Component {
   
   static navigationOptions = {
