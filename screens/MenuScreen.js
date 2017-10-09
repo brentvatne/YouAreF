@@ -34,7 +34,7 @@ export default class MenuScreen extends React.Component {
           </View>
 
            <List>
-            <ListItem>
+            <ListItem button onPress={() => navigate('TutorialsScreen')}>
               <Text>Tutorials</Text>
             </ListItem>
             <ListItem button onPress={() => navigate('FaqScreen')}>

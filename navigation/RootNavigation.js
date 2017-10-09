@@ -16,6 +16,7 @@ import BankDetailsScreen from '../screens/BankDetailsScreen';
 import FaqScreen from '../screens/FaqScreen';
 import SingleDiscussion from '../screens/SingleDiscussion';
 import SignUpScreen from '../screens/SignUpScreen';
+import TutorialsScreen from '../screens/TutorialsScreen';
 
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
@@ -62,6 +63,9 @@ const RootStackNavigator = StackNavigator(
     },
     SignUpScreen: {
       screen: SignUpScreen,
+    },
+    TutorialsScreen: {
+      screen: TutorialsScreen, 
     },
   },
   {
