@@ -9,7 +9,7 @@ export default class CampaignsScreen extends Component {
 
   };
 
-   constructor(props) {
+   /*constructor(props) {
     super(props);
     this.state = {
       isLoading: true,
@@ -31,37 +31,35 @@ export default class CampaignsScreen extends Component {
       .catch((error) => {
         console.error(error);
       });
-  }
+  }*/
 
 
 	render() {	
 
-	if (this.state.isLoading) {
+	/*if (this.state.isLoading) {
       return (
         <View style={{flex: 1, paddingTop: 20}}>
           <ActivityIndicator />
         </View>
       );
-    }	
+    }*/	
     
     const { navigate } = this.props.navigation;
 
-    var plan = [    {"name":"Amazon A","difficulty":"Easy",likes:"20",price:"200"},
+    var plans = [    {"name":"Amazon A","difficulty":"Easy",likes:"20",price:"200"},
                     {"name":"Snapdeal B","difficulty":"Easy",likes:"63",price:"350"},
                     {"name":"Flipkart A","difficulty":"Medium",likes:"36",price:"400"},
                     {"name":"Instamojo A","difficulty":"Easy",likes:"2",price:"2000"},
                     {"name":"Thyrocare C","difficulty":"Hard",likes:"59",price:"2400"},
                     {"name":"MakeMyTrips B","difficulty":"Easy",likes:"12",price:"1200"},
                 ];
-    console.log(this.state.plans);
-    console.log(plan);
     return (
       <Container style={styles.container} >
         <Content>
 
         
 
-          <List dataArray={this.state.plans}
+          <List dataArray={plans}
             renderRow={(plan) =>
             <ListItem onPress={() => navigate('PlansScreen')}>
               <Image style={styles.thumbnailStyle} source={{ uri: plan.logo }} />
