@@ -1,16 +1,51 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator,Tab,Tabs,ScrollableTab } from 'native-base';
-import { StyleSheet, View } from 'react-native';
+import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator,Tab,Tabs,ScrollableTab, Footer } from 'native-base';
+import { StyleSheet, View} from 'react-native';
 import PlanTabAbout from './PlanTabAbout';
 import PlanTabTraining from './PlanTabTraining';
 import PlanTabReviews from './PlanTabReviews';
 import PlanTabDiscuss from './PlanTabDiscuss';
+import { Button } from 'react-native-elements';
+import {
+    Dialog,
+    ProgressDialog,
+    ConfirmDialog,
+} from 'react-native-simple-dialogs'
 
 export default class PlansScreen extends Component {
   
   static navigationOptions = ({ navigation }) => ({
     title: `${navigation.state.params.name}`
   });
+
+  state = {}
+
+    openDialog(show) {
+        this.setState({ showDialog: show })
+    }
+    openConfirm(show) {
+        this.setState({ showConfirm: show })
+    }
+    openProgress() {
+        this.setState({ showProgress: true })
+
+        setTimeout(
+            () => this.setState({ showProgress: false }),
+            4000
+        );
+    }
+    optionYes() {
+        this.openConfirm(false);
+        // Yes, this is a workaround :(
+        // Why? See this https://github.com/facebook/react-native/issues/10471
+        setTimeout(() => alert("Done"), 100);
+    }
+    optionNo() {
+        this.openConfirm(false);
+        // Yes, this is a workaround :(
+        // Why? See this https://github.com/facebook/react-native/issues/10471
+        // setTimeout(() => alert(""), 100);
+    }
 
   render() {
     const { navigate } = this.props.navigation;
@@ -31,6 +66,32 @@ export default class PlansScreen extends Component {
             <PlanTabDiscuss />
           </Tab>
         </Tabs>
+
+        <Footer style={{ backgroundColor:'#000000'}}>
+          <Button 
+            large
+            onPress={() => {}}
+            title="REGISTER"
+            color='white'
+            backgroundColor='black'
+            fontWeight='bold'
+            onPress={() => this.openConfirm(true)} 
+            />
+        </Footer>
+
+        <ConfirmDialog
+          title="Confirm Dialog"
+          message="Do you want to register for this plan ?"
+          visible={this.state.showConfirm}
+          onTouchOutside={() => this.openConfirm(false)}
+          positiveButton={{
+            title: "YES",
+            onPress: () => this.optionYes()
+          }}
+          negativeButton={{
+            title: "NO",
+            onPress: () => this.optionNo()
+          }} />
       </Container>
     );
   }

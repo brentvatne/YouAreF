@@ -20,6 +20,7 @@
     "react": "16.0.0-alpha.12",
     "react-native": "https://github.com/expo/react-native/archive/sdk-20.0.0.tar.gz",
     "react-native-action-button": "^2.8.0",
+    "react-native-elements": "^0.17.0",
     "react-native-fab": "^1.0.6",
     "react-native-fontawesome": "^5.7.0",
     "react-native-gifted-chat": "^0.2.7",
@@ -29,6 +30,7 @@
     "react-native-phone-call": "^1.0.3",
     "react-native-popup-dialog": "^0.9.36",
     "react-native-scrollable-tab-view": "^0.8.0",
+    "react-native-simple-dialogs": "^0.2.5",
     "react-native-simple-login": "^1.1.0",
     "react-native-star-rating": "^1.0.8",
     "react-navigation": "^1.0.0-beta.12"
