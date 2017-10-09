@@ -1,6 +1,8 @@
 import React from 'react'
 import Expo from 'expo'
 import Button from 'react-native-button'
+import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Icon } from 'native-base';
+import { StyleSheet, Image, View, TabNavigator, ListView, ActivityIndicator, TouchableOpacity } from 'react-native';
 
 export default class LoginScreen extends React.Component {
 
@@ -42,10 +44,38 @@ export default class LoginScreen extends React.Component {
   	 const { navigate } = this.props.navigation;
 
     return (
-    	<Button 
-    	 onPress={this.onLoginPress}>
-    	 Login
-    	 </Button>
+    	<Container style={styles.container}>
+	    	<Content>
+		    	<Image
+		    	 style={styles.imageStyle}
+		         source={require('../assets/images/YOUAREF.png')}
+		        />
+		       	<TouchableOpacity onPress={this.onLoginPress}> 
+		       	 	<Image 
+		       	 	 style={styles.buttonImageStyle} 
+		       	 	 source={require('../assets/images/google.png')} 
+		       	 	 /> 
+		       	</TouchableOpacity>
+	    	 </Content>
+    	 </Container>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#fad30a',
+  },
+  imageStyle: {
+    height: 300,
+    width: 200,
+    alignSelf:'center',
+    marginTop:96,
+  },
+  buttonImageStyle: {
+    height: 50,
+    width: 200,
+    alignSelf:'center',
+    marginTop:24,
+  },
+});
