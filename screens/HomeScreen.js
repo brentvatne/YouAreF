@@ -238,8 +238,10 @@ const styles = StyleSheet.create({
   },
   notificationActionButtonView: {
     height: 50,
-    paddingTop: 10,
-    left: 300,
+    paddingTop: 20,
+    alignItems:'flex-end',
+    justifyContent: 'space-around',
+    right: 20
   },
   developmentModeText: {
     marginBottom: 20,

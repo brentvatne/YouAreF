@@ -52,7 +52,7 @@ export default class PlansScreen extends Component {
 
     return (
       <Container style={styles.container} >
-        <Tabs renderTabBar={()=> <ScrollableTab />}>
+        <Tabs renderTabBar={()=> <ScrollableTab />} backgroundColor={'#fad30a'}>
           <Tab heading="About" tabStyle={{backgroundColor: '#fad30a'}} textStyle={{color: '#000000'}} activeTabStyle={{backgroundColor: '#fad30a'}} activeTextStyle={{color: '#000000', fontWeight: 'bold'}}>
             <PlanTabAbout />
           </Tab>
@@ -70,11 +70,12 @@ export default class PlansScreen extends Component {
         <Footer style={{ backgroundColor:'#000000'}}>
           <Button 
             large
-            onPress={() => {}}
             title="REGISTER"
             color='white'
             backgroundColor='black'
             fontWeight='bold'
+            fontSize={20}
+            buttonStyle= {{ flex:1, flexDirection:'row' }}
             onPress={() => this.openConfirm(true)} 
             />
         </Footer>
