@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator} from 'native-base';
+import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Button } from 'native-base';
 import { ScrollView, StyleSheet, View, Image, TextInput } from 'react-native';
-import { Button } from 'react-native-elements';
 
 export default class SignUpScreen extends Component {
   
@@ -12,25 +11,25 @@ export default class SignUpScreen extends Component {
   constructor(props,navigation) {
     super(props);
     this.state = {
-      name: '',
       email: '',
       gender: '',
       cv: '',
       address:'',
       contact:'',
     };
+    this.onButtonPress = this.onButtonPress.bind(this);
   }
 
-  onButtonPress = async () => {
-  fetch('http://192.168.43.197/api/public/userdetail/7', {
+  onButtonPress(navigation) {
+  fetch('http://192.168.43.197/api/public/userdetail/8', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      user_id: '7',
-      user_name: 'yourOtherValue',
+      user_id: '8',
+      user_name: `${navigation.state.params.name}`,
       college: 'yourOtherValue',
       gender: 'yourOtherValue',
       email: 'anshul.mk97@gmail.com',
@@ -93,27 +92,22 @@ export default class SignUpScreen extends Component {
             />
           </View>
           <Button 
-            large
-            title="SIGN UP"
-            color='white'
-            backgroundColor='black'
-            fontWeight='bold'
-            borderRadius={10}
-            buttonStyle = {styles.signupButton} 
-            onPress={this.onButtonPress}
-            />
+           info 
+           rounded 
+           style={styles.signupButton}
+           onPress={this.onButtonPress}
+           >
+              <Text style={styles.signupButtonText}>Sign Up</Text>
+          </Button>
 
-            <Button 
-            large
-            title="DO IT LATER"
-            color='white'
-            backgroundColor='black'
-            fontWeight='bold'
-            borderRadius={10}
-            buttonStyle = {styles.signupButton}
-            onPress={() => navigate('Main')}
-            />
-
+           <Button 
+           info 
+           rounded 
+           style={styles.signupButton}
+           onPress={() => navigate('Main')}
+           >
+            <Text style={styles.signupButtonText}>Go ahead</Text>
+          </Button>
         </Content>
       </Container>
     );
