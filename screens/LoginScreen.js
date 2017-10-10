@@ -1,8 +1,8 @@
-import React from 'react'
-import Expo from 'expo'
-import Button from 'react-native-button'
+import React from 'react';
+import Expo from 'expo';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Icon } from 'native-base';
 import { StyleSheet, Image, View, TabNavigator, ListView, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { Button } from 'react-native-elements';
 
 export default class LoginScreen extends React.Component {
 
@@ -57,6 +57,17 @@ export default class LoginScreen extends React.Component {
 		       	 	 source={require('../assets/images/google.png')} 
 		       	 	/> 
 		       	</TouchableOpacity>
+
+            <Button 
+              large
+              title="DO IT LATER"
+              color='white'
+              backgroundColor='black'
+              fontWeight='bold'
+              borderRadius={10}
+              buttonStyle = {styles.signupButton}
+              onPress={() => navigate('Main')}
+            />
 	    	 </Content>
     	 </Container>
     )

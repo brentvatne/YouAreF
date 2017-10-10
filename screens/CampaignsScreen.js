@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body } from 'native-base';
-import { StyleSheet, Image, View } from 'react-native';
+import { StyleSheet, Image, View, ActivityIndicator } from 'react-native';
 
 export default class CampaignsScreen extends Component {
   
@@ -10,21 +10,46 @@ export default class CampaignsScreen extends Component {
     headerTitleStyle: { alignSelf: 'center' },
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true,
+      companies:{}
+    }
+  }
+
+  componentDidMount() {
+    return fetch('http://192.168.43.197/api/public/companies')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          isLoading: false,
+          companies: responseJson.data
+        }, function() {
+          
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   render() {
+
+    if (this.state.isLoading) {
+      return (
+        <View style={{flex: 1, paddingTop: 20}}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
     
     const { navigate } = this.props.navigation;
-
-    var camp = [    {"id":"1","name":"Amazon","type":"Wholesale","rating":"4.6","enrolled":"933"},
-                    {"id":"2","name":"Tesla","type":"Cars","rating":"4.1","enrolled":"522"},
-                    {"id":"3","name":"SpaceX","type":"Rockets","rating":"4.8","enrolled":"296"},
-                    {"id":"4","name":"Adidas","type":"Retail","rating":"5.0","enrolled":"844"},
-                    {"id":"5","name":"Flipkart","type":"Ecommerce","rating":"3.9","enrolled":"326"},
-                    {"id":"6","name":"Snapdeal","type":"Ecommerce","rating":"4.3","enrolled":"147"}
-                ];
+    
     return (
       <Container style={styles.container} >
         <Content>
-          <List dataArray={camp}
+          <List dataArray={this.state.companies}
             renderRow={(camp) =>
             <ListItem onPress={() => navigate('CampaignsDetScreen', { id: `${camp.id}`, name: `${camp.name}`})}>
               <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
