@@ -8,9 +8,10 @@ export default class SignUpScreen extends Component {
     header: null,
   };
 
-  constructor(props,navigation) {
+  constructor(props) {
     super(props);
     this.state = {
+      name:'',
       email: '',
       gender: '',
       cv: '',
@@ -20,23 +21,23 @@ export default class SignUpScreen extends Component {
     this.onButtonPress = this.onButtonPress.bind(this);
   }
 
-  onButtonPress(navigation) {
-  fetch('http://192.168.43.197/api/public/userdetail/8', {
+  onButtonPress() {
+  fetch('http://192.168.43.197/api/public/userdetail/12', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      user_id: '8',
-      user_name: `${navigation.state.params.name}`,
-      college: 'yourOtherValue',
-      gender: 'yourOtherValue',
-      email: 'anshul.mk97@gmail.com',
-      phone: '9717953260',
-      address: 'yourOtherValue',
-      degree: 'yourOtherValue',
-      cv: 'yourOtherValue',
+      user_id: '12',
+      user_name: this.props.navigation.state.params.name,
+      college: this.state.college,
+      gender: this.state.gender,
+      email: this.props.navigation.state.params.email,
+      phone: this.state.contact,
+      address: this.state.address,
+      degree: this.state.degree,
+      cv: this.state.cv,
     })
   });
   this.props.navigation.navigate('approveScreen') 
@@ -83,6 +84,18 @@ export default class SignUpScreen extends Component {
               placeholder="Address"
               onChangeText={(address) => this.setState({address})}
               value={this.state.address}
+            />
+            <TextInput
+              style={{height: 50}}
+              placeholder="Degree"
+              onChangeText={(degree) => this.setState({degree})}
+              value={this.state.degree}
+            />
+            <TextInput
+              style={{height: 50}}
+              placeholder="College"
+              onChangeText={(college) => this.setState({college})}
+              value={this.state.college}
             />
             <TextInput
               style={{height: 50}}
