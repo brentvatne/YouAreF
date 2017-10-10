@@ -6,7 +6,8 @@ export default class CampaignsScreen extends Component {
   
   static navigationOptions = {
     title: 'Plans',
-
+    headerLeft: null,
+    headerTitleStyle: { alignSelf: 'center' },
   };
 
    /*constructor(props) {

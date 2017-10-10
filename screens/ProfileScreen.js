@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Button } from 'native-base';
-import { ScrollView, StyleSheet, View, Image } from 'react-native';
+import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator } from 'native-base';
+import { ScrollView, StyleSheet, View, Image,} from 'react-native';
+import { Button } from 'react-native-elements';
+import Hyperlink from 'react-native-hyperlink';
 
 export default class ProfileScreen extends Component {
   
   static navigationOptions = {
     title: 'Profile',
-    headerLeft: null,
   };
 
   render() {
@@ -38,26 +39,35 @@ export default class ProfileScreen extends Component {
               <Text>New Delhi,India</Text>
             </ListItem>
             <ListItem>
-              <Text>CV link</Text>
+              <Hyperlink linkDefault={ true }>
+                <Text style={styles.linkStyle} > singhalok641.github.io </Text>
+              </Hyperlink>
             </ListItem>
           </List>
 
-          <Button 
-           info 
-           rounded 
-           style={styles.loginButton}
-           onPress={() => navigate('BankDetailsScreen')}
-           >
-              <Text style={styles.loginButtonText}> Add Bank Details </Text>
-          </Button>
+          <View style = {styles.loginButton}>
+            <Button
+                onPress={() => navigate('BankDetailsScreen')}
+                title="ADD BANK DETAILS"
+                color='white'
+                raised
+                backgroundColor='black'
+                fontWeight='bold'
+                fontSize={18}
+              />
+          </View>
 
-          <Button 
-           danger 
-           rounded 
-           style={styles.loginButton}
-           >
-              <Text style={styles.loginButtonText}> Logout </Text>
-          </Button>
+          <View style = {styles.loginButton}>
+            <Button
+                onPress={() => navigate('BankDetailsScreen')}
+                title="LOGOUT"
+                raised
+                color='white'
+                backgroundColor='black'
+                fontWeight='bold'
+                style = {styles.loginButton}
+              />
+          </View>         
         </Content>
       </Container>
     );
@@ -86,5 +96,10 @@ const styles = StyleSheet.create({
   },
   loginButtonText: {
     fontSize: 18,
+  },
+  linkStyle: {
+    fontSize:16,
+    color: '#2980b9',
+    paddingTop: 10,
   },
 });
