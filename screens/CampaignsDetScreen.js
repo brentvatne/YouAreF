@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, List, Icon, ListItem, Thumbnail, Body, Card, CardItem, Button, Text } from 'native-base';
+import { Container, Header, Content, List, Icon, ListItem, Thumbnail, Body, Card, CardItem, Text } from 'native-base';
 import { View, Image, StyleSheet } from 'react-native';
 import StarRating from 'react-native-star-rating';
-
+import { Button } from 'react-native-elements';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 export default class CampaignsDetScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -13,55 +14,84 @@ export default class CampaignsDetScreen extends Component {
 constructor(props) {
     super(props);
     this.state = {
-      starCount: 0
+      starCount: 0,
+      isLoading: true,
+      company:{
+        id: '',
+        logo: '',
+        total_plans: '',
+        rating: '',
+        about: '',
+        type: '',
+        name: '',
+        enrolled:'',
+        plans:[]
+      },
     };
   }  
+componentDidMount() {
+    return fetch('http://192.168.43.197/api/public/company/1')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          isLoading: false,
+          company: responseJson.data,
+        }, function() {
+          
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
 
 onStarRatingPress(rating) {
   this.setState({
     starCount: rating
   });
+
 }            
 
   render() {
+
     const { params } = this.props.navigation.state;
     const { navigate } = this.props.navigation;
-    var company = {
-                   "id":"1",
-                   "name":"Amazon",
-                   "logo":"asas",
-                   "type":"Wholesale",
-                   "rating":"4.6",
-                   "enrolled":"933",
-                   "about":"Amazon.com, Inc., doing business as Amazon, is an American electronic commerce and cloud computing company based in Seattle, Washington that was founded by Jeff Bezos on July 5, 1994",
-                   "plans": [
-                    {
-                     "id":1,
-                     "name":"Plan A",
-                     "price":"200",
-                     "difficulty":"Easy",
-                     "conversion":100,
-                     "likes":10
-                    },
-                    {
-                     "id":2,
-                     "name":"Plan B",
-                     "price":"230",
-                     "difficulty":"Easy",
-                     "conversion":100,
-                     "likes":10
-                    },
-                    {
-                     "id":3,
-                     "name":"Plan C",
-                     "price":"360",
-                     "difficulty":"Easy",
-                     "conversion":100,
-                     "likes":10
-                    },
-                   ]
-                  }
+    // var company = {
+    //                "id":"1",
+    //                "name":"Amazon",
+    //                "logo":"asas",
+    //                "type":"Wholesale",
+    //                "rating":"4.6",
+    //                "enrolled":"933",
+    //                "about":"Amazon.com, Inc., doing business as Amazon, is an American electronic commerce and cloud computing company based in Seattle, Washington that was founded by Jeff Bezos on July 5, 1994",
+    //                "plans": [
+    //                 {
+    //                  "id":1,
+    //                  "name":"Plan A",
+    //                  "price":"200",
+    //                  "difficulty":"Easy",
+    //                  "conversion":100,
+    //                  "likes":10
+    //                 },
+    //                 {
+    //                  "id":2,
+    //                  "name":"Plan B",
+    //                  "price":"230",
+    //                  "difficulty":"Easy",
+    //                  "conversion":100,
+    //                  "likes":10
+    //                 },
+    //                 {
+    //                  "id":3,
+    //                  "name":"Plan C",
+    //                  "price":"360",
+    //                  "difficulty":"Easy",
+    //                  "conversion":100,
+    //                  "likes":10
+    //                 },
+    //                ]
+    //               }
     return (
       <Container style={styles.container}>
         <Content>
@@ -69,16 +99,16 @@ onStarRatingPress(rating) {
           <Text style={styles.thumbnailText}>{params.name}</Text>
 
           <View style={styles.viewSubHeadStyle}>
-            <Text note>{company.enrolled} enrolled | </Text>
-            <Text note>{company.plans.length} plans | </Text>
-            <Text note>{company.rating}/5.0</Text>
+            <Text note>{this.state.company.enrolled} enrolled | </Text>
+            <Text note>{this.state.company.total_plans} plans | </Text>
+            <Text note>{this.state.company.rating}/5.0</Text>
           </View>
 
           <View style={styles.aboutViewStyle}>
-              <Text style={styles.aboutTextStyle} note>{company.about}</Text>
-            </View>
+            <Text style={styles.aboutTextStyle} note>{this.state.company.about}</Text>
+          </View>
 
-          <Text note style={{textAlign:'center'}}>Rate this company</Text>
+          <Text note style={{textAlign:'center',paddingTop:10}}>Rate this company</Text>
 
           <View style={styles.ratingViewStyle}>
             <View style={styles.ratingStyle}>
@@ -90,22 +120,29 @@ onStarRatingPress(rating) {
                 selectedStar={(rating) => this.onStarRatingPress(rating)}
               />
             </View>
+              <Text style={{ fontWeight:'bold', paddingTop:10}}>Submit</Text>
           </View>
           
-          <List dataArray={company.plans}
+          {/*<Text> console.log({this.state.company.plans.data}) </Text>*/}
+          <List dataArray={this.state.company.plans.data}
             renderRow={(plan) =>
-            <ListItem>
-              <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
+            <ListItem onPress={() => navigate('PlansScreen', { id: `${plan.id}`, name: `${plan.name}`})}>
+              <Image style={styles.thumbnailStyle} source={{ uri: plan.logo }} />
               <Body>
                 <View style={styles.viewTextStyle}>
                   <Text>{plan.name}</Text>
-                  <Text note>Rs {plan.price}</Text>
+                  <Text note>Rs {plan.price_of_product}</Text>
                 </View>
                 <View style={styles.viewTextStyle}>
-                  <Text note>{plan.difficulty}</Text>
-                  <Text note> 
-                    {plan.likes}
-                  </Text>
+                  <Text note >{plan.difficulty}</Text>
+                  <View style={{ left:90 }}>
+                    <EvilIcons name="like" size={30} color="#000000" />
+                  </View>
+                  <View style={{ top:5 }}>
+                    <Text note> 
+                      {plan.likes}
+                    </Text>
+                  </View>
                 </View>
               </Body>
             </ListItem>
@@ -147,16 +184,17 @@ const styles = StyleSheet.create({
     width:130,
   },
   ratingViewStyle: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
     paddingBottom:15,
-    paddingTop:8
+    paddingTop:8,
+    alignItems: 'center',
   },
 
   aboutViewStyle: {
-    paddingLeft: 30,
-    paddingRight: 30,
-    paddingBottom:20,
+    alignItems: 'center',
+    justifyContent: 'center',
+
   },
   aboutTextStyle: {
     textAlign: 'justify',

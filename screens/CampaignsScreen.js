@@ -51,7 +51,7 @@ export default class CampaignsScreen extends Component {
         <Content>
           <List dataArray={this.state.companies}
             renderRow={(camp) =>
-            <ListItem onPress={() => navigate('CampaignsDetScreen', { id: `${camp.id}`, name: `${camp.name}`})}>
+            <ListItem onPress={() => navigate('CampaignsDetScreen', { id: `${camp.company_id}`, name: `${camp.name}`})}>
               <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
               <Body>
                 <View style={styles.viewTextStyle}>

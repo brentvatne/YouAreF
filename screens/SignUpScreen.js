@@ -104,14 +104,14 @@ export default class SignUpScreen extends Component {
             />
 
             <Button 
-            large
-            title="DO IT LATER"
-            color='white'
-            backgroundColor='black'
-            fontWeight='bold'
-            borderRadius={10}
-            buttonStyle = {styles.signupButton}
-            onPress={() => navigate('Main')}
+              large
+              title="DO IT LATER"
+              color='white'
+              backgroundColor='black'
+              fontWeight='bold'
+              borderRadius={10}
+              buttonStyle = {styles.signupButton}
+              onPress={() => navigate('Main')}
             />
 
         </Content>
