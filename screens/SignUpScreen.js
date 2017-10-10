@@ -20,6 +20,28 @@ export default class SignUpScreen extends Component {
     };
   }
 
+  onButtonPress = async () => {
+  fetch('http://192.168.43.197/api/public/userdetail/7', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      user_id: '7',
+      user_name: 'yourOtherValue',
+      college: 'yourOtherValue',
+      gender: 'yourOtherValue',
+      email: 'anshul.mk97@gmail.com',
+      phone: '9717953260',
+      address: 'yourOtherValue',
+      degree: 'yourOtherValue',
+      cv: 'yourOtherValue',
+    })
+  });
+  this.props.navigation.navigate('approveScreen') 
+  }
+
   render() {
     
     const { navigate } = this.props.navigation;
@@ -73,9 +95,18 @@ export default class SignUpScreen extends Component {
            info 
            rounded 
            style={styles.signupButton}
-           onPress={() => navigate('approveScreen')}
+           onPress={this.onButtonPress}
            >
               <Text style={styles.signupButtonText}>Sign Up</Text>
+          </Button>
+
+           <Button 
+           info 
+           rounded 
+           style={styles.signupButton}
+           onPress={() => navigate('Main')}
+           >
+            <Text style={styles.signupButtonText}>Go ahead</Text>
           </Button>
         </Content>
       </Container>
