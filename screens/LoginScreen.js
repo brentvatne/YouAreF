@@ -33,7 +33,8 @@ export default class LoginScreen extends React.Component {
     const result = await this.signInWithGoogleAsync();
    
     if (result.type === 'success') {
-        this.props.navigation.navigate('Main')
+    	console.log(result);
+        this.props.navigation.navigate('SignUpScreen', { id: `${result.user.id}`, name: `${result.user.name}`, email: `${result.user.email}`})
       }
 
     // if there is no result.error or result.cancelled, the user is logged in
@@ -54,7 +55,7 @@ export default class LoginScreen extends React.Component {
 		       	 	<Image 
 		       	 	 style={styles.buttonImageStyle} 
 		       	 	 source={require('../assets/images/google.png')} 
-		       	 	 /> 
+		       	 	/> 
 		       	</TouchableOpacity>
 	    	 </Content>
     	 </Container>
