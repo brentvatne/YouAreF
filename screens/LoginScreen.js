@@ -10,6 +10,13 @@ export default class LoginScreen extends React.Component {
     header: null,
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+        plans:''
+    }
+  }
+
   signInWithGoogleAsync = async () => {
     try {
       const result = await Expo.Google.logInAsync({
@@ -31,14 +38,18 @@ export default class LoginScreen extends React.Component {
 
   onLoginPress = async () => {
     const result = await this.signInWithGoogleAsync();
-   
     if (result.type === 'success') {
-    	console.log(result);
-        this.props.navigation.navigate('SignUpScreen', { id: `${result.user.id}`, name: `${result.user.name}`, email: `${result.user.email}`})
+    	fetch('http://192.168.43.197/api/public/userdetail/{result.user.id}/{result.user.email}')
+	      .then((responseJson) => {
+	        this.setState({
+	          plans: responseJson
+	        }, function() {
+	         console.log(this.state.plans); 
+	        });
+	      });
+		this.props.navigation.navigate('SignUpScreen', { id: `${result.user.id}`, name: `${result.user.name}`, email: `${result.user.email}`})
       }
 
-    // if there is no result.error or result.cancelled, the user is logged in
-    // do something with the result
   }
 
   render() {

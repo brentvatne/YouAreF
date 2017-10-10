@@ -22,14 +22,14 @@ export default class SignUpScreen extends Component {
   }
 
   onButtonPress() {
-  fetch('http://192.168.43.197/api/public/userdetail/12', {
+  fetch('http://192.168.43.197/api/public/userdetail', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      user_id: '12',
+      google_id: this.props.navigation.state.params.id,
       user_name: this.props.navigation.state.params.name,
       college: this.state.college,
       gender: this.state.gender,
@@ -40,6 +40,7 @@ export default class SignUpScreen extends Component {
       cv: this.state.cv,
     })
   });
+  console.log(this.props.navigation.state.params.id);
   this.props.navigation.navigate('approveScreen') 
   }
 
