@@ -75,7 +75,6 @@ export default class PlansScreen extends Component {
             backgroundColor='black'
             fontWeight='bold'
             fontSize={20}
-            buttonStyle= {{ flex:1, flexDirection:'row' }}
             onPress={() => this.openConfirm(true)} 
             />
         </Footer>
