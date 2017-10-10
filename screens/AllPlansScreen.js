@@ -10,7 +10,7 @@ export default class CampaignsScreen extends Component {
     headerTitleStyle: { alignSelf: 'center' },
   };
 
-   /*constructor(props) {
+   constructor(props) {
     super(props);
     this.state = {
       isLoading: true,
@@ -32,27 +32,28 @@ export default class CampaignsScreen extends Component {
       .catch((error) => {
         console.error(error);
       });
-  }*/
+  }
 
 
 	render() {	
 
-	/*if (this.state.isLoading) {
+	if (this.state.isLoading) {
       return (
         <View style={{flex: 1, paddingTop: 20}}>
           <ActivityIndicator />
         </View>
       );
-    }*/	
+    }
     
     const { navigate } = this.props.navigation;
 
-    var plans = [    {"id":"1","name":"Amazon A","difficulty":"Easy",likes:"20",price:"200"},
-                    {"id":"2","name":"Snapdeal B","difficulty":"Easy",likes:"63",price:"350"},
-                    {"id":"4","name":"Instamojo A","difficulty":"Easy",likes:"2",price:"2000"},
-                    {"id":"5","name":"Thyrocare C","difficulty":"Hard",likes:"59",price:"2400"},
-                    {"id":"6","name":"MakeMyTrips B","difficulty":"Easy",likes:"12",price:"1200"},
-                ];
+    // var plans = [    {"id":"1","name":"Amazon A","difficulty":"Easy",likes:"20",price:"200"},
+    //                 {"id":"2","name":"Snapdeal B","difficulty":"Easy",likes:"63",price:"350"},
+    //                 {"id":"4","name":"Instamojo A","difficulty":"Easy",likes:"2",price:"2000"},
+    //                 {"id":"5","name":"Thyrocare C","difficulty":"Hard",likes:"59",price:"2400"},
+    //                 {"id":"6","name":"MakeMyTrips B","difficulty":"Easy",likes:"12",price:"1200"},
+    //             ];
+    
     return (
       <Container style={styles.container} >
         <Content>
@@ -63,7 +64,7 @@ export default class CampaignsScreen extends Component {
               <Body>
                 <View style={styles.viewTextStyle}>
                   <Text>{plan.name}</Text>
-                  <Text note>Rs {plan.price}</Text>
+                  <Text note>Rs {plan.price_of_product}</Text>
                 </View>
                 <View style={styles.viewTextStyle}>
                   <Text note >{plan.difficulty}</Text>
