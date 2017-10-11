@@ -40,8 +40,6 @@ componentDidMount() {
           company: responseJson.data,
           plans: this.state.company.plans.data
         }, function() {
-          console.log(this.props.navigation.state.params.id);
-          console.log('1122');
           
         });
       })
@@ -59,7 +57,6 @@ onStarRatingPress(rating) {
 }            
 
   render() {
-
     const { params } = this.props.navigation.state;
     const { navigate } = this.props.navigation;
     var company_logo = this.state.company.logo;
@@ -130,7 +127,6 @@ onStarRatingPress(rating) {
               <Text style={{ fontWeight:'bold', paddingTop:10}}>Submit</Text>
           </View>
           
-          {/*<Text> [{this.state.company.plans}] </Text>*/}
           <List dataArray={this.state.company.plans.data}
             renderRow={(plan) =>
             <ListItem onPress={() => navigate('PlansScreen', { id: `${plan.id}`, name: `${plan.name}`})}>

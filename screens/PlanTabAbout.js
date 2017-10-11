@@ -4,6 +4,30 @@ import { ScrollView, StyleSheet, View, Image, TextInput } from 'react-native';
 
 export default class PlanTabAbout extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true,
+      About:{}
+    }
+  }
+
+  componentDidMount() {
+    return fetch('http://192.168.43.197/api/public/plan/1')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          isLoading: false,
+          About: responseJson.data
+        }, function() {
+          
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   render() {
 
     return (
@@ -14,7 +38,7 @@ export default class PlanTabAbout extends Component {
               <Body>
                 <View>
                   <Text>About the plan</Text>
-                  <Text note>Basic 15-34 products to sell</Text>
+                  <Text note>{this.state.About.about}</Text>
                 </View>
               </Body>
             </ListItem>
@@ -22,7 +46,7 @@ export default class PlanTabAbout extends Component {
               <Body>
                 <View>
                   <Text>Conversion</Text>
-                  <Text note>Sign up offline merchant to sell on amazon. Get paid when seller is active for 30 days</Text>
+                  <Text note>{this.state.About.conversion}</Text>
                 </View>
               </Body>
             </ListItem>
@@ -30,7 +54,7 @@ export default class PlanTabAbout extends Component {
               <Body>
                 <View>
                   <Text>Earn per conversion</Text>
-                  <Text note>Rs. 500 per conversion</Text>
+                  <Text note>{this.state.About.earn_per_conversion}</Text>
                 </View>
               </Body>
             </ListItem>
@@ -38,7 +62,7 @@ export default class PlanTabAbout extends Component {
               <Body>
                 <View>
                   <Text>Price of the product</Text>
-                  <Text note>Free to sign up</Text>
+                  <Text note>{this.state.About.price_per_product}</Text>
                 </View>
               </Body>
             </ListItem>
