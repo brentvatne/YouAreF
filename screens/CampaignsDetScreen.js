@@ -17,15 +17,8 @@ constructor(props) {
       starCount: 0,
       isLoading: true,
       company:{
-        id: '',
-        logo: '',
-        total_plans: '',
-        rating: '',
-        about: '',
-        type: '',
-        name: '',
-        enrolled:'',
-        plans:[]
+      },
+      plans:{
       },
     };
   }  
@@ -38,10 +31,9 @@ componentDidMount() {
         this.setState({
           isLoading: false,
           company: responseJson.data,
-          plans: this.state.company.plans.data
+          plans: responseJson.data.plans.data
         }, function() {
           console.log(this.props.navigation.state.params.id);
-          console.log('1122');
           
         });
       })
@@ -130,8 +122,7 @@ onStarRatingPress(rating) {
               <Text style={{ fontWeight:'bold', paddingTop:10}}>Submit</Text>
           </View>
           
-          {/*<Text> [{this.state.company.plans}] </Text>*/}
-          <List dataArray={this.state.company.plans.data}
+          <List dataArray={this.state.plans}
             renderRow={(plan) =>
             <ListItem onPress={() => navigate('PlansScreen', { id: `${plan.id}`, name: `${plan.name}`})}>
               <Image style={styles.thumbnailStyle} source={{ uri: plan.logo }} />
