@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator} from 'native-base';
+import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Button } from 'native-base';
 import { ScrollView, StyleSheet, View, Image, TextInput } from 'react-native';
-import { Button } from 'react-native-elements';
 
 export default class SignUpScreen extends Component {
   
@@ -9,37 +8,39 @@ export default class SignUpScreen extends Component {
     header: null,
   };
 
-  constructor(props,navigation) {
+  constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      name:'',
       email: '',
       gender: '',
       cv: '',
       address:'',
       contact:'',
     };
+    this.onButtonPress = this.onButtonPress.bind(this);
   }
 
-  onButtonPress = async () => {
-  fetch('http://192.168.43.197/api/public/userdetail/7', {
+  onButtonPress() {
+  fetch('http://192.168.43.197/api/public/userdetail', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      user_id: '7',
-      user_name: 'yourOtherValue',
-      college: 'yourOtherValue',
-      gender: 'yourOtherValue',
-      email: 'anshul.mk97@gmail.com',
-      phone: '9717953260',
-      address: 'yourOtherValue',
-      degree: 'yourOtherValue',
-      cv: 'yourOtherValue',
+      google_id: this.props.navigation.state.params.id,
+      user_name: this.props.navigation.state.params.name,
+      college: this.state.college,
+      gender: this.state.gender,
+      email: this.props.navigation.state.params.email,
+      phone: this.state.contact,
+      address: this.state.address,
+      degree: this.state.degree,
+      cv: this.state.cv,
     })
   });
+  console.log(this.props.navigation.state.params.id);
   this.props.navigation.navigate('approveScreen') 
   }
 
@@ -87,21 +88,31 @@ export default class SignUpScreen extends Component {
             />
             <TextInput
               style={{height: 50}}
+              placeholder="Degree"
+              onChangeText={(degree) => this.setState({degree})}
+              value={this.state.degree}
+            />
+            <TextInput
+              style={{height: 50}}
+              placeholder="College"
+              onChangeText={(college) => this.setState({college})}
+              value={this.state.college}
+            />
+            <TextInput
+              style={{height: 50}}
               placeholder="Link to CV"
               onChangeText={(cv) => this.setState({cv})}
               value={this.state.cv}
             />
           </View>
           <Button 
-            large
-            title="SIGN UP"
-            color='white'
-            backgroundColor='black'
-            fontWeight='bold'
-            borderRadius={10}
-            buttonStyle = {styles.signupButton} 
-            onPress={this.onButtonPress}
-            />
+           info 
+           rounded 
+           style={styles.signupButton}
+           onPress={this.onButtonPress}
+           >
+              <Text style={styles.signupButtonText}>Sign Up</Text>
+          </Button>
 
             <Button 
               large
