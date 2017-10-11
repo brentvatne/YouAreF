@@ -18,11 +18,15 @@ import SingleDiscussion from '../screens/SingleDiscussion';
 import SignUpScreen from '../screens/SignUpScreen';
 import TutorialsScreen from '../screens/TutorialsScreen';
 import approveScreen from '../screens/approveScreen';
+import SplashScreen from '../screens/SplashScreen';
 
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
 const RootStackNavigator = StackNavigator(
   {
+    Splash: {
+      screen: SplashScreen,
+    },
     Login: {
       screen: LoginScreen,
     },

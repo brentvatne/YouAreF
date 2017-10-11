@@ -17,15 +17,19 @@ export default class LoginScreen extends React.Component {
     }
   }
 
-  /*componentDidMount() {
-    AsyncStorage.getItem("key").then((value) => {
-    	this.setState({"key":value});
-    });
+  componentDidMount = async () => {
+    try {
+      let token = await AsyncStorage.getItem('token');
+      if(token!== null) {
+        this.props.navigation.navigate('Main');  
+      }
+      console.log(token);
+    } 
+    catch (error) {
+      alert(error);
+    }
   }
 
-  getInitialState() {
-  	return { };
-  }*/
 
   signInWithGoogleAsync = async () => {
     try {
@@ -53,14 +57,8 @@ export default class LoginScreen extends React.Component {
     } catch (error) {
       alert(error);
     }
-  }
+  }*/
 
-  saveData() {
-    
-      let key = 'Anshul'
-      AsyncStorage.setItem('key',key);
-     
-  } */
 
 
 
@@ -84,15 +82,15 @@ export default class LoginScreen extends React.Component {
         this.setState({
           auth: responseJson
         }, function() {
-          console.log(this.state.auth);
-          
+          console.log(this.state.auth.token);
+          AsyncStorage.setItem("token",this.state.auth.token);
         });
       });
 
-        /*let key = 'Anshul';
-           AsyncStorage.setItem("key",key); */
+          this.props.navigation.navigate('SignUpScreen', { name: `${result.user.name}`, email: `${result.user.email}`})
+           
 
-		  this.props.navigation.navigate('SignUpScreen', { id: `${result.user.id}`, name: `${result.user.name}`, email: `${result.user.email}`})
+		  
       }
 
   }
