@@ -17,18 +17,7 @@ export default class LoginScreen extends React.Component {
     }
   }
 
-  componentDidMount = async () => {
-    try {
-      let token = await AsyncStorage.getItem('token');
-      if(token!== null) {
-        this.props.navigation.navigate('Main');  
-      }
-      console.log(token);
-    } 
-    catch (error) {
-      alert(error);
-    }
-  }
+  
 
 
   signInWithGoogleAsync = async () => {
@@ -73,7 +62,7 @@ export default class LoginScreen extends React.Component {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          gid: result.user.id,
+          google_id: result.user.id,
           email: result.user.email,
         })
       })
@@ -82,12 +71,23 @@ export default class LoginScreen extends React.Component {
         this.setState({
           auth: responseJson
         }, function() {
-          console.log(this.state.auth.token);
+          console.log(this.state.auth);
           AsyncStorage.setItem("token",this.state.auth.token);
+          if(this.state.auth.registered === true){
+            if(this.state.auth.status === "accepted") {
+              this.props.navigation.navigate('Main');
+            }
+            else {
+              this.props.navigation.navigate('approveScreen');
+            }
+          }
+          else {
+            this.props.navigation.navigate('SignUpScreen', { id:`${result.user.id}`, name: `${result.user.name}`, email: `${result.user.email}`});
+          }
         });
       });
 
-          this.props.navigation.navigate('SignUpScreen', { name: `${result.user.name}`, email: `${result.user.email}`})
+          
            
 
 		  
