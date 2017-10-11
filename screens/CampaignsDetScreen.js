@@ -32,7 +32,7 @@ constructor(props) {
 
 
 componentDidMount() {
-    return fetch(`http://192.168.43.197/api/public/company/1`)
+    return fetch(`http://192.168.43.197/api/public/company/${this.props.navigation.state.params.id}`)
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
@@ -40,6 +40,8 @@ componentDidMount() {
           company: responseJson.data,
           plans: this.state.company.plans.data
         }, function() {
+          console.log(this.props.navigation.state.params.id);
+          console.log('1122');
           
         });
       })
