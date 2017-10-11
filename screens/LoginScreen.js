@@ -14,7 +14,6 @@ export default class LoginScreen extends React.Component {
     super(props);
     this.state = {
         auth:{},
-        key:'abc'
     }
   }
 
@@ -69,21 +68,31 @@ export default class LoginScreen extends React.Component {
   onLoginPress = async () => {
     const result = await this.signInWithGoogleAsync();
     if (result.type === 'success') {
-    	fetch('http://192.168.43.197/api/public/userdetails/103871410449701682831/anshul.mk97@gmail.com')
-	      .then((response) => response.json())
-	      .then((responseJson) => {
-	        this.setState({
-	          auth: responseJson
-	        }, function() {
-	        	console.log(result.user.id);
-	        	console.log(result.user.email);
-	         console.log(this.state.data);
-	         let key = 'Anshul';
-	         AsyncStorage.setItem("key",key); 
-	         
-	        });
-	      });
-		this.props.navigation.navigate('SignUpScreen', { id: `${result.user.id}`, name: `${result.user.name}`, email: `${result.user.email}`})
+    	fetch('http://192.168.43.197/api/public/login', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          gid: result.user.id,
+          email: result.user.email,
+        })
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          auth: responseJson
+        }, function() {
+          console.log(this.state.auth);
+          
+        });
+      });
+
+        /*let key = 'Anshul';
+           AsyncStorage.setItem("key",key); */
+
+		  this.props.navigation.navigate('SignUpScreen', { id: `${result.user.id}`, name: `${result.user.name}`, email: `${result.user.email}`})
       }
 
   }
