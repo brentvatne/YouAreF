@@ -33,7 +33,6 @@ componentDidMount() {
           company: responseJson.data,
           plans: responseJson.data.plans.data
         }, function() {
-          console.log(this.props.navigation.state.params.id);
           
         });
       })
