@@ -7,7 +7,7 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 export default class CampaignsDetScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: `${navigation.state.params.name}`
+    title: `${navigation.state.params.name}`,
     
   });
 
@@ -29,13 +29,16 @@ constructor(props) {
       },
     };
   }  
+
+
 componentDidMount() {
-    return fetch('http://192.168.43.197/api/public/company/1')
+    return fetch(`http://192.168.43.197/api/public/company/1`)
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
           isLoading: false,
           company: responseJson.data,
+          plans: this.state.company.plans.data
         }, function() {
           
         });
@@ -57,6 +60,7 @@ onStarRatingPress(rating) {
 
     const { params } = this.props.navigation.state;
     const { navigate } = this.props.navigation;
+    var company_logo = this.state.company.logo;
     // var company = {
     //                "id":"1",
     //                "name":"Amazon",
@@ -92,10 +96,11 @@ onStarRatingPress(rating) {
     //                 },
     //                ]
     //               }
+    
     return (
       <Container style={styles.container}>
         <Content>
-          <Image style={styles.image}  borderRadius={10} source={{uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg'}} />
+          <Image style={styles.image}  borderRadius={10} source={{uri: company_logo}} />
           <Text style={styles.thumbnailText}>{params.name}</Text>
 
           <View style={styles.viewSubHeadStyle}>
@@ -123,7 +128,7 @@ onStarRatingPress(rating) {
               <Text style={{ fontWeight:'bold', paddingTop:10}}>Submit</Text>
           </View>
           
-          {/*<Text> console.log({this.state.company.plans.data}) </Text>*/}
+          {/*<Text> [{this.state.company.plans}] </Text>*/}
           <List dataArray={this.state.company.plans.data}
             renderRow={(plan) =>
             <ListItem onPress={() => navigate('PlansScreen', { id: `${plan.id}`, name: `${plan.name}`})}>

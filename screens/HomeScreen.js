@@ -58,11 +58,6 @@ export default class HomeScreen extends React.Component {
     }
 
     var plan = [    {"name":"Amazon A","difficulty":"Easy",likes:"20",price:"200"},
-                    {"name":"Snapdeal B","difficulty":"Easy",likes:"63",price:"350"},
-                    {"name":"Flipkart A","difficulty":"Medium",likes:"36",price:"400"},
-                    {"name":"Instamojo A","difficulty":"Easy",likes:"2",price:"2000"},
-                    {"name":"Thyrocare C","difficulty":"Hard",likes:"59",price:"2400"},
-                    {"name":"MakeMyTrips B","difficulty":"Easy",likes:"12",price:"1200"},
                 ];
 
     var myplans = [ {"name":"Amazon A","status":"Accepted","date":"30 Sep 2017"},
