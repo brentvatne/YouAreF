@@ -69,7 +69,7 @@ export default class CampaignsScreen extends Component {
                 </View>
                 <View style={styles.viewTextStyle}>
                   <Text note >{plan.difficulty}</Text>
-                  <View style={{ left:110 }}>
+                  <View style={{ left:90 }}>
                     <EvilIcons name="like" size={30} color="#000000" />
                   </View>
                   <View style={{ top:5 }}>

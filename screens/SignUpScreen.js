@@ -114,14 +114,17 @@ export default class SignUpScreen extends Component {
               <Text style={styles.signupButtonText}>Sign Up</Text>
           </Button>
 
-           <Button 
-           info 
-           rounded 
-           style={styles.signupButton}
-           onPress={() => navigate('Main')}
-           >
-            <Text style={styles.signupButtonText}>Go ahead</Text>
-          </Button>
+            <Button 
+              large
+              title="DO IT LATER"
+              color='white'
+              backgroundColor='black'
+              fontWeight='bold'
+              borderRadius={10}
+              buttonStyle = {styles.signupButton}
+              onPress={() => navigate('Main')}
+            />
+
         </Content>
       </Container>
     );
