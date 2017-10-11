@@ -1,7 +1,7 @@
 import React from 'react';
 import Expo from 'expo';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Icon } from 'native-base';
-import { StyleSheet, Image, View, TabNavigator, ListView, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { StyleSheet, Image, View, TabNavigator, ListView, ActivityIndicator, TouchableOpacity, AsyncStorage } from 'react-native';
 import { Button } from 'react-native-elements';
 
 export default class LoginScreen extends React.Component {
@@ -13,9 +13,20 @@ export default class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        plans:''
+        auth:{},
+        key:'abc'
     }
   }
+
+  /*componentDidMount() {
+    AsyncStorage.getItem("key").then((value) => {
+    	this.setState({"key":value});
+    });
+  }
+
+  getInitialState() {
+  	return { };
+  }*/
 
   signInWithGoogleAsync = async () => {
     try {
@@ -35,16 +46,41 @@ export default class LoginScreen extends React.Component {
     }
   }
 
+  /*displayData = async () => {
+    try {
+      let key = await AsyncStorage.getItem('key');
+      alert(key);
+      
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+  saveData() {
+    
+      let key = 'Anshul'
+      AsyncStorage.setItem('key',key);
+     
+  } */
+
+
+
 
   onLoginPress = async () => {
     const result = await this.signInWithGoogleAsync();
     if (result.type === 'success') {
-    	fetch('http://192.168.43.197/api/public/userdetail/{result.user.id}/{result.user.email}')
+    	fetch('http://192.168.43.197/api/public/userdetails/103871410449701682831/anshul.mk97@gmail.com')
+	      .then((response) => response.json())
 	      .then((responseJson) => {
 	        this.setState({
-	          plans: responseJson
+	          auth: responseJson
 	        }, function() {
-	         console.log(this.state.plans); 
+	        	console.log(result.user.id);
+	        	console.log(result.user.email);
+	         console.log(this.state.data);
+	         let key = 'Anshul';
+	         AsyncStorage.setItem("key",key); 
+	         
 	        });
 	      });
 		this.props.navigation.navigate('SignUpScreen', { id: `${result.user.id}`, name: `${result.user.name}`, email: `${result.user.email}`})
@@ -58,6 +94,7 @@ export default class LoginScreen extends React.Component {
     return (
     	<Container style={styles.container}>
 	    	<Content>
+	    		{/*<Text>{this.state.mykey}</Text>*/}
 		    	<Image
 		    	 style={styles.imageStyle}
 		         source={require('../assets/images/YOUAREF.png')}
@@ -68,6 +105,13 @@ export default class LoginScreen extends React.Component {
 		       	 	 source={require('../assets/images/google.png')} 
 		       	 	/> 
 		       	</TouchableOpacity>
+
+	   			{/*<TouchableOpacity onPress={this.displayData}> 
+		       		<Text>Display</Text>
+		       	</TouchableOpacity>
+		       	<TouchableOpacity onPress={this.saveData}> 
+		       		<Text>Save</Text>
+		       	</TouchableOpacity> */}
 
             <Button 
               large
