@@ -5,14 +5,41 @@ import PopupDialog, { DialogTitle } from 'react-native-popup-dialog';
 
 export default class PlanTabReviews extends Component {
 
-  render() {
+   constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true,
+      reviews:{
 
-    var reviews = [{reviewHead:"Really worth it",description:"It was good experience working with amazon. All the payments and transactions were on time",user:"Alok Singh", date:"9/6/2017"},
+      }
+    }
+  }
+
+  componentDidMount() {
+    return fetch('http://192.168.43.197/api/public/plan/1')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          isLoading: false,
+          reviews: responseJson.data.reviews.data
+        }, function() {
+          console.log(this.state.reviews);
+          
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  render() {
+  
+    /*var reviews = [{reviewHead:"Really worth it",description:"It was good experience working with amazon. All the payments and transactions were on time",user:"Alok Singh", date:"9/6/2017"},
                    {reviewHead:"Really worth it",description:"It was good experience working with amazon. All the payments and transactions were on time",user:"Alok Singh", date:"9/6/2017"},
                    {reviewHead:"Really worth it",description:"It was good experience working with amazon. All the payments and transactions were on time",user:"Alok Singh", date:"9/6/2017"},
                    {reviewHead:"Really worth it",description:"It was good experience working with amazon. All the payments and transactions were on time",user:"Alok Singh", date:"9/6/2017"},
                    {reviewHead:"Really worth it",description:"It was good experience working with amazon. All the payments and transactions were on time",user:"Alok Singh", date:"9/6/2017"},
-                  ]; 
+                  ]; */
 
     return (
       <Container style={styles.container}>
@@ -48,15 +75,15 @@ export default class PlanTabReviews extends Component {
           </View>
 
           <View>
-            <List dataArray={reviews}
-              renderRow={(reviews) =>
+            <List dataArray = {this.state.reviews}
+              renderRow = {(review) =>
                 <ListItem>
                   <Body> 
                     <View style={styles.viewTextStyle}>
-                      <Text>{reviews.reviewHead}</Text>
-                      <Text note>{reviews.description}</Text>
+                      <Text>{review.name}</Text>
+                      <Text note>{review.message}</Text>
                       <View style={styles.nameTextStyle}>
-                        <Text note>By {reviews.user} on {reviews.date}</Text>
+                        <Text note>By {review.user_name} on {review.date}</Text>
                       </View>
                     </View>
                   </Body>
