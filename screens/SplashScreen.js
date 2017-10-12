@@ -20,7 +20,7 @@ export default class SplashScreen extends Component {
     try {
       let token = await AsyncStorage.getItem('token');
       if(token!== null) {
-
+        console.log(token);
       fetch('http://192.168.43.197/api/public/checkstatus',{
         method: 'GET',
         headers: {
@@ -77,6 +77,6 @@ export default class SplashScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#3498db',
   },
 });

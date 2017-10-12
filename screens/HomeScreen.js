@@ -37,11 +37,25 @@ import fontawesomeIcon from 'react-native-vector-icons/FontAwesome';
 import call from 'react-native-phone-call';
 import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
 import IconBadge from 'react-native-icon-badge';
+import { NavigationActions } from 'react-navigation'
+
+
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
-  };
+  }
+
+  /*componentWillMount() {
+    const resetAction = NavigationActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate({ routeName: 'Main'})
+      ]
+    });
+
+    this.props.navigation.dispatch(resetAction);
+  }*/
 
   constructor() {
     super();
@@ -50,8 +64,11 @@ export default class HomeScreen extends React.Component {
     };
   }
 
+  
+
   render() {
     const { navigate } = this.props.navigation;
+
     const args = {
       number: '8505960948', // String value with the number to call 
       prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call  

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Icon } from 'native-base';
-import { StyleSheet, Image, View, TabNavigator, ListView, ActivityIndicator } from 'react-native';
+import { StyleSheet, Image, View, TabNavigator, ListView, ActivityIndicator, AsyncStorage } from 'react-native';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 export default class CampaignsScreen extends Component {
@@ -8,8 +8,7 @@ export default class CampaignsScreen extends Component {
   static navigationOptions = {
     title: 'Plans',
     headerLeft: null,
-    headerTitleStyle: { alignSelf: 'center' },
-  };
+  }
 
    constructor(props) {
     super(props);
@@ -18,23 +17,32 @@ export default class CampaignsScreen extends Component {
       plans:{}
     }
   }
-
-  componentDidMount() {
-    return fetch('http://192.168.43.197/api/public/plans')
+  componentDidMount = async () => {
+    let token = await AsyncStorage.getItem('token');
+    
+    fetch('http://192.168.43.197/api/public/plans',{
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token,
+          'Host': '192.168.43.197'
+        }
+      })
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
           isLoading: false,
-          plans: responseJson.data
-        }, function() {
+          plans: responseJson.data,
           
+        }, function() {
+          console.log(this.state.plans)
         });
       })
       .catch((error) => {
         console.error(error);
       });
   }
-
 
 	render() {	
 
