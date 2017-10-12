@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body } from 'native-base';
-import { StyleSheet, Image, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, Image, View, ActivityIndicator, AsyncStorage } from 'react-native';
 
 export default class CampaignsScreen extends Component {
   
@@ -8,7 +8,7 @@ export default class CampaignsScreen extends Component {
     title: 'Companies',
     headerLeft: null,
     headerTitleStyle: { alignSelf: 'center' },
-  };
+  }
 
   constructor(props) {
     super(props);
@@ -18,15 +18,26 @@ export default class CampaignsScreen extends Component {
     }
   }
 
-  componentDidMount() {
-    return fetch('http://192.168.43.197/api/public/companies')
+  componentDidMount = async () => {
+    let token = await AsyncStorage.getItem('token');
+    
+    fetch('http://192.168.43.197/api/public/companies',{
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token,
+          'Host': '192.168.43.197'
+        }
+      })
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
           isLoading: false,
-          companies: responseJson.data
-        }, function() {
+          companies: responseJson.data,
           
+        }, function() {
+          console.log(this.state.companies)
         });
       })
       .catch((error) => {
