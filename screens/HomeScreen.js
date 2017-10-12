@@ -57,10 +57,40 @@ export default class HomeScreen extends React.Component {
 
     this.props.navigation.dispatch(resetAction);
   }*/
+  constructor() {
+    super();
+    this.state = {
+      active: 'true',
+      home:{},
+      myplans:{}
 
+    };
+  }
   componentDidMount = async () => {
     let token = await AsyncStorage.getItem('token');
     
+    fetch('http://192.168.43.197/api/public/home',{
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token,
+          'Host': '192.168.43.197'
+        }
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          home: responseJson.data[0],
+          
+        }, function() {
+          console.log('abcc  ' + this.state.home.name);
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
     fetch('http://192.168.43.197/api/public/myplans',{
         method: 'GET',
         headers: {
@@ -77,22 +107,16 @@ export default class HomeScreen extends React.Component {
           myplans: responseJson.data,
           
         }, function() {
-          console.log(this.state.companies)
+          console.log(this.state.myplans);
         });
       })
       .catch((error) => {
         console.error(error);
       });
+
+      
   }
 
-  constructor() {
-    super();
-    this.state = {
-      active: 'true'
-    };
-  }
-
-  
 
   render() {
     const { navigate } = this.props.navigation;
@@ -105,12 +129,12 @@ export default class HomeScreen extends React.Component {
     return (
         <Container style={styles.container}>
           <Content>
-              <Card style={{backgroundColor:"#fad30a"}}>
+             <Card style={{backgroundColor:"#fad30a"}}>
                 <View style={ styles.notificationActionButtonView }>
                   <Ionicons name="md-notifications" style={styles.notificationButtonIcon} />
                 </View>
                 <CardItem style={{ alignItems: 'center',justifyContent: 'center',backgroundColor:'#fad30a' }}>
-                  <Text style={{ fontSize:30,color:'#000000' }}> Hello Alok !</Text>
+                  <Text style={{ fontSize:30,color:'#000000' }}> Hello {this.state.home.name} !</Text>
                 </CardItem>
                 <CardItem style={{alignItems: 'center',justifyContent: 'center',paddingTop:0,backgroundColor:'#fad30a'}}>
                   <View style={{
@@ -124,7 +148,7 @@ export default class HomeScreen extends React.Component {
                   <Body style={{ alignItems:"center",justifyContent:"center"}}>
                     <View style={{flexDirection:'column',justifyContent:'center'}}>
                       <View style={{flexDirection:'row',alignItems:'center'}}>
-                        <Text style={{ fontSize:35,color:'#000000' }}> 110 </Text>
+                        <Text style={{ fontSize:35,color:'#000000' }}> {this.state.home.amount} </Text>
                         <FontAwesomeIcons name="rupee" size={30} color="#000000" /> 
                       </View>
                         <Text style={{ fontSize:15,color:'#000000' }}> earnings so far</Text>
@@ -133,28 +157,28 @@ export default class HomeScreen extends React.Component {
                 </CardItem>
               </Card>
 
-            <View style={{ flex: 1, flexDirection: 'row', alignSelf:'stretch' ,position:'relative'}}>
+            <View style={{  flexDirection: 'row', alignSelf:'stretch' ,position:'relative'}}>
               <View style={{ flex:1,height: 80, alignSelf:'stretch', position:'relative' }}>
                 <Body style={{ alignItems:"center",justifyContent:"center" }}>
-                  <Text style={{fontSize: 30}}> 2 </Text>
-                  <Text  style={styles.smallText}>campaigns</Text>
+                  <Text style={{fontSize: 30}}> {this.state.home.companies} </Text>
+                  <Text  style={styles.smallText}>Companies</Text>
                 </Body>
               </View>
               <View style={{ flex:1,height: 80, alignSelf:'stretch',position:'relative'}}>
                 <Body style={{ alignItems:"center",justifyContent:"center"}}>
-                  <Text style={{fontSize: 30}}> 1 </Text>
-                  <Text  style={styles.smallText}>total deals</Text>
+                  <Text style={{fontSize: 30}}> {this.state.home.my_plans} </Text>
+                  <Text  style={styles.smallText}>My plans</Text>
                 </Body>
               </View>  
               <View style={{ flex:1,height: 80, alignSelf:'stretch',position:'relative'}}>
                 <Body style={{ alignItems:"center",justifyContent:"center"}}>
-                  <Text style={{fontSize: 30}}> 0 </Text>
-                  <Text  style={styles.smallText} >approved</Text>
+                  <Text style={{fontSize: 30}}> {this.state.home.accepted} </Text>
+                  <Text  style={styles.smallText}>Approved</Text>
                 </Body>
               </View>
             </View>
 
-          <Text style={{paddingTop:10}}> Your Plans </Text>
+          <Text style={{padding:16}}> My Plans </Text>
             <List dataArray={this.state.myplans}
               renderRow={(myplans) =>
                 <ListItem onPress={() => navigate('CampaignsDetScreen', { name: `${myplans.name}`})}>
