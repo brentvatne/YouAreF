@@ -18,6 +18,7 @@ import SingleDiscussion from '../screens/SingleDiscussion';
 import SignUpScreen from '../screens/SignUpScreen';
 import TutorialsScreen from '../screens/TutorialsScreen';
 import approveScreen from '../screens/approveScreen';
+import ChatScreen from '../screens/ChatScreen';
 import SplashScreen from '../screens/SplashScreen';
 
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
@@ -74,6 +75,9 @@ const RootStackNavigator = StackNavigator(
     },
     approveScreen: {
       screen: approveScreen, 
+    },
+    ChatScreen: {
+      screen: ChatScreen,
     },
   },
   {

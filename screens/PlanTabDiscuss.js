@@ -4,24 +4,49 @@ import { ScrollView, StyleSheet, View, Image, TextInput, Button} from 'react-nat
 
 export default class PlanTabDiscuss extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true,
+      discuss:{
+      }
+    }
+  }
+
+  componentDidMount() {
+    return fetch('http://192.168.43.197/api/public/plan/1')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          isLoading: false,
+          discuss: responseJson.data.discussions.data
+        }, function() {
+
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   render() {
 
-    var discussions = [{id:0,discussionHead:"Does amazon charges extra tax from the seller ?"},
+    /*var discussions = [{id:0,discussionHead:"Does amazon charges extra tax from the seller ?"},
                       {id:0,discussionHead:"What all skills are necessary to apply for this plan ?"},
                       {id:0,discussionHead:"Can anyone share his/her experience ?"},
                       {id:0,discussionHead:"In how many will the payment reflect in my account ?"},
-                      ]; 
+                      ]; */
 
     return (
       <Container style={styles.container} >
         <Content>
           <View>
-            <List dataArray={discussions}
+            <List dataArray={this.state.discuss}
               renderRow={(discussions) =>
                 <ListItem>
                   <Body> 
                     <View style={styles.viewTextStyle}>
-                      <Text>{discussions.discussionHead}</Text>
+                      <Text>{discussions.question}</Text>
                     </View>
                   </Body>
                 </ListItem>

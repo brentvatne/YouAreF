@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Button } from 'native-base';
+import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator} from 'native-base';
 import { ScrollView, StyleSheet, View, Image, TextInput } from 'react-native';
+import { Button } from 'react-native-elements';
 
 export default class SignUpScreen extends Component {
   
@@ -105,17 +106,18 @@ export default class SignUpScreen extends Component {
               value={this.state.cv}
             />
           </View>
-          <Button 
-           info 
-           rounded 
-           style={styles.signupButton}
-           onPress={this.onButtonPress}
-           >
-              <Text style={styles.signupButtonText}>Sign Up</Text>
-          </Button>
 
             <Button 
-              large
+              title="SIGN UP"
+              color='white'
+              backgroundColor='black'
+              fontWeight='bold'
+              borderRadius={10}
+              buttonStyle = {styles.signupButton}
+              onPress={this.onButtonPress}
+            />
+
+            <Button 
               title="DO IT LATER"
               color='white'
               backgroundColor='black'
@@ -136,7 +138,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   signupButton: {
-    marginTop: 24,
+    marginTop: 15,
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
