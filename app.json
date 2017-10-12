@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "my-new-project",
+    "name": "YouAreF",
     "description": "No description",
     "slug": "my-new-project",
     "privacy": "public",
@@ -22,7 +22,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "host.exp.exponent"
+      "bundleIdentifier": "com.youaref.client"
     },
     "android": {
       "package": "com.youaref.client",
