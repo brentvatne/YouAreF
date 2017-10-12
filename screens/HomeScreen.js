@@ -6,7 +6,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
-  TouchableHighlight,} from 'react-native';
+  TouchableHighlight,
+  AsyncStorage, } from 'react-native';
 
 import { 
   Container, 
@@ -57,6 +58,33 @@ export default class HomeScreen extends React.Component {
     this.props.navigation.dispatch(resetAction);
   }*/
 
+  componentDidMount = async () => {
+    let token = await AsyncStorage.getItem('token');
+    
+    fetch('http://192.168.43.197/api/public/myplans',{
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token,
+          'Host': '192.168.43.197'
+        }
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          isLoading: false,
+          myplans: responseJson.data,
+          
+        }, function() {
+          console.log(this.state.companies)
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   constructor() {
     super();
     this.state = {
@@ -73,18 +101,6 @@ export default class HomeScreen extends React.Component {
       number: '8505960948', // String value with the number to call 
       prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call  
     }
-
-    var plan = [    {"name":"Amazon A","difficulty":"Easy",likes:"20",price:"200"},
-                ];
-
-    var myplans = [ {"name":"Amazon A","status":"Accepted","date":"30 Sep 2017"},
-                    {"name":"Snapdeal B","status":"Accepted","date":"30 Sep 2017"},
-                    {"name":"Flipkart A","status":"Rejected","date":"30 Sep 2017"},
-                    {"name":"Instamojo A","status":"Accepted","date":"30 Sep 2017"},
-                    {"name":"Thyrocare C","status":"Accepted","date":"30 Sep 2017"},
-                    {"name":"MakeMyTrips B","status":"Rejected","date":"30 Sep 2017"},
-                ];
-
 
     return (
         <Container style={styles.container}>
@@ -139,7 +155,7 @@ export default class HomeScreen extends React.Component {
             </View>
 
           <Text style={{paddingTop:10}}> Your Plans </Text>
-            <List dataArray={myplans}
+            <List dataArray={this.state.myplans}
               renderRow={(myplans) =>
                 <ListItem onPress={() => navigate('CampaignsDetScreen', { name: `${myplans.name}`})}>
                   <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
@@ -162,27 +178,6 @@ export default class HomeScreen extends React.Component {
                     </View>
                     <View style={styles.viewTextStyle}>
                       <Text note>{myplans.date}</Text>
-                    </View>
-                  </Body>
-                </ListItem>
-              }>
-            </List>
-
-          <Text style={{paddingTop:30}}> Plans recommended for you </Text>
-            <List dataArray={plan}
-              renderRow={(plan) =>
-                <ListItem onPress={() => navigate('CampaignsDetScreen', { name: `${plan.name}`})}>
-                  <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
-                  <Body>
-                    <View style={styles.viewTextStyle}>
-                      <Text>{plan.name}</Text>
-                      <Text note>Rs {plan.price}</Text>
-                    </View>
-                    <View style={styles.viewTextStyle}>
-                      <Text note>{plan.difficulty}</Text>
-                      <Text note> 
-                        {plan.likes}
-                      </Text>
                     </View>
                   </Body>
                 </ListItem>

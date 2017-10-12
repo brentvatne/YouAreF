@@ -25,7 +25,13 @@
       "bundleIdentifier": "host.exp.exponent"
     },
     "android": {
-      "package": "host.exp.exponent"
-    }
+      "package": "com.youaref.client",
+      "config": {
+        "googleSignIn": {
+          "apiKey": "AIzaSyBHzyuKFyzQPdVsg126zD4u_x4lIHIe34o",
+          "certificateHash":"12F0FF83F494181D571C2AEAC1DA41752466FB0F"
+        }
+      } 
+    },
   }
 }
