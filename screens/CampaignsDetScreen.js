@@ -62,13 +62,13 @@ componentDidMount = async () => {
   
   let token = await AsyncStorage.getItem('token');
     
-  fetch(`http://192.168.43.197/api/public/ratecompany/${this.props.navigation.state.params.id}`, {
+  fetch(`http://192.168.43.217/api/public/ratecompany/${this.props.navigation.state.params.id}`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token,
-      'Host': '192.168.43.197'
+      'Host': '192.168.43.217'
     },
     body: JSON.stringify({
       rating: this.state.starCount,
@@ -136,7 +136,7 @@ componentDidMount = async () => {
                 selectedStar={(rating) => this.onStarRatingPress(rating)}
               />
             </View>
-            <TouchableOpacity onPress={this.submitrating}>
+            <TouchableOpacity onPress={this.onsubmitrating}>
               <Text style={{ fontWeight:'bold', paddingTop:10}}>Submit</Text>
             </TouchableOpacity>
           </View>

@@ -14,6 +14,7 @@ export default class LoginScreen extends React.Component {
     super(props);
     this.state = {
         auth:{},
+        isLoading: false,
     }
   }
 
@@ -21,6 +22,7 @@ export default class LoginScreen extends React.Component {
 
 
   signInWithGoogleAsync = async () => {
+
     try {
       const result = await Expo.Google.logInAsync({
         androidClientId: "612669964630-04vbqsbsvt3mjv0nr7nsa77erika2f9p.apps.googleusercontent.com",
@@ -31,6 +33,7 @@ export default class LoginScreen extends React.Component {
       })
 
       if (result.type === 'success') {
+
         return result
       }
       return { cancelled: true }
@@ -39,23 +42,11 @@ export default class LoginScreen extends React.Component {
     }
   }
 
-  /*displayData = async () => {
-    try {
-      let key = await AsyncStorage.getItem('key');
-      alert(key);
-      
-    } catch (error) {
-      alert(error);
-    }
-  }*/
-
-
-
-
-
   onLoginPress = async () => {
+
     const result = await this.signInWithGoogleAsync();
     if (result.type === 'success') {
+      
     	fetch('http://192.168.43.217/api/public/login', {
         method: 'POST',
         headers: {
@@ -102,7 +93,6 @@ export default class LoginScreen extends React.Component {
     return (
     	<Container style={styles.container}>
 	    	<Content>
-	    		{/*<Text>{this.state.mykey}</Text>*/}
 		    	<Image
 		    	 style={styles.imageStyle}
 		         source={require('../assets/images/YOUAREF.png')}
@@ -113,13 +103,6 @@ export default class LoginScreen extends React.Component {
 		       	 	 source={require('../assets/images/google.png')} 
 		       	 	/> 
 		       	</TouchableOpacity>
-
-	   			{/*<TouchableOpacity onPress={this.displayData}> 
-		       		<Text>Display</Text>
-		       	</TouchableOpacity>
-		       	<TouchableOpacity onPress={this.saveData}> 
-		       		<Text>Save</Text>
-		       	</TouchableOpacity> */}
 
             <Button 
               large

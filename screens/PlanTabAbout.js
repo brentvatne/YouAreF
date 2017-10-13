@@ -16,13 +16,13 @@ export default class PlanTabAbout extends Component {
   componentDidMount = async () => {
     let token = await AsyncStorage.getItem('token');
     
-    fetch(`http://192.168.43.197/api/public/plan/1`,{
+    fetch(`http://192.168.43.217/api/public/plan/1`,{
        method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + token,
-          'Host': '192.168.43.197'
+          'Host': '192.168.43.217'
         }
       })
       .then((response) => response.json())
