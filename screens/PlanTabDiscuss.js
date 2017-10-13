@@ -6,6 +6,7 @@ export default class PlanTabDiscuss extends Component {
 
   constructor(props) {
     super(props);
+    this.sampleProps = this.props;
     this.state = {
       isLoading: true,
       discuss:{
@@ -18,7 +19,7 @@ export default class PlanTabDiscuss extends Component {
   componentDidMount = async () => {
     let token = await AsyncStorage.getItem('token');
     
-    fetch('http://192.168.43.217/api/public/plan/2',
+    fetch(`http://192.168.43.217/api/public/plan/${this.sampleProps.sampleProps}`,
     {
        method: 'GET',
         headers: {
@@ -44,7 +45,7 @@ export default class PlanTabDiscuss extends Component {
   }
 
 /*  onButtonPress() {
-  fetch('http://192.168.43.197/api/public/plan/2', {
+  fetch('http://192.168.43.217/api/public/plan/2', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

@@ -9,8 +9,6 @@ export default class approveScreen extends Component {
     header: null,
   };
 
-  
-
   render() {
     
     const { navigate } = this.props.navigation;

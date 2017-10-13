@@ -14,10 +14,6 @@ import {
 
 export default class PlansScreen extends Component {
   
-  static navigationOptions = ({ navigation }) => ({
-    title: `${navigation.state.params.name}`
-  });
-
   constructor(props) {
     super(props);
     this.state = {
@@ -56,23 +52,31 @@ export default class PlansScreen extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    /*console.log(this.props.navigation.state.params.id);
-    console.log('1122');*/
+    console.log(this.props.navigation.state.params.id);
+    console.log('1122');
 
     return (
       <Container style={styles.container} >
         <Tabs renderTabBar={()=> <ScrollableTab />} backgroundColor={'#fad30a'}>
           <Tab heading="About" tabStyle={{backgroundColor: '#fad30a'}} textStyle={{color: '#000000'}} activeTabStyle={{backgroundColor: '#fad30a'}} activeTextStyle={{color: '#000000', fontWeight: 'bold'}}>
-            <PlanTabAbout />
+            <PlanTabAbout  
+              sampleProps={this.props.navigation.state.params.id}
+            />
           </Tab>
           <Tab heading="Training" tabStyle={{backgroundColor: '#fad30a'}} textStyle={{color: '#000000'}} activeTabStyle={{backgroundColor: '#fad30a'}} activeTextStyle={{color: '#000000', fontWeight: 'bold'}}>
-            <PlanTabTraining />
+            <PlanTabTraining 
+              sampleProps={this.props.navigation.state.params.id}
+              />
           </Tab>
           <Tab heading="Reviews" tabStyle={{backgroundColor: '#fad30a'}} textStyle={{color: '#000000'}} activeTabStyle={{backgroundColor: '#fad30a'}} activeTextStyle={{color: '#000000', fontWeight: 'bold'}}>
-            <PlanTabReviews />
+            <PlanTabReviews 
+              sampleProps={this.props.navigation.state.params.id}
+            />
           </Tab>
           <Tab heading="Discuss" tabStyle={{backgroundColor: '#fad30a'}} textStyle={{color: '#000000'}} activeTabStyle={{backgroundColor: '#fad30a'}} activeTextStyle={{color: '#000000', fontWeight: 'bold'}}>
-            <PlanTabDiscuss />
+            <PlanTabDiscuss 
+              sampleProps={this.props.navigation.state.params.id}
+            />
           </Tab>
         </Tabs>
 
