@@ -56,7 +56,7 @@ export default class LoginScreen extends React.Component {
   onLoginPress = async () => {
     const result = await this.signInWithGoogleAsync();
     if (result.type === 'success') {
-    	fetch('http://192.168.43.197/api/public/login', {
+    	fetch('http://192.168.43.217/api/public/login', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
