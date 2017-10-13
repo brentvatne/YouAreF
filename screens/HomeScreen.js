@@ -70,13 +70,13 @@ export default class HomeScreen extends React.Component {
   componentDidMount = async () => {
     let token = await AsyncStorage.getItem('token');
     
-    fetch('http://192.168.43.197/api/public/home',{
+    fetch('http://192.168.43.217/api/public/home',{
         method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + token,
-          'Host': '192.168.43.197'
+          'Host': '192.168.43.217'
         }
       })
       .then((response) => response.json())

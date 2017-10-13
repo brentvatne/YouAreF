@@ -24,7 +24,7 @@ export default class SignUpScreen extends Component {
   }
 
   onButtonPress() {
-  fetch('http://192.168.43.197/api/public/signup', {
+  fetch('http://192.168.43.217/api/public/signup', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

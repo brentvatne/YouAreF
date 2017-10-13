@@ -21,13 +21,13 @@ export default class CampaignsScreen extends Component {
   componentDidMount = async () => {
     let token = await AsyncStorage.getItem('token');
     
-    fetch('http://192.168.43.197/api/public/companies',{
+    fetch('http://192.168.43.217/api/public/companies',{
         method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + token,
-          'Host': '192.168.43.197'
+          'Host': '192.168.43.217'
         }
       })
       .then((response) => response.json())

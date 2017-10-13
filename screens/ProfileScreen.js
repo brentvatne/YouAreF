@@ -10,6 +10,41 @@ export default class ProfileScreen extends Component {
     title: 'Profile',
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true,
+      user: {}
+    }
+  }
+
+  componentDidMount = async () => {
+   let token = await AsyncStorage.getItem('token');
+   console.log('User ');
+   fetch('http://192.168.43.217/api/public/user',{
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token,
+          'Host': '192.168.43.217'
+        }
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          isLoading: false,
+          user: responseJson.data[0],
+          
+        }, function() {
+          console.log('User '+this.state.user);
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   logoutbutton = async () => {
   this.props.navigation.navigate('Login');  
   AsyncStorage.clear();
@@ -26,30 +61,25 @@ export default class ProfileScreen extends Component {
             style={styles.thumbnailStyle} 
             source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }}
           />
-
           <List>
             <ListItem>
-              <Text>Anshul Mehta</Text>
+              <Text>{this.state.user.user_name}</Text>
             </ListItem>
             <ListItem>
-              <Text>anshul.mk97@gmail.com</Text>
+              <Text>{this.state.user.email}</Text>
             </ListItem>
             <ListItem>
-              <Text>+919717953260</Text>
+              <Text>{this.state.user.phone}</Text>
             </ListItem>
             <ListItem>
-              <Text>Male</Text>
-            </ListItem>
-            <ListItem>
-              <Text>New Delhi,India</Text>
+              <Text>{this.state.user.address}</Text>
             </ListItem>
             <ListItem>
               <Hyperlink linkDefault={ true }>
-                <Text style={styles.linkStyle} > singhalok641.github.io </Text>
+                <Text style={styles.linkStyle}>{this.state.user.cv}</Text>
               </Hyperlink>
             </ListItem>
           </List>
-
           <View style = {styles.loginButton}>
             <Button
                 onPress={() => navigate('BankDetailsScreen')}
