@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Button } from 'native-base';
-import { ScrollView, StyleSheet, View, Image, TextInput } from 'react-native';
+import { ScrollView, StyleSheet, View, Image, TextInput, AsyncStorage } from 'react-native';
 
 export default class BankDetailsScreen extends Component {
   
   static navigationOptions = {
     title: 'Bank Details',
     headerLeft: null,
-  };
+  }
 
   constructor(props) {
     super(props);
@@ -19,20 +19,25 @@ export default class BankDetailsScreen extends Component {
                     pannumber: '',
                     res:{} 
                  };
-  //this.onButtonPress = this.onButtonPress.bind(this);               
+  this.onButtonPress = this.onButtonPress.bind(this);               
   }
 
-  /*onButtonPress() {
-  fetch('http://192.168.43.197/api/public/signup', {
+  onButtonPress= async () => {
+  
+  let token = await AsyncStorage.getItem('token');
+    
+  fetch('http://192.168.43.197/api/public/bank_detail', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+      'Host': '192.168.43.197'
     },
     body: JSON.stringify({
       holder_name: this.state.holdername,
       bank_name: this.state.bankname,
-      ifsccode: this.state.ifsccode,
+      ifsc: this.state.ifsccode,
       account_number: this.state.accountnumber,
       pan_number: this.state.pannumber,
     })
@@ -43,10 +48,19 @@ export default class BankDetailsScreen extends Component {
       this.setState({
         res: responseJson
        }, function() {
+        console.log(this.state.res);
+        if(this.state.res.status === "ok"){
+          alert('Bank Details Added');
+          this.props.navigation.navigate('ProfileScreen');
+        }
+        else if(this.state.res.title === "Already added!"){
+          alert('Error, Bank Details already Added');
+          this.props.navigation.navigate('ProfileScreen');
+        }
      
     });
   }); 
-  }*/
+  }
 
 
   render() {
@@ -93,6 +107,7 @@ export default class BankDetailsScreen extends Component {
            info 
            rounded 
            style={styles.Button}
+           onPress={this.onButtonPress}
            >
               <Text style={styles.ButtonText}>Save</Text>
           </Button>
