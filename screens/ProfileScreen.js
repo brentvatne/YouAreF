@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator } from 'native-base';
-import { ScrollView, StyleSheet, View, Image,} from 'react-native';
+import { ScrollView, StyleSheet, View, Image, AsyncStorage } from 'react-native';
 import { Button } from 'react-native-elements';
 import Hyperlink from 'react-native-hyperlink';
 
@@ -8,7 +8,12 @@ export default class ProfileScreen extends Component {
   
   static navigationOptions = {
     title: 'Profile',
-  };
+  }
+
+  logoutbutton = async () => {
+  this.props.navigation.navigate('Login');  
+  AsyncStorage.clear();
+  }
 
   render() {
     
@@ -59,7 +64,7 @@ export default class ProfileScreen extends Component {
 
           <View style = {styles.loginButton}>
             <Button
-                onPress={() => navigate('BankDetailsScreen')}
+                onPress={this.logoutbutton}
                 title="LOGOUT"
                 raised
                 color='white'
