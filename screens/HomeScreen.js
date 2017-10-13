@@ -134,7 +134,7 @@ export default class HomeScreen extends React.Component {
                   <Ionicons name="md-notifications" style={styles.notificationButtonIcon} />
                 </View>
                 <CardItem style={{ alignItems: 'center',justifyContent: 'center',backgroundColor:'#fad30a' }}>
-                  <Text style={{ fontSize:30,color:'#000000' }}> Hello {this.state.home.name} !</Text>
+                  <Text style={{ fontSize:30,color:'#000000' }}> Hello, {this.state.home.name} !</Text>
                 </CardItem>
                 <CardItem style={{alignItems: 'center',justifyContent: 'center',paddingTop:0,backgroundColor:'#fad30a'}}>
                   <View style={{
@@ -177,36 +177,37 @@ export default class HomeScreen extends React.Component {
                 </Body>
               </View>
             </View>
-
-          <Text style={{padding:16}}> My Plans </Text>
-            <List dataArray={this.state.myplans}
-              renderRow={(myplans) =>
-                <ListItem onPress={() => navigate('CampaignsDetScreen', { name: `${myplans.name}`})}>
-                  <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
-                  <Body>
-                    <View style={styles.viewTextStyle}>
-                      <Text>{myplans.name}</Text>
-                      {
-                        myplans.status == 'Accepted' ? (
-                          <Badge style={{ backgroundColor: '#388e3c' }}>
-                            <Text style={{ color: 'white' }}>{myplans.status}</Text>
-                          </Badge>
-                          )
-                          :
-                          (
-                          <Badge style={{ backgroundColor: '#ef5350' }}>
-                            <Text style={{ color: 'white' }}>{myplans.status}</Text>
-                          </Badge>
-                          )
-                      }
-                    </View>
-                    <View style={styles.viewTextStyle}>
-                      <Text note>{myplans.date}</Text>
-                    </View>
-                  </Body>
-                </ListItem>
-              }>
-            </List>
+          <View>
+            <Text style={{padding:16}}> My Plans </Text>
+              <List dataArray={this.state.myplans}
+                renderRow={(myplans) =>
+                  <ListItem onPress={() => navigate('PlansScreen', { id: `${plan.id}`, name: `${plan.name}`})}>
+                    <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
+                    <Body>
+                      <View style={styles.viewTextStyle}>
+                        <Text>{myplans.name}</Text>
+                        {
+                          myplans.status == 'Accepted' ? (
+                            <Badge style={{ backgroundColor: '#388e3c' }}>
+                              <Text style={{ color: 'white' }}>{myplans.status}</Text>
+                            </Badge>
+                            )
+                            :
+                            (
+                            <Badge style={{ backgroundColor: '#ef5350' }}>
+                              <Text style={{ color: 'white' }}>{myplans.status}</Text>
+                            </Badge>
+                            )
+                        }
+                      </View>
+                      <View style={styles.viewTextStyle}>
+                        <Text note>{myplans.date}</Text>
+                      </View>
+                    </Body>
+                  </ListItem>
+                }>
+              </List>
+            </View>
           </Content>
           
           <ActionButton buttonColor="rgba(250,211,10,1)" degrees={0} icon={<Ionicons name="md-call" style={styles.floatingActionButtonIcon} /> }>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, Icon, ListItem, Thumbnail, Body, Card, CardItem, Text } from 'native-base';
-import { View, Image, StyleSheet, AsyncStorage } from 'react-native';
-import { View, Image, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Image, StyleSheet, AsyncStorage, ActivityIndicator } from 'react-native';
 import StarRating from 'react-native-star-rating';
 import { Button } from 'react-native-elements';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
