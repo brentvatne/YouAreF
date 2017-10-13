@@ -12,7 +12,10 @@ export default class PlanTabReviews extends Component {
       isLoading: true,
       reviews:{
 
-      }
+      },
+      title:'',
+      message:'',
+      res:{}
     }
   }
 
@@ -35,12 +38,42 @@ export default class PlanTabReviews extends Component {
           reviews: responseJson.data.reviews.data,
           
         }, function() {
-          console.log(this.state.plans)
         });
       })
       .catch((error) => {
         console.error(error);
       });
+  }
+
+  onButtonPress= async () => {
+  
+  let token = await AsyncStorage.getItem('token');
+    
+  fetch(`http://192.168.43.217/api/public/reviewPlan/${this.sampleProps.sampleProps}`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+      'Host': '192.168.43.217'
+    },
+    body: JSON.stringify({
+      title: this.state.title,
+      message: this.state.message,
+    })
+
+  })
+  .then((response) => response.json())
+  .then((responseJson) => {
+      this.setState({
+        res: responseJson
+       }, function() {
+        if(this.state.res.status === "ok"){
+          this.popupDialog.dismiss();
+        }
+        
+    });
+  }); 
   }
 
   render() {
@@ -75,7 +108,10 @@ export default class PlanTabReviews extends Component {
         <PopupDialog dialogTitle={<DialogTitle title="Add review" />} width={330} height={250} ref={(popupDialog) => { this.popupDialog = popupDialog; }}>
               <View>
                 <Item>
-                  <Input placeholder='Title' />
+                  <Input 
+                  placeholder='Title'
+                  onChangeText={(title) => this.setState({title})}
+                   />
                 </Item>
                 <Item floatingLabel>
                   <Input 
@@ -83,11 +119,13 @@ export default class PlanTabReviews extends Component {
                     multiline={true}
                     numberOfLines={5}
                     style={{ height: 80}}
+                    onChangeText={(message) => this.setState({message})}
                     />
                 </Item>
                 <View  style={{ top:30,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
                   <Button
                     title="SUBMIT"
+                    onPress={this.onButtonPress}
                     color="#000000"
                   />
                 </View>
