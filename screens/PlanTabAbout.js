@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Button } from 'native-base';
-import { ScrollView, StyleSheet, View, Image, TextInput } from 'react-native';
+import { ScrollView, StyleSheet, View, Image, TextInput, AsyncStorage } from 'react-native';
+import PlansScreen from './PlansScreen';
 
 export default class PlanTabAbout extends Component {
 
@@ -12,15 +13,26 @@ export default class PlanTabAbout extends Component {
     }
   }
 
-  componentDidMount() {
-    return fetch('http://192.168.43.197/api/public/plan/1')
+  componentDidMount = async () => {
+    let token = await AsyncStorage.getItem('token');
+    
+    fetch(`http://192.168.43.197/api/public/plan/1`,{
+       method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token,
+          'Host': '192.168.43.197'
+        }
+      })
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
           isLoading: false,
-          About: responseJson.data
-        }, function() {
+          About: responseJson.data,
           
+        }, function() {
+          console.log(this.state.plans)
         });
       })
       .catch((error) => {
@@ -28,7 +40,9 @@ export default class PlanTabAbout extends Component {
       });
   }
 
+
   render() {
+    /*console.log(this.props.navigation.state.params.id);*/
 
     return (
       <Container style={styles.container} >

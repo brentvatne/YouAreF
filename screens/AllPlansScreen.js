@@ -55,13 +55,6 @@ export default class CampaignsScreen extends Component {
     }
     
     const { navigate } = this.props.navigation;
-
-    // var plans = [    {"id":"1","name":"Amazon A","difficulty":"Easy",likes:"20",price:"200"},
-    //                 {"id":"2","name":"Snapdeal B","difficulty":"Easy",likes:"63",price:"350"},
-    //                 {"id":"4","name":"Instamojo A","difficulty":"Easy",likes:"2",price:"2000"},
-    //                 {"id":"5","name":"Thyrocare C","difficulty":"Hard",likes:"59",price:"2400"},
-    //                 {"id":"6","name":"MakeMyTrips B","difficulty":"Easy",likes:"12",price:"1200"},
-    //             ];
     
     return (
       <Container style={styles.container} >

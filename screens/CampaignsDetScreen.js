@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, Icon, ListItem, Thumbnail, Body, Card, CardItem, Text } from 'native-base';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, AsyncStorage } from 'react-native';
 import StarRating from 'react-native-star-rating';
 import { Button } from 'react-native-elements';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
@@ -23,9 +23,18 @@ constructor(props) {
     };
   }  
 
-
-componentDidMount() {
-    return fetch(`http://192.168.43.197/api/public/company/${this.props.navigation.state.params.id}`)
+componentDidMount = async () => {
+    let token = await AsyncStorage.getItem('token');
+    fetch(`http://192.168.43.197/api/public/company/${this.props.navigation.state.params.id}`,
+    {
+      method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token,
+          'Host': '192.168.43.197'
+        }
+    })
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({

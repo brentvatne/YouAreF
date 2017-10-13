@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Input, Item } from 'native-base';
-import { ScrollView, StyleSheet, View, Image, TextInput, Button} from 'react-native';
+import { ScrollView, StyleSheet, View, Image, TextInput, Button, AsyncStorage} from 'react-native';
 
 export default class PlanTabDiscuss extends Component {
 
@@ -9,19 +9,33 @@ export default class PlanTabDiscuss extends Component {
     this.state = {
       isLoading: true,
       discuss:{
-      }
-    }
+      },
+      question:'',
+    };
+    this.onButtonPress = this.onButtonPress.bind(this);
   }
 
-  componentDidMount() {
-    return fetch('http://192.168.43.197/api/public/plan/1')
+componentDidMount = async () => {
+    let token = await AsyncStorage.getItem('token');
+    
+    fetch('http://192.168.43.197/api/public/plan/2',
+    {
+       method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token,
+          'Host': '192.168.43.197'
+        }
+      })
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
           isLoading: false,
           discuss: responseJson.data.discussions.data
+          
         }, function() {
-
+          console.log(this.state.plans)
         });
       })
       .catch((error) => {
@@ -29,13 +43,31 @@ export default class PlanTabDiscuss extends Component {
       });
   }
 
-  render() {
+/*  onButtonPress() {
+  fetch('http://192.168.43.197/api/public/plan/2', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      google_id: this.props.navigation.state.params.id,
+      user_name: this.props.navigation.state.params.name,
+      college: this.state.college,
+      gender: this.state.gender,
+      email: this.props.navigation.state.params.email,
+      phone: this.state.contact,
+      address: this.state.address,
+      degree: this.state.degree,
+      cv: this.state.cv,
+    })
+  });
+  console.log(this.props.navigation.state.params.id);
+     
+  }*/
 
-    /*var discussions = [{id:0,discussionHead:"Does amazon charges extra tax from the seller ?"},
-                      {id:0,discussionHead:"What all skills are necessary to apply for this plan ?"},
-                      {id:0,discussionHead:"Can anyone share his/her experience ?"},
-                      {id:0,discussionHead:"In how many will the payment reflect in my account ?"},
-                      ]; */
+
+  render() {
 
     return (
       <Container style={styles.container} >
@@ -62,6 +94,7 @@ export default class PlanTabDiscuss extends Component {
             </View>
             <View style={{ flex:1, alignSelf:'stretch',position:'relative',paddingTop:9,paddingLeft:10}}> 
               <Button
+                onPress={this.onButtonPress}
                 title="Submit"
                 color="#000000"
                 accessibilityLabel="Learn more about this purple button"

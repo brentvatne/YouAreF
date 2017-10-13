@@ -18,6 +18,13 @@ export default class PlansScreen extends Component {
     title: `${navigation.state.params.name}`
   });
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true,
+    }
+  }
+
   state = {}
 
     openDialog(show) {
@@ -49,6 +56,8 @@ export default class PlansScreen extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
+    /*console.log(this.props.navigation.state.params.id);
+    console.log('1122');*/
 
     return (
       <Container style={styles.container} >
