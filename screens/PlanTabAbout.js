@@ -7,6 +7,7 @@ export default class PlanTabAbout extends Component {
 
   constructor(props) {
     super(props);
+    this.sampleProps = this.props;
     this.state = {
       isLoading: true,
       About:{}
@@ -16,13 +17,13 @@ export default class PlanTabAbout extends Component {
   componentDidMount = async () => {
     let token = await AsyncStorage.getItem('token');
     
-    fetch(`http://192.168.43.217/api/public/plan/ ${sampleProps}`,{
+    fetch(`http://192.168.43.217/api/public/plan/${this.sampleProps.sampleProps}`,{
        method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + token,
-          'Host': '192.168.43.127'
+          'Host': '192.168.43.217'
         }
       })
       .then((response) => response.json())
@@ -43,9 +44,9 @@ export default class PlanTabAbout extends Component {
  
   render() {
 
-    const {sampleProps} = this.props;
     console.log("planAbout"); 
-    console.log(sampleProps); 
+    console.log(this.sampleProps.sampleProps); 
+    console.log(this.state.About.about);
 
     return (
       <Container style={styles.container} >

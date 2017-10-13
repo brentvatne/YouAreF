@@ -64,13 +64,19 @@ export default class PlansScreen extends Component {
             />
           </Tab>
           <Tab heading="Training" tabStyle={{backgroundColor: '#fad30a'}} textStyle={{color: '#000000'}} activeTabStyle={{backgroundColor: '#fad30a'}} activeTextStyle={{color: '#000000', fontWeight: 'bold'}}>
-            <PlanTabTraining />
+            <PlanTabTraining 
+              sampleProps={this.props.navigation.state.params.id}
+              />
           </Tab>
           <Tab heading="Reviews" tabStyle={{backgroundColor: '#fad30a'}} textStyle={{color: '#000000'}} activeTabStyle={{backgroundColor: '#fad30a'}} activeTextStyle={{color: '#000000', fontWeight: 'bold'}}>
-            <PlanTabReviews />
+            <PlanTabReviews 
+              sampleProps={this.props.navigation.state.params.id}
+            />
           </Tab>
           <Tab heading="Discuss" tabStyle={{backgroundColor: '#fad30a'}} textStyle={{color: '#000000'}} activeTabStyle={{backgroundColor: '#fad30a'}} activeTextStyle={{color: '#000000', fontWeight: 'bold'}}>
-            <PlanTabDiscuss />
+            <PlanTabDiscuss 
+              sampleProps={this.props.navigation.state.params.id}
+            />
           </Tab>
         </Tabs>
 
