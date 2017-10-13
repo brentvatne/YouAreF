@@ -16,9 +16,38 @@ export default class BankDetailsScreen extends Component {
                     bankname: '',
                     ifsccode: '',
                     accountnumber: '',
-                    pannumber: '', 
+                    pannumber: '',
+                    res:{} 
                  };
+  //this.onButtonPress = this.onButtonPress.bind(this);               
   }
+
+  /*onButtonPress() {
+  fetch('http://192.168.43.197/api/public/signup', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      holder_name: this.state.holdername,
+      bank_name: this.state.bankname,
+      ifsccode: this.state.ifsccode,
+      account_number: this.state.accountnumber,
+      pan_number: this.state.pannumber,
+    })
+
+  })
+  .then((response) => response.json())
+  .then((responseJson) => {
+      this.setState({
+        res: responseJson
+       }, function() {
+     
+    });
+  }); 
+  }*/
+
 
   render() {
     
@@ -33,6 +62,12 @@ export default class BankDetailsScreen extends Component {
             onChangeText={(holdername) => this.setState({holdername})}
             value={this.state.holdername}
             placeholder = 'Account Holder Name'
+            />
+            <TextInput
+            style={styles.textInputStyle}
+            onChangeText={(bankname) => this.setState({bankname})}
+            value={this.state.bankname}
+            placeholder = 'Bank Name'
             />
             <TextInput
             style={styles.textInputStyle}

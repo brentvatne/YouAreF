@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, Icon, ListItem, Thumbnail, Body, Card, CardItem, Text } from 'native-base';
 import { View, Image, StyleSheet, AsyncStorage } from 'react-native';
+import { View, Image, StyleSheet, ActivityIndicator } from 'react-native';
 import StarRating from 'react-native-star-rating';
 import { Button } from 'react-native-elements';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
@@ -63,42 +64,15 @@ onStarRatingPress(rating) {
     const { params } = this.props.navigation.state;
     const { navigate } = this.props.navigation;
     var company_logo = this.state.company.logo;
-    // var company = {
-    //                "id":"1",
-    //                "name":"Amazon",
-    //                "logo":"asas",
-    //                "type":"Wholesale",
-    //                "rating":"4.6",
-    //                "enrolled":"933",
-    //                "about":"Amazon.com, Inc., doing business as Amazon, is an American electronic commerce and cloud computing company based in Seattle, Washington that was founded by Jeff Bezos on July 5, 1994",
-    //                "plans": [
-    //                 {
-    //                  "id":1,
-    //                  "name":"Plan A",
-    //                  "price":"200",
-    //                  "difficulty":"Easy",
-    //                  "conversion":100,
-    //                  "likes":10
-    //                 },
-    //                 {
-    //                  "id":2,
-    //                  "name":"Plan B",
-    //                  "price":"230",
-    //                  "difficulty":"Easy",
-    //                  "conversion":100,
-    //                  "likes":10
-    //                 },
-    //                 {
-    //                  "id":3,
-    //                  "name":"Plan C",
-    //                  "price":"360",
-    //                  "difficulty":"Easy",
-    //                  "conversion":100,
-    //                  "likes":10
-    //                 },
-    //                ]
-    //               }
-    
+
+    if (this.state.isLoading) {
+      return (
+        <View style={{flex: 1, paddingTop: 20}}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
+
     return (
       <Container style={styles.container}>
         <Content>

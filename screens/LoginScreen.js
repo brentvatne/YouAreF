@@ -25,8 +25,9 @@ export default class LoginScreen extends React.Component {
       const result = await Expo.Google.logInAsync({
         androidClientId: "612669964630-04vbqsbsvt3mjv0nr7nsa77erika2f9p.apps.googleusercontent.com",
         iosClientId: "612669964630-68qv7vej51qnlkccrdbu7jo2s4v4a1c2.apps.googleusercontent.com",
+        androidStandaloneAppClientId: "612669964630-qffrhkqhqjd60m7usj14u6rhv2101hof.apps.googleusercontent.com",
         scopes: ['profile','email'],
-        behavior: "web",
+        behavior: "web", 
       })
 
       if (result.type === 'success') {
@@ -72,8 +73,8 @@ export default class LoginScreen extends React.Component {
           auth: responseJson
         }, function() {
           console.log(this.state.auth);
-          AsyncStorage.setItem("token",this.state.auth.token);
           if(this.state.auth.registered === true){
+            AsyncStorage.setItem("token",this.state.auth.token);
             if(this.state.auth.status === "accepted") {
               this.props.navigation.navigate('Main');
             }
