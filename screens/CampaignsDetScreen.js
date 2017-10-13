@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, Icon, ListItem, Thumbnail, Body, Card, CardItem, Text } from 'native-base';
-import { View, Image, StyleSheet, AsyncStorage, ActivityIndicator } from 'react-native';
+import { View, Image, StyleSheet, AsyncStorage, ActivityIndicator, TouchableOpacity} from 'react-native';
 import StarRating from 'react-native-star-rating';
 import { Button } from 'react-native-elements';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
@@ -9,7 +9,7 @@ export default class CampaignsDetScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: `${navigation.state.params.name}`,
     
-  });
+  })
 
 constructor(props) {
     super(props);
@@ -20,6 +20,7 @@ constructor(props) {
       },
       plans:{
       },
+      res:{}
     };
   }  
 
@@ -50,13 +51,48 @@ componentDidMount = async () => {
       });
   }
 
-
-onStarRatingPress(rating) {
+  onStarRatingPress(rating) {
   this.setState({
     starCount: rating
   });
 
-}            
+}
+
+  onsubmitrating = async () => {
+  
+  let token = await AsyncStorage.getItem('token');
+    
+  fetch(`http://192.168.43.197/api/public/ratecompany/${this.props.navigation.state.params.id}`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+      'Host': '192.168.43.197'
+    },
+    body: JSON.stringify({
+      rating: this.state.starCount,
+      
+    })
+
+  })
+  .then((response) => response.json())
+  .then((responseJson) => {
+      this.setState({
+        res: responseJson
+       }, function() {
+          if(this.state.res.status === "ok"){
+            alert('Rating Submitted');
+          }
+          else if(this.state.res.title === "Already Rated!") {
+           alert('You Have already rated'); 
+          }
+    });
+  });
+  }
+
+
+            
 
   render() {
 
@@ -100,7 +136,9 @@ onStarRatingPress(rating) {
                 selectedStar={(rating) => this.onStarRatingPress(rating)}
               />
             </View>
+            <TouchableOpacity onPress={this.submitrating}>
               <Text style={{ fontWeight:'bold', paddingTop:10}}>Submit</Text>
+            </TouchableOpacity>
           </View>
           
           <List dataArray={this.state.plans}
