@@ -62,7 +62,8 @@ export default class HomeScreen extends React.Component {
     this.state = {
       active: 'true',
       home:{},
-      myplans:{}
+      myplans:{},
+      username:'',
 
     };
   }
@@ -82,9 +83,11 @@ export default class HomeScreen extends React.Component {
       .then((responseJson) => {
         this.setState({
           home: responseJson.data[0],
+          username: responseJson.data[0].name,
           
         }, function() {
-          console.log('abcc  ' + this.state.home.name);
+          console.log('name:  ' + this.state.home.name);
+          console.log('username:' + this.state.username);
         });
       })
       .catch((error) => {
@@ -117,9 +120,9 @@ export default class HomeScreen extends React.Component {
       
   }
 
-
   render() {
     const { navigate } = this.props.navigation;
+    let split = this.state.username.split(' ');
 
     const args = {
       number: '8505960948', // String value with the number to call 
@@ -134,7 +137,7 @@ export default class HomeScreen extends React.Component {
                   <Ionicons name="md-notifications" style={styles.notificationButtonIcon} />
                 </View>
                 <CardItem style={{ alignItems: 'center',justifyContent: 'center',backgroundColor:'#fad30a' }}>
-                  <Text style={{ fontSize:30,color:'#000000' }}> Hello, {this.state.home.name} !</Text>
+                  <Text style={{ fontSize:30,color:'#000000' }}> Hello, {split[0]} !</Text>
                 </CardItem>
                 <CardItem style={{alignItems: 'center',justifyContent: 'center',paddingTop:0,backgroundColor:'#fad30a'}}>
                   <View style={{
@@ -147,11 +150,13 @@ export default class HomeScreen extends React.Component {
                 <CardItem  style={styles.normalText}>
                   <Body style={{ alignItems:"center",justifyContent:"center"}}>
                     <View style={{flexDirection:'column',justifyContent:'center'}}>
-                      <View style={{flexDirection:'row',alignItems:'center'}}>
+                      <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
                         <Text style={{ fontSize:35,color:'#000000' }}> {this.state.home.amount} </Text>
                         <FontAwesomeIcons name="rupee" size={30} color="#000000" /> 
                       </View>
+                      <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
                         <Text style={{ fontSize:15,color:'#000000' }}> earnings so far</Text>
+                      </View>
                     </View>
                   </Body>
                 </CardItem>
@@ -179,15 +184,17 @@ export default class HomeScreen extends React.Component {
             </View>
           <View>
             <Text style={{padding:16}}> My Plans </Text>
-              <List dataArray={this.state.myplans}
+            {
+              this.state.myplans.length > 0 ? (
+                <List dataArray={this.state.myplans}
                 renderRow={(myplans) =>
-                  <ListItem onPress={() => navigate('PlansScreen', { id: `${plan.id}`, name: `${plan.name}`})}>
+                  <ListItem onPress={() => navigate('PlansScreen', { id: `${myplans.id}`, name: `${myplans.name}`})}>
                     <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
                     <Body>
                       <View style={styles.viewTextStyle}>
                         <Text>{myplans.name}</Text>
                         {
-                          myplans.status == 'Accepted' ? (
+                          myplans.status == 'accepted' ? (
                             <Badge style={{ backgroundColor: '#388e3c' }}>
                               <Text style={{ color: 'white' }}>{myplans.status}</Text>
                             </Badge>
@@ -207,6 +214,13 @@ export default class HomeScreen extends React.Component {
                   </ListItem>
                 }>
               </List>
+                ):
+              ( <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+                  <Text note style={{fontSize: 20}}> No plans yet ! </Text>
+                </View>
+                )
+            } 
+              
             </View>
           </Content>
           
