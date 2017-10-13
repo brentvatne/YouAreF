@@ -91,6 +91,36 @@ componentDidMount = async () => {
   });
   }
 
+  onButtonPress= async (id) => {
+  
+  let token = await AsyncStorage.getItem('token');
+    
+  fetch(`http://192.168.43.217/api/public/likePlan/${id}`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+      'Host': '192.168.43.217'
+    }
+
+  })
+  .then((response) => response.json())
+  .then((responseJson) => {
+      this.setState({
+        res: responseJson
+       }, function() {
+        if(this.state.res.status === "ok"){
+          alert('Liked');
+        }
+        else if(this.state.res.title === "Already Liked!"){
+          alert('Already Liked');
+        }
+        
+    });
+  }); 
+  }
+
 
             
 
@@ -153,7 +183,9 @@ componentDidMount = async () => {
                 <View style={styles.viewTextStyle}>
                   <Text note >{plan.difficulty}</Text>
                   <View style={{ left:90 }}>
+                  <TouchableOpacity onPress={() => this.onButtonPress(plan.id)}>
                     <EvilIcons name="like" size={30} color="#000000" />
+                  </TouchableOpacity>
                   </View>
                   <View style={{ top:5 }}>
                     <Text note> 
