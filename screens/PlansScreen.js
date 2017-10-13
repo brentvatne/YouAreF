@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator,Tab,Tabs,ScrollableTab, Footer } from 'native-base';
-import { StyleSheet, View} from 'react-native';
+import { StyleSheet, View, AsyncStorage } from 'react-native';
 import PlanTabAbout from './PlanTabAbout';
 import PlanTabTraining from './PlanTabTraining';
 import PlanTabReviews from './PlanTabReviews';
@@ -18,7 +18,68 @@ export default class PlansScreen extends Component {
     super(props);
     this.state = {
       isLoading: true,
+      res:{},
+      flag:{}
     }
+  }
+
+  componentDidMount = async () => {
+    let token = await AsyncStorage.getItem('token');
+    
+    fetch(`http://192.168.43.217/api/public/plan/${this.props.navigation.state.params.id}`,{
+       method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token,
+          'Host': '192.168.43.217'
+        }
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          isLoading: false,
+          res: responseJson.data,
+          
+        }, function() {
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  onButtonPress= async () => {
+  
+  let token = await AsyncStorage.getItem('token');
+    //console.log('Abc'+this.state.res.id);
+    //console.log(this.state.res.company_id);
+    
+  fetch(`http://192.168.43.217/api/public/registerPlan/${this.state.res.id}/${this.state.res.company_id}`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+      'Host': '192.168.43.217'
+    },
+
+  })
+  .then((response) => response.json())
+  .then((responseJson) => {
+      this.setState({
+        flag: responseJson
+       }, function() {
+        if(this.state.flag.status === "ok"){
+          this.optionYes();
+        }
+        else if(this.state.flag.title === "Already registered!"){
+          this.optionNo();
+          alert('Already registered!');
+        }
+        
+    });
+  }); 
   }
 
   state = {}
@@ -52,8 +113,8 @@ export default class PlansScreen extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    console.log(this.props.navigation.state.params.id);
-    console.log('1122');
+    //console.log(this.props.navigation.state.params.id);
+    //console.log('1122');
 
     return (
       <Container style={styles.container} >
@@ -99,7 +160,7 @@ export default class PlansScreen extends Component {
           onTouchOutside={() => this.openConfirm(false)}
           positiveButton={{
             title: "YES",
-            onPress: () => this.optionYes()
+            onPress: () => this.onButtonPress()
           }}
           negativeButton={{
             title: "NO",

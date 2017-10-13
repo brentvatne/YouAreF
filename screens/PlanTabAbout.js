@@ -33,7 +33,7 @@ export default class PlanTabAbout extends Component {
           About: responseJson.data,
           
         }, function() {
-          console.log(this.state.plans)
+         // console.log(this.state.plans)
         });
       })
       .catch((error) => {
@@ -44,9 +44,9 @@ export default class PlanTabAbout extends Component {
  
   render() {
 
-    console.log("planAbout"); 
-    console.log(this.sampleProps.sampleProps); 
-    console.log(this.state.About.about);
+    //console.log("planAbout"); 
+    //console.log(this.sampleProps.sampleProps); 
+    //console.log(this.state.About.about);
 
     return (
       <Container style={styles.container} >
