@@ -19,8 +19,8 @@ export default class SplashScreen extends Component {
   componentDidMount = async () => {
     try {
       let token = await AsyncStorage.getItem('token');
+      console.log(token);
       if(token!== null) {
-        console.log(token);
       fetch('http://192.168.43.197/api/public/checkstatus',{
         method: 'GET',
         headers: {

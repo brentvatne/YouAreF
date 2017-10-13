@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator} from 'native-base';
-import { ScrollView, StyleSheet, View, Image, TextInput } from 'react-native';
+import { ScrollView, StyleSheet, View, Image, TextInput, AsyncStorage } from 'react-native';
 import { Button } from 'react-native-elements';
 
 export default class SignUpScreen extends Component {
@@ -18,12 +18,13 @@ export default class SignUpScreen extends Component {
       cv: '',
       address:'',
       contact:'',
+      auth:{},
     };
     this.onButtonPress = this.onButtonPress.bind(this);
   }
 
   onButtonPress() {
-  fetch('http://192.168.43.197/api/public/userdetail', {
+  fetch('http://192.168.43.197/api/public/signup', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -40,6 +41,15 @@ export default class SignUpScreen extends Component {
       degree: this.state.degree,
       cv: this.state.cv,
     })
+
+  })
+  .then((response) => response.json())
+  .then((responseJson) => {
+      this.setState({
+        auth: responseJson
+       }, function() {
+      AsyncStorage.setItem("token",this.state.auth.token);
+    });
   });
   console.log(this.props.navigation.state.params.id);
   this.props.navigation.navigate('approveScreen') 
