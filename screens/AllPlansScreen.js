@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Icon } from 'native-base';
-import { StyleSheet, Image, View, TabNavigator, ListView, ActivityIndicator, AsyncStorage } from 'react-native';
+import { StyleSheet, Image, View, TabNavigator, ListView, ActivityIndicator, AsyncStorage, TouchableOpacity } from 'react-native';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 export default class CampaignsScreen extends Component {
@@ -44,6 +44,36 @@ export default class CampaignsScreen extends Component {
       });
   }
 
+  onButtonPress= async (id) => {
+  
+  let token = await AsyncStorage.getItem('token');
+    
+  fetch(`http://192.168.43.217/api/public/likePlan/${id}`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+      'Host': '192.168.43.217'
+    }
+
+  })
+  .then((response) => response.json())
+  .then((responseJson) => {
+      this.setState({
+        res: responseJson
+       }, function() {
+        if(this.state.res.status === "ok"){
+          alert('Liked');
+        }
+        else if(this.state.res.title === "Already Liked!"){
+          alert('Already Liked');
+        }
+        
+    });
+  }); 
+  }
+
 	render() {	
 
 	if (this.state.isLoading) {
@@ -71,7 +101,9 @@ export default class CampaignsScreen extends Component {
                 <View style={styles.viewTextStyle}>
                   <Text note >{plan.difficulty}</Text>
                   <View style={{ left:90 }}>
+                  <TouchableOpacity onPress={() => this.onButtonPress(plan.id)}>
                     <EvilIcons name="like" size={30} color="#000000" />
+                  </TouchableOpacity>
                   </View>
                   <View style={{ top:5 }}>
                     <Text note> 
