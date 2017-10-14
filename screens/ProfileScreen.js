@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator } from 'native-base';
-import { ScrollView, StyleSheet, View, Image, AsyncStorage } from 'react-native';
+import { ScrollView, StyleSheet, View, Image, AsyncStorage, ActivityIndicator } from 'react-native';
 import { Button } from 'react-native-elements';
 import Hyperlink from 'react-native-hyperlink';
 
@@ -51,6 +51,14 @@ export default class ProfileScreen extends Component {
   }
 
   render() {
+
+    if (this.state.isLoading) {
+      return (
+        <View style={{flex: 1, paddingTop: 20}}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
     
     const { navigate } = this.props.navigation;
 
