@@ -1,12 +1,50 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View, Image } from 'react-native';
+import { ScrollView, StyleSheet, View, Image, AsyncStorage } from 'react-native';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Icon } from 'native-base';
 
 export default class MenuScreen extends React.Component {
   static navigationOptions = {
     title: 'Menu',
     headerLeft: null,
-  };
+    
+  }
+
+  constructor() {
+    super();
+    this.state = {
+      username:'',
+    };
+  }
+
+  componentDidMount = async () => {
+    let token = await AsyncStorage.getItem('token');
+    
+    fetch('http://192.168.43.217/api/public/home',{
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token,
+          'Host': '192.168.43.217'
+        }
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          //home: responseJson.data[0],
+          username: responseJson.data[0].name,
+          
+        }, function() {
+          //console.log('name:  ' + this.state.home.name);
+          //console.log('username:' + this.state.username);
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+      
+  }
 
   render() {
 
@@ -17,7 +55,7 @@ export default class MenuScreen extends React.Component {
         <Content>
           <View style={styles.headerViewStyle}>
             <View style={styles.headerTextStyle}>
-              <Text style={styles.nameStyle}>Anshul Mehta</Text>
+              <Text style={styles.nameStyle}>{this.state.username}</Text>
               <Text 
                note 
                style={styles.buttonStyle} 
