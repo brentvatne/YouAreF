@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Input, Item, Label } from 'native-base';
-import { ScrollView, StyleSheet, View, Image, TextInput, Button, AsyncStorage } from 'react-native';
+import { ScrollView, StyleSheet, View, Image, TextInput, Button, AsyncStorage, ActivityIndicator } from 'react-native';
 import PopupDialog, { DialogTitle } from 'react-native-popup-dialog';
 
 export default class PlanTabReviews extends Component {
@@ -77,6 +77,14 @@ export default class PlanTabReviews extends Component {
   }
 
   render() {
+
+    if (this.state.isLoading) {
+      return (
+        <View style={{flex: 1, paddingTop: 20}}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
 
     return (
       <Container style={styles.container}>
