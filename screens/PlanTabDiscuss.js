@@ -83,27 +83,18 @@ export default class PlanTabDiscuss extends Component {
       );
     }
 
-
-        var discussions = [ {id:0,discussionHead:"Does amazon charges extra tax from the seller ?"},
-                        {id:0,discussionHead:"What all skills are necessary to apply for this plan ?"},
-                        {id:0,discussionHead:"Can anyone share his/her experience ?"},
-                        {id:0,discussionHead:"In how many will the payment reflect in my account ?"},
-                      ]; 
-
-      
-
    // console.log(this.state.discuss);
 
     return (
       <Container style={styles.container} >
         <Content>
           <View>
-            <List dataArray={discussions}
+            <List dataArray={this.state.discuss}
               renderRow={(discussions) =>
-                <ListItem onPress={() => this.props.navigation.navigate('SingleDiscussion')}>
+                <ListItem onPress={() => this.props.navigation.navigate('SingleDiscussion',{ id: `${this.sampleProps.sampleProps}`, question: `${discussions.question}`})}>
                   <Body> 
                     <View style={styles.viewTextStyle}>
-                      <Text>{discussions.discussionHead}</Text>
+                      <Text>{discussions.question}</Text>
                     </View>
                   </Body>
                 </ListItem>
@@ -118,12 +109,12 @@ export default class PlanTabDiscuss extends Component {
               </Item>
             </View>
             <View style={{ flex:1, alignSelf:'stretch',position:'relative',paddingTop:9,paddingLeft:10}}> 
-              {/*<Button
+              <Button
                 onPress={this.onButtonPress}
                 title="Submit"
                 color="#000000"
                 accessibilityLabel="Learn more about this purple button"
-              />*/}
+              />
             </View>
           </View>
         </Content>

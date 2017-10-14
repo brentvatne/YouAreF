@@ -1,34 +1,70 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Button, Input, Item } from 'native-base';
-import { ScrollView, StyleSheet, View, Image, TextInput } from 'react-native';
+import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Input, Item } from 'native-base';
+import { ScrollView, StyleSheet, View, Image, TextInput, Button } from 'react-native';
 
 export default class SingleDiscussion extends Component {
 
   static navigationOptions = ({ navigation }) => ({
-    title:null,
+    title:`${navigation.state.params.question}`,
     
   })
 
-  render() {
+  constructor(props) {
+    super(props);
+    this.sampleProps = this.props;
+    this.state = {
+      isLoading: true,
+      discuss:{
+      },
+      answers:'',
+    };
+  }
 
-    var discussions = [ {id:0,discussionHead:"Does amazon charges extra tax from the seller ?"},
-                        {id:0,discussionHead:"What all skills are necessary to apply for this plan ?"},
-                        {id:0,discussionHead:"Can anyone share his/her experience ?"},
-                        {id:0,discussionHead:"In how many will the payment reflect in my account ?"},
-                      ];
+  componentDidMount = async () => {
+    let token = await AsyncStorage.getItem('token');
+    
+    fetch(`http://192.168.43.217/api/public/plan/1`,
+    {
+       method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token,
+          'Host': '192.168.43.217'
+        }
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          isLoading: false,
+          answers: responseJson.data.discussions.data.answers.data,
+          
+        }, function() {
+          console.log(this.state.plans)
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  render() {
+    
+    console.log(this.state.answers);
+
     return (
       <Container style={styles.container} >
         <Content>
           <View>
-            <List dataArray={discussions}
-              renderRow={(discussions) =>
+            <List dataArray={this.state.answers}
+              renderRow={(answer) =>
                 <ListItem>
                   <Body> 
                     <View style={styles.viewTextStyle}>
-                      <Text>{discussions.discussionHead}</Text>
+                      <Text>{answers.answer}</Text>
                     </View>
                     <View style={styles.viewTextStyle}>
-                      <Text note>{discussions.discussionHead}</Text>
+                      <Text note>{answers.user_name}</Text>
                     </View>
                   </Body>
                 </ListItem>
@@ -37,15 +73,18 @@ export default class SingleDiscussion extends Component {
           </View>
           
           <View style={ {flex:1, flexDirection:'row', alignSelf:'stretch' ,position:'relative',paddingTop: 15,paddingLeft:5} }>
-            <View style={{ flex:2.5,height:60, alignSelf:'stretch', position:'relative' }}>
-              <Item rounded>
-                <Input placeholder='Add a comment' />
+            <View style={{ flex:3,height:60, alignSelf:'stretch', position:'relative' }}>
+              <Item regular>
+                <Input placeholder='Your comment here' />
               </Item>
             </View>
-            <View style={{ flex:1, alignSelf:'stretch',position:'relative',paddingTop:5,paddingLeft:5}}> 
-              <Button rounded dark onPress={() => {}}> 
-                <Text>Comment</Text>
-              </Button>
+            <View style={{ flex:1, alignSelf:'stretch',position:'relative',paddingTop:9,paddingLeft:10}}> 
+              <Button
+                onPress={this.onButtonPress}
+                title="Comment"
+                color="#000000"
+                accessibilityLabel="Learn more about this purple button"
+              />
             </View>
           </View>
         </Content>
