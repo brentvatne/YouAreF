@@ -18,7 +18,6 @@ export default class SplashScreen extends Component {
 
 
   componentDidMount = async () => {
-
     const resetActionLogin = NavigationActions.reset({
       index: 0,
       actions: [
@@ -37,13 +36,13 @@ export default class SplashScreen extends Component {
       let token = await AsyncStorage.getItem('token');
       console.log(token);
       if(token!== null) {
-      fetch('http://192.168.43.217/api/public/checkstatus',{
+      fetch('http://byld.tech/checkstatus',{
         method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + token,
-          'Host': '192.168.43.217'
+          'Host': 'byld.tech'
         }
       })
       .then((response) => response.json())

@@ -19,13 +19,13 @@ export default class MenuScreen extends React.Component {
   componentDidMount = async () => {
     let token = await AsyncStorage.getItem('token');
     
-    fetch('http://192.168.43.217/api/public/home',{
+    fetch('http://byld.tech/home',{
         method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + token,
-          'Host': '192.168.43.217'
+          'Host': 'byld.tech'
         }
       })
       .then((response) => response.json())

@@ -26,14 +26,14 @@ constructor(props) {
 
 componentDidMount = async () => {
     let token = await AsyncStorage.getItem('token');
-    fetch(`http://192.168.43.217/api/public/company/${this.props.navigation.state.params.id}`,
+    fetch(`http://byld.tech/company/${this.props.navigation.state.params.id}`,
     {
       method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + token,
-          'Host': '192.168.43.217'
+          'Host': 'byld.tech'
         }
     })
       .then((response) => response.json())
@@ -62,13 +62,13 @@ componentDidMount = async () => {
   
   let token = await AsyncStorage.getItem('token');
     
-  fetch(`http://192.168.43.217/api/public/ratecompany/${this.props.navigation.state.params.id}`, {
+  fetch(`http://byld.tech/ratecompany/${this.props.navigation.state.params.id}`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token,
-      'Host': '192.168.43.217'
+      'Host': 'byld.tech'
     },
     body: JSON.stringify({
       rating: this.state.starCount,
@@ -95,13 +95,13 @@ componentDidMount = async () => {
   
   let token = await AsyncStorage.getItem('token');
     
-  fetch(`http://192.168.43.217/api/public/likePlan/${id}`, {
+  fetch(`http://byld.tech/likePlan/${id}`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token,
-      'Host': '192.168.43.217'
+      'Host': 'byld.tech'
     }
 
   })

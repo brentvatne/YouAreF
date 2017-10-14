@@ -22,13 +22,13 @@ export default class PlanTabReviews extends Component {
   componentDidMount = async () => {
     let token = await AsyncStorage.getItem('token');
     
-    fetch(`http://192.168.43.217/api/public/plan/${this.sampleProps.sampleProps}`,{
+    fetch(`http://byld.tech/plan/${this.sampleProps.sampleProps}`,{
        method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + token,
-          'Host': '192.168.43.217'
+          'Host': 'byld.tech'
         }
       })
       .then((response) => response.json())
@@ -49,13 +49,13 @@ export default class PlanTabReviews extends Component {
   
   let token = await AsyncStorage.getItem('token');
     
-  fetch(`http://192.168.43.217/api/public/reviewPlan/${this.sampleProps.sampleProps}`, {
+  fetch(`http://byld.tech/reviewPlan/${this.sampleProps.sampleProps}`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token,
-      'Host': '192.168.43.217'
+      'Host': 'byld.tech'
     },
     body: JSON.stringify({
       title: this.state.title,
