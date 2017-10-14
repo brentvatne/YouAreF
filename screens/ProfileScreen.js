@@ -85,10 +85,10 @@ export default class ProfileScreen extends Component {
                 onPress={() => navigate('BankDetailsScreen')}
                 title="ADD BANK DETAILS"
                 color='white'
-                raised
                 backgroundColor='black'
                 fontWeight='bold'
                 fontSize={18}
+                borderRadius = {10}
               />
           </View>
 
@@ -96,11 +96,11 @@ export default class ProfileScreen extends Component {
             <Button
                 onPress={this.logoutbutton}
                 title="LOGOUT"
-                raised
                 color='white'
                 backgroundColor='black'
                 fontWeight='bold'
                 style = {styles.loginButton}
+                borderRadius = {10}
               />
           </View>         
         </Content>

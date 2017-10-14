@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Button } from 'native-base';
-import { ScrollView, StyleSheet, View, Image, TextInput, AsyncStorage } from 'react-native';
+import { ScrollView, StyleSheet, View, Image, TextInput, AsyncStorage, ActivityIndicator } from 'react-native';
 import PlansScreen from './PlansScreen';
 
 export default class PlanTabAbout extends Component {
@@ -44,9 +44,13 @@ export default class PlanTabAbout extends Component {
  
   render() {
 
-    //console.log("planAbout"); 
-    //console.log(this.sampleProps.sampleProps); 
-    //console.log(this.state.About.about);
+    if (this.state.isLoading) {
+      return (
+        <View style={{flex: 1, paddingTop: 20}}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
 
     return (
       <Container style={styles.container} >
