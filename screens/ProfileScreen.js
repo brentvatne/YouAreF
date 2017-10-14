@@ -65,10 +65,10 @@ export default class ProfileScreen extends Component {
     return (
       <Container style={styles.container} >
         <Content>
-          <Image 
+          {/*<Image 
             style={styles.thumbnailStyle} 
             source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }}
-          />
+          />*/}
           <List>
             <ListItem>
               <Text>{this.state.user.user_name}</Text>

@@ -132,9 +132,9 @@ export default class HomeScreen extends React.Component {
         <Container style={styles.container}>
           <Content>
              <Card style={{backgroundColor:"#fad30a"}}>
-                <View style={ styles.notificationActionButtonView }>
+                {/*<View style={ styles.notificationActionButtonView }>
                   <Ionicons name="md-notifications" style={styles.notificationButtonIcon} />
-                </View>
+                </View>*/}
                 <CardItem style={{ alignItems: 'center',justifyContent: 'center',backgroundColor:'#fad30a' }}>
                   <Text style={{ fontSize:30,color:'#000000' }}> Hello, {split[0]} !</Text>
                 </CardItem>
