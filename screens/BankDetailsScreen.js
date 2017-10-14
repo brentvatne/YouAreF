@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Button } from 'native-base';
-import { ScrollView, StyleSheet, View, Image, TextInput, AsyncStorage } from 'react-native';
+import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator} from 'native-base';
+import { ScrollView, StyleSheet, View, Image, TextInput, AsyncStorage, Button } from 'react-native';
 
 export default class BankDetailsScreen extends Component {
   
@@ -104,13 +104,15 @@ export default class BankDetailsScreen extends Component {
           </View>
 
           <Button 
-           info 
-           rounded 
-           style={styles.Button}
-           onPress={this.onButtonPress}
-           >
-              <Text style={styles.ButtonText}>Save</Text>
-          </Button>
+              large
+              title="SAVE"
+              color='white'
+              backgroundColor='black'
+              fontWeight='bold'
+              borderRadius={10}
+              buttonStyle = {styles.signupButton}
+              onPress={this.onButtonPress}
+            />
 
         </Content>
       </Container>
