@@ -87,8 +87,8 @@ export default class HomeScreen extends React.Component {
           username: responseJson.data[0].name,
           
         }, function() {
-          console.log('name:  ' + this.state.home.name);
-          console.log('username:' + this.state.username);
+          //console.log('home:  ' + this.state.home);
+          //console.log('username:' + this.state.username);
         });
       })
       .catch((error) => {
