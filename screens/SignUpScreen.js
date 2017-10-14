@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator} from 'native-base';
 import { ScrollView, StyleSheet, View, Image, TextInput, AsyncStorage } from 'react-native';
 import { Button } from 'react-native-elements';
+import { NavigationActions } from 'react-navigation';
 
 export default class SignUpScreen extends Component {
   
@@ -24,6 +25,15 @@ export default class SignUpScreen extends Component {
   }
 
   onButtonPress() {
+
+  const resetActionApprove = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'approveScreen'})
+      ]
+    });
+    
+
   fetch('http://192.168.43.217/api/public/signup', {
     method: 'POST',
     headers: {
@@ -49,10 +59,11 @@ export default class SignUpScreen extends Component {
         auth: responseJson
        }, function() {
       AsyncStorage.setItem("token",this.state.auth.token);
+      this.props.navigation.dispatch(resetActionApprove);
     });
   });
-  console.log(this.props.navigation.state.params.id);
-  this.props.navigation.navigate('approveScreen') 
+  //console.log(this.props.navigation.state.params.id);
+   
   }
 
   render() {

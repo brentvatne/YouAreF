@@ -46,10 +46,17 @@ export default class LoginScreen extends React.Component {
 
   onLoginPress = async () => {
 
-    const resetAction = NavigationActions.reset({
+    const resetActionLogin = NavigationActions.reset({
       index: 0,
       actions: [
         NavigationActions.navigate({ routeName: 'Main'})
+      ]
+    });
+
+    const resetActionApprove = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'approveScreen'})
       ]
     });
 
@@ -77,10 +84,10 @@ export default class LoginScreen extends React.Component {
           if(this.state.auth.registered === true){
             AsyncStorage.setItem("token",this.state.auth.token);
             if(this.state.auth.status === "accepted") {
-              this.props.navigation.dispatch(resetAction);
+              this.props.navigation.dispatch(resetActionLogin);
             }
             else {
-              this.props.navigation.navigate('approveScreen');
+              this.props.navigation.dispatch(resetActionApprove);
             }
           }
           else {

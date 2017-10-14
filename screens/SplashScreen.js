@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, Thumbnail, Text, Body, Icon } from 'native-base';
 import { StyleSheet, Image, View, TabNavigator, ListView, ActivityIndicator, AsyncStorage } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 
 export default class SplashScreen extends Component {
   
@@ -17,6 +18,21 @@ export default class SplashScreen extends Component {
 
 
   componentDidMount = async () => {
+
+    const resetActionLogin = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'Main'})
+      ]
+    });
+
+    const resetActionApprove = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'approveScreen'})
+      ]
+    });
+
     try {
       let token = await AsyncStorage.getItem('token');
       console.log(token);
@@ -36,10 +52,10 @@ export default class SplashScreen extends Component {
           checkstatus: responseJson
         }, function() {
           if(this.state.checkstatus.status === "accepted"){
-          this.props.navigation.navigate('Main');  
+          this.props.navigation.dispatch(resetActionLogin);  
           }
           else {
-           this.props.navigation.navigate('approveScreen'); 
+           this.props.navigation.dispatch(resetActionApprove); 
           }
           
         });
