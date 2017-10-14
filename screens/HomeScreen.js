@@ -234,13 +234,13 @@ export default class HomeScreen extends React.Component {
             </View>
           </Content>
           
-          <ActionButton buttonColor="rgba(250,211,10,1)" degrees={0} icon={<Ionicons name="md-call" style={styles.floatingActionButtonIcon} /> }>
-            <ActionButton.Item buttonColor='#9b59b6' title="Call" onPress={() => call(args).catch(console.error)}>
+          <ActionButton buttonColor="rgba(250,211,10,1)" degrees={0} icon={<Ionicons name="md-call" style={styles.floatingActionButtonIcon} /> } onPress={() => call(args).catch(console.error)} >
+            {/*<ActionButton.Item buttonColor='#9b59b6' title="Call" onPress={() => call(args).catch(console.error)}>
               <Ionicons name="md-call" style={styles.actionButtonIcon} />
             </ActionButton.Item>
             <ActionButton.Item buttonColor='#1abc9c' title="Chat" onPress={() => navigate('ChatScreen')}>
               <Ionicons name="md-chatboxes" style={styles.actionButtonIcon} />
-            </ActionButton.Item>
+            </ActionButton.Item>*/}
           </ActionButton>
         </Container>
     );
