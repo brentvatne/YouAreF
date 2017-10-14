@@ -63,12 +63,12 @@ export default class MenuScreen extends React.Component {
                View Profile
               </Text>
             </View>
-            <View>
+            {/*<View>
               <Image 
                  style={styles.thumbnailStyle} 
                  source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }}
               />
-            </View>
+            </View>*/}
           </View>
 
            <List>
