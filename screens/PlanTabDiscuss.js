@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Input, Item } from 'native-base';
-import { ScrollView, StyleSheet, View, Image, TextInput, Button, AsyncStorage} from 'react-native';
+import { ScrollView, StyleSheet, View, Image, TextInput, Button, AsyncStorage,TabNavigator, ActivityIndicator} from 'react-native';
 
 export default class PlanTabDiscuss extends Component {
+
+  static navigationOptions = {
+    header: null,
+  }
 
   constructor(props) {
     super(props);
@@ -44,7 +48,7 @@ export default class PlanTabDiscuss extends Component {
       });
   }
 
-/*  onButtonPress() {
+  onButtonPress() {
   fetch('http://192.168.43.217/api/public/plan/2', {
     method: 'POST',
     headers: {
@@ -65,10 +69,20 @@ export default class PlanTabDiscuss extends Component {
   });
   console.log(this.props.navigation.state.params.id);
      
-  }*/
+  }
 
 
   render() {
+
+      if (this.state.isLoading) {
+      return (
+        <View style={{flex: 1, paddingTop: 20}}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
+
+    console.log(this.state.discuss);
 
     return (
       <Container style={styles.container} >
@@ -76,7 +90,7 @@ export default class PlanTabDiscuss extends Component {
           <View>
             <List dataArray={this.state.discuss}
               renderRow={(discussions) =>
-                <ListItem>
+                <ListItem onPress={() => navigate('SingleDiscussion',{name:'Alok'})}>
                   <Body> 
                     <View style={styles.viewTextStyle}>
                       <Text>{discussions.question}</Text>

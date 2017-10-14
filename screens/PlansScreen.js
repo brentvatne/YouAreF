@@ -14,6 +14,11 @@ import {
 
 export default class PlansScreen extends Component {
   
+  static navigationOptions = ({ navigation }) => ({
+    title: `${navigation.state.params.name}`,
+    
+  })
+  
   constructor(props) {
     super(props);
     this.state = {

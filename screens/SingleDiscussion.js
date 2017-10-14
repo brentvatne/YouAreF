@@ -4,6 +4,11 @@ import { ScrollView, StyleSheet, View, Image, TextInput } from 'react-native';
 
 export default class SingleDiscussion extends Component {
 
+  static navigationOptions = ({ navigation }) => ({
+    title: `${navigation.state.params.name}`,
+    
+  })
+
   render() {
 
     var discussions = [ {id:0,discussionHead:"Does amazon charges extra tax from the seller ?"},
@@ -33,7 +38,7 @@ export default class SingleDiscussion extends Component {
           </View>
           
           <View style={ {flex:1, flexDirection:'row', alignSelf:'stretch' ,position:'relative',paddingTop: 15,paddingLeft:5} }>
-            <View style={{ flex:3,height:60, alignSelf:'stretch', position:'relative' }}>
+            <View style={{ flex:2.5,height:60, alignSelf:'stretch', position:'relative' }}>
               <Item rounded>
                 <Input placeholder='Add a comment' />
               </Item>
