@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   View,
   TouchableHighlight,
-  AsyncStorage, } from 'react-native';
+  AsyncStorage,
+  ActivityIndicator } from 'react-native';
 
 import { 
   Container, 
@@ -121,6 +122,15 @@ export default class HomeScreen extends React.Component {
   }
 
   render() {
+
+    if (this.state.isLoading) {
+      return (
+        <View style={{flex: 1, paddingTop: 20}}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
+
     const { navigate } = this.props.navigation;
     let split = this.state.username.split(' ');
 

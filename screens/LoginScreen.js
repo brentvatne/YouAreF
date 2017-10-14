@@ -3,7 +3,12 @@ import Expo from 'expo';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Icon } from 'native-base';
 import { StyleSheet, Image, View, TabNavigator, ListView, ActivityIndicator, TouchableOpacity, AsyncStorage } from 'react-native';
 import { Button } from 'react-native-elements';
-import { NavigationActions } from 'react-navigation'
+import { NavigationActions } from 'react-navigation';
+import {
+    Dialog,
+    ProgressDialog,
+    ConfirmDialog,
+} from 'react-native-simple-dialogs'
 
 export default class LoginScreen extends React.Component {
 
@@ -19,11 +24,40 @@ export default class LoginScreen extends React.Component {
     }
   }
 
-  
+    state = {}
 
+    openDialog(show) {
+        this.setState({ showDialog: show })
+    }
+
+    openConfirm(show) {
+        this.setState({ showConfirm: show })
+    }
+
+    openProgress() {
+        this.setState({ showProgress: true })
+
+        setTimeout(
+            () => this.setState({ showProgress: false }),
+            2500
+        );
+    }
+
+    optionYes() {
+        this.openConfirm(false);
+        // Yes, this is a workaround :(
+        // Why? See this https://github.com/facebook/react-native/issues/10471
+        setTimeout(() => alert("Yes touched!"), 100);
+    }
+
+    optionNo() {
+        this.openConfirm(false);
+        // Yes, this is a workaround :(
+        // Why? See this https://github.com/facebook/react-native/issues/10471
+        setTimeout(() => alert("No touched!"), 100);
+}
 
   signInWithGoogleAsync = async () => {
-
     try {
       const result = await Expo.Google.logInAsync({
         androidClientId: "612669964630-04vbqsbsvt3mjv0nr7nsa77erika2f9p.apps.googleusercontent.com",
@@ -45,7 +79,6 @@ export default class LoginScreen extends React.Component {
   }
 
   onLoginPress = async () => {
-
     const resetActionLogin = NavigationActions.reset({
       index: 0,
       actions: [
@@ -60,10 +93,12 @@ export default class LoginScreen extends React.Component {
       ]
     });
 
-
     const result = await this.signInWithGoogleAsync();
-    if (result.type === 'success') {
+
+    if (result.type === 'success') {  
       
+      this.openProgress();
+
     	fetch('http://192.168.43.217/api/public/login', {
         method: 'POST',
         headers: {
@@ -94,18 +129,13 @@ export default class LoginScreen extends React.Component {
             this.props.navigation.navigate('SignUpScreen', { id:`${result.user.id}`, name: `${result.user.name}`, email: `${result.user.email}`});
           }
         });
-      });
-
-          
-           
-
-		  
-      }
+      });  
+    }
 
   }
 
   render() {
-  	 const { navigate } = this.props.navigation;
+  	const { navigate } = this.props.navigation;
 
     return (
     	<Container style={styles.container}>
@@ -130,6 +160,13 @@ export default class LoginScreen extends React.Component {
               borderRadius={10}
               buttonStyle = {styles.signupButton}
               onPress={() => navigate('Main')}
+            />
+
+            <ProgressDialog
+              visible={this.state.showProgress}
+              message="Logging in..."
+              activityIndicatorSize="large"
+              activityIndicatorColor="black"
             />
 	    	 </Content>
     	 </Container>
