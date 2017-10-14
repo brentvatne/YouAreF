@@ -4,6 +4,37 @@ import { ScrollView, StyleSheet, View, Image, TextInput } from 'react-native';
 
 export default class PlanTabTraining extends Component {
 
+  /*constructor(props) {
+    super(props);
+    this.sampleProps = this.props;
+  }
+
+  componentDidMount = async () => {
+    let token = await AsyncStorage.getItem('token');
+    
+    fetch(`http://byld.tech/plan/${this.sampleProps.sampleProps}`,{
+       method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token,
+          'Host': 'byld.tech'
+        }
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          isLoading: false,
+          reviews: responseJson.data.reviews.data,
+          
+        }, function() {
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  } */
+
   render() {
     return (
       <Container style={styles.container} >
@@ -18,33 +49,5 @@ export default class PlanTabTraining extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ffffff',
-  },
-  thumbnailStyle: {
-    resizeMode: 'contain',
-    marginTop: 20,
-    borderColor: '#ddd',
-    borderWidth: 1,
-    height: 100,
-    width: 100,
-    alignSelf:'center'
-  },
-  Button: {
-    marginTop:5,
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 300,
-  },
-  ButtonText: {
-    fontSize: 18,
-  },
-  textInputViewStyle: {
-    padding:20,
-  },
-  textInputStyle: {
-    fontSize: 18,
-    marginBottom:12,
-    height:50,
-    fontWeight: '100'
   },
 });

@@ -47,17 +47,6 @@ export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   }
-
-  /*componentWillMount() {
-    const resetAction = NavigationActions.reset({
-      index: 1,
-      actions: [
-        NavigationActions.navigate({ routeName: 'Main'})
-      ]
-    });
-
-    this.props.navigation.dispatch(resetAction);
-  }*/
   constructor() {
     super();
     this.state = {
@@ -71,13 +60,13 @@ export default class HomeScreen extends React.Component {
   componentDidMount = async () => {
     let token = await AsyncStorage.getItem('token');
     
-    fetch('http://192.168.43.217/api/public/home',{
+    fetch('http://byld.tech/home',{
         method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + token,
-          'Host': '192.168.43.217'
+          'Host': 'byld.tech'
         }
       })
       .then((response) => response.json())
@@ -95,13 +84,13 @@ export default class HomeScreen extends React.Component {
         console.error(error);
       });
 
-    fetch('http://192.168.43.217/api/public/myplans',{
+    fetch('http://byld.tech/myplans',{
         method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + token,
-          'Host': '192.168.43.217'
+          'Host': 'byld.tech'
         }
       })
       .then((response) => response.json())
@@ -111,7 +100,7 @@ export default class HomeScreen extends React.Component {
           myplans: responseJson.data,
           
         }, function() {
-          console.log(this.state.myplans);
+         console.log(this.state.myplans);
         });
       })
       .catch((error) => {
@@ -143,9 +132,9 @@ export default class HomeScreen extends React.Component {
         <Container style={styles.container}>
           <Content>
              <Card style={{backgroundColor:"#fad30a"}}>
-                <View style={ styles.notificationActionButtonView }>
+                {/*<View style={ styles.notificationActionButtonView }>
                   <Ionicons name="md-notifications" style={styles.notificationButtonIcon} />
-                </View>
+                </View>*/}
                 <CardItem style={{ alignItems: 'center',justifyContent: 'center',backgroundColor:'#fad30a' }}>
                   <Text style={{ fontSize:30,color:'#000000' }}> Hello, {split[0]} !</Text>
                 </CardItem>
@@ -198,7 +187,7 @@ export default class HomeScreen extends React.Component {
               this.state.myplans.length > 0 ? (
                 <List dataArray={this.state.myplans}
                 renderRow={(myplans) =>
-                  <ListItem onPress={() => navigate('PlansScreen', { id: `${myplans.id}`, name: `${myplans.name}`})}>
+                  <ListItem onPress={() => navigate('PlansScreen', { id: `${myplans.plan_id}`, name: `${myplans.name}`})}>
                     <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
                     <Body>
                       <View style={styles.viewTextStyle}>

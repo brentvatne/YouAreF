@@ -22,14 +22,14 @@ export default class PlanTabDiscuss extends Component {
   componentDidMount = async () => {
     let token = await AsyncStorage.getItem('token');
     
-    fetch(`http://192.168.43.217/api/public/plan/${this.sampleProps.sampleProps}`,
+    fetch(`http://byld.tech/plan/${this.sampleProps.sampleProps}`,
     {
        method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + token,
-          'Host': '192.168.43.217'
+          'Host': 'byld.tech'
         }
       })
       .then((response) => response.json())
@@ -50,7 +50,7 @@ export default class PlanTabDiscuss extends Component {
 
 
   /*onButtonPress() {
-  fetch('http://192.168.43.217/api/public/plan/2', {
+  fetch('http://byld.tech/plan/2', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

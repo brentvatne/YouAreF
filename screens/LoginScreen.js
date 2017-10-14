@@ -99,7 +99,7 @@ export default class LoginScreen extends React.Component {
       
       this.openProgress();
 
-    	fetch('http://192.168.43.217/api/public/login', {
+    	fetch('http://byld.tech/login', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -150,17 +150,6 @@ export default class LoginScreen extends React.Component {
 		       	 	 source={require('../assets/images/google.png')} 
 		       	 	/> 
 		       	</TouchableOpacity>
-
-            <Button 
-              large
-              title="DO IT LATER"
-              color='white'
-              backgroundColor='black'
-              fontWeight='bold'
-              borderRadius={10}
-              buttonStyle = {styles.signupButton}
-              onPress={() => navigate('Main')}
-            />
 
             <ProgressDialog
               visible={this.state.showProgress}

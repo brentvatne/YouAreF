@@ -34,7 +34,7 @@ export default class SignUpScreen extends Component {
     });
     
 
-  fetch('http://192.168.43.217/api/public/signup', {
+  fetch('http://byld.tech/signup', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -136,16 +136,6 @@ export default class SignUpScreen extends Component {
               borderRadius={10}
               buttonStyle = {styles.signupButton}
               onPress={this.onButtonPress}
-            />
-
-            <Button 
-              title="DO IT LATER"
-              color='white'
-              backgroundColor='black'
-              fontWeight='bold'
-              borderRadius={10}
-              buttonStyle = {styles.signupButton}
-              onPress={() => navigate('Main')}
             />
 
         </Content>

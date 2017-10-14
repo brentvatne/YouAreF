@@ -20,13 +20,13 @@ export default class CampaignsScreen extends Component {
   componentDidMount = async () => {
     let token = await AsyncStorage.getItem('token');
     
-    fetch('http://192.168.43.217/api/public/plans',{
+    fetch('http://byld.tech/plans',{
         method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + token,
-          'Host': '192.168.43.217'
+          'Host': 'byld.tech'
         }
       })
       .then((response) => response.json())
@@ -48,13 +48,13 @@ export default class CampaignsScreen extends Component {
   
   let token = await AsyncStorage.getItem('token');
     
-  fetch(`http://192.168.43.217/api/public/likePlan/${id}`, {
+  fetch(`http://byld.tech/likePlan/${id}`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token,
-      'Host': '192.168.43.217'
+      'Host': 'byld.tech'
     }
 
   })

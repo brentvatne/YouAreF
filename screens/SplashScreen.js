@@ -18,7 +18,6 @@ export default class SplashScreen extends Component {
 
 
   componentDidMount = async () => {
-
     const resetActionLogin = NavigationActions.reset({
       index: 0,
       actions: [
@@ -37,13 +36,13 @@ export default class SplashScreen extends Component {
       let token = await AsyncStorage.getItem('token');
       console.log(token);
       if(token!== null) {
-      fetch('http://192.168.43.217/api/public/checkstatus',{
+      fetch('http://byld.tech/checkstatus',{
         method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + token,
-          'Host': '192.168.43.217'
+          'Host': 'byld.tech'
         }
       })
       .then((response) => response.json())
@@ -85,6 +84,10 @@ export default class SplashScreen extends Component {
     return (
       <Container style={styles.container} >
         <Content>
+          <Image
+           style={styles.imageStyle}
+             source={require('../assets/images/YOUAREF.png')}
+          />
         </Content>
       </Container>
     );
@@ -93,6 +96,13 @@ export default class SplashScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#3498db',
+    backgroundColor: '#fad30a',
+  },
+
+  imageStyle: {
+    height: 300,
+    width: 200,
+    alignSelf:'center',
+    marginTop:108,
   },
 });

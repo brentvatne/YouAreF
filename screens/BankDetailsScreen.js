@@ -26,13 +26,13 @@ export default class BankDetailsScreen extends Component {
   
   let token = await AsyncStorage.getItem('token');
     
-  fetch('http://192.168.43.217/api/public/bank_detail', {
+  fetch('http://byld.tech/bank_detail', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token,
-      'Host': '192.168.43.217'
+      'Host': 'byld.tech'
     },
     body: JSON.stringify({
       holder_name: this.state.holdername,
