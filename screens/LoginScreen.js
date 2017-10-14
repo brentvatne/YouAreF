@@ -3,6 +3,7 @@ import Expo from 'expo';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Icon } from 'native-base';
 import { StyleSheet, Image, View, TabNavigator, ListView, ActivityIndicator, TouchableOpacity, AsyncStorage } from 'react-native';
 import { Button } from 'react-native-elements';
+import { NavigationActions } from 'react-navigation'
 
 export default class LoginScreen extends React.Component {
 
@@ -28,6 +29,7 @@ export default class LoginScreen extends React.Component {
         androidClientId: "612669964630-04vbqsbsvt3mjv0nr7nsa77erika2f9p.apps.googleusercontent.com",
         iosClientId: "612669964630-68qv7vej51qnlkccrdbu7jo2s4v4a1c2.apps.googleusercontent.com",
         androidStandaloneAppClientId: "612669964630-qffrhkqhqjd60m7usj14u6rhv2101hof.apps.googleusercontent.com",
+        iosStandaloneAppClientId:" 612669964630-79dju4toak9f4svrbp8n8f0ns27o1ldq.apps.googleusercontent.com",
         scopes: ['profile','email'],
         behavior: "web", 
       })
@@ -43,6 +45,21 @@ export default class LoginScreen extends React.Component {
   }
 
   onLoginPress = async () => {
+
+    const resetActionLogin = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'Main'})
+      ]
+    });
+
+    const resetActionApprove = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'approveScreen'})
+      ]
+    });
+
 
     const result = await this.signInWithGoogleAsync();
     if (result.type === 'success') {
@@ -67,10 +84,10 @@ export default class LoginScreen extends React.Component {
           if(this.state.auth.registered === true){
             AsyncStorage.setItem("token",this.state.auth.token);
             if(this.state.auth.status === "accepted") {
-              this.props.navigation.navigate('Main');
+              this.props.navigation.dispatch(resetActionLogin);
             }
             else {
-              this.props.navigation.navigate('approveScreen');
+              this.props.navigation.dispatch(resetActionApprove);
             }
           }
           else {
