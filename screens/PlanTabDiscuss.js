@@ -17,7 +17,6 @@ export default class PlanTabDiscuss extends Component {
       },
       question:'',
     };
-    this.onButtonPress = this.onButtonPress.bind(this);
   }
 
   componentDidMount = async () => {
@@ -48,7 +47,9 @@ export default class PlanTabDiscuss extends Component {
       });
   }
 
-  onButtonPress() {
+
+
+  /*onButtonPress() {
   fetch('http://192.168.43.217/api/public/plan/2', {
     method: 'POST',
     headers: {
@@ -69,12 +70,12 @@ export default class PlanTabDiscuss extends Component {
   });
   console.log(this.props.navigation.state.params.id);
      
-  }
+  }*/
 
 
   render() {
-
-      if (this.state.isLoading) {
+      
+    if (this.state.isLoading) {
       return (
         <View style={{flex: 1, paddingTop: 20}}>
           <ActivityIndicator />
@@ -82,18 +83,27 @@ export default class PlanTabDiscuss extends Component {
       );
     }
 
-    console.log(this.state.discuss);
+
+        var discussions = [ {id:0,discussionHead:"Does amazon charges extra tax from the seller ?"},
+                        {id:0,discussionHead:"What all skills are necessary to apply for this plan ?"},
+                        {id:0,discussionHead:"Can anyone share his/her experience ?"},
+                        {id:0,discussionHead:"In how many will the payment reflect in my account ?"},
+                      ]; 
+
+      
+
+   // console.log(this.state.discuss);
 
     return (
       <Container style={styles.container} >
         <Content>
           <View>
-            <List dataArray={this.state.discuss}
+            <List dataArray={discussions}
               renderRow={(discussions) =>
-                <ListItem onPress={() => navigate('SingleDiscussion',{name:'Alok'})}>
+                <ListItem onPress={() => this.props.navigation.navigate('SingleDiscussion')}>
                   <Body> 
                     <View style={styles.viewTextStyle}>
-                      <Text>{discussions.question}</Text>
+                      <Text>{discussions.discussionHead}</Text>
                     </View>
                   </Body>
                 </ListItem>
@@ -108,12 +118,12 @@ export default class PlanTabDiscuss extends Component {
               </Item>
             </View>
             <View style={{ flex:1, alignSelf:'stretch',position:'relative',paddingTop:9,paddingLeft:10}}> 
-              <Button
+              {/*<Button
                 onPress={this.onButtonPress}
                 title="Submit"
                 color="#000000"
                 accessibilityLabel="Learn more about this purple button"
-              />
+              />*/}
             </View>
           </View>
         </Content>

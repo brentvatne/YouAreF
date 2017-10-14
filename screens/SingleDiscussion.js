@@ -5,7 +5,7 @@ import { ScrollView, StyleSheet, View, Image, TextInput } from 'react-native';
 export default class SingleDiscussion extends Component {
 
   static navigationOptions = ({ navigation }) => ({
-    title: `${navigation.state.params.name}`,
+    title:null,
     
   })
 
@@ -15,8 +15,7 @@ export default class SingleDiscussion extends Component {
                         {id:0,discussionHead:"What all skills are necessary to apply for this plan ?"},
                         {id:0,discussionHead:"Can anyone share his/her experience ?"},
                         {id:0,discussionHead:"In how many will the payment reflect in my account ?"},
-                      ]; 
-
+                      ];
     return (
       <Container style={styles.container} >
         <Content>

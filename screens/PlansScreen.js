@@ -142,6 +142,7 @@ export default class PlansScreen extends Component {
           <Tab heading="Discuss" tabStyle={{backgroundColor: '#fad30a'}} textStyle={{color: '#000000'}} activeTabStyle={{backgroundColor: '#fad30a'}} activeTextStyle={{color: '#000000', fontWeight: 'bold'}}>
             <PlanTabDiscuss 
               sampleProps={this.props.navigation.state.params.id}
+              navigation={this.props.navigation}
             />
           </Tab>
         </Tabs>
