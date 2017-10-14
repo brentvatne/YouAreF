@@ -3,6 +3,7 @@ import Expo from 'expo';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Icon } from 'native-base';
 import { StyleSheet, Image, View, TabNavigator, ListView, ActivityIndicator, TouchableOpacity, AsyncStorage } from 'react-native';
 import { Button } from 'react-native-elements';
+import { NavigationActions } from 'react-navigation'
 
 export default class LoginScreen extends React.Component {
 
@@ -45,6 +46,14 @@ export default class LoginScreen extends React.Component {
 
   onLoginPress = async () => {
 
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'Main'})
+      ]
+    });
+
+
     const result = await this.signInWithGoogleAsync();
     if (result.type === 'success') {
       
@@ -68,7 +77,7 @@ export default class LoginScreen extends React.Component {
           if(this.state.auth.registered === true){
             AsyncStorage.setItem("token",this.state.auth.token);
             if(this.state.auth.status === "accepted") {
-              this.props.navigation.navigate('Main');
+              this.props.navigation.dispatch(resetAction);
             }
             else {
               this.props.navigation.navigate('approveScreen');
