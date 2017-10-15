@@ -70,6 +70,8 @@ export default class PlanTabReviews extends Component {
        }, function() {
         if(this.state.res.status === "ok"){
           this.popupDialog.dismiss();
+          this.refs.titleInput.setNativeProps({text:''})
+          this.refs.descriptionInput.setNativeProps({text:''})
         }
         
     });
@@ -117,13 +119,15 @@ export default class PlanTabReviews extends Component {
               <View>
                 <Item>
                   <Input 
-                  placeholder='Title'
-                  onChangeText={(title) => this.setState({title})}
-                   />
+                    placeholder='Title'
+                    ref='titleInput'
+                    onChangeText={(title) => this.setState({title})}
+                  />
                 </Item>
                 <Item floatingLabel>
                   <Input 
                     placeholder='Description'
+                    ref='descriptionInput'
                     multiline={true}
                     numberOfLines={5}
                     style={{ height: 80}}

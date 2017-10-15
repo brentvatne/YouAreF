@@ -69,7 +69,7 @@ export default class PlanTabDiscuss extends Component {
         res: responseJson
        }, function() {
         if(this.state.res.status === "ok"){
-          this.popupDialog.dismiss();
+          this.refs.questionInput.setNativeProps({text:''})
         }        
     });
   }); 
@@ -110,6 +110,7 @@ export default class PlanTabDiscuss extends Component {
             <View style={ { flex:3,height:60, alignSelf:'stretch', position:'relative' } }>
               <Item regular>
                 <Input 
+                  ref='questionInput'
                   placeholder='Ask a question' 
                   onChangeText={(question) => this.setState({question})}
                 />
