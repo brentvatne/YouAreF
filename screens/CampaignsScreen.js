@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body } from 'native-base';
-import { StyleSheet, Image, View, ActivityIndicator, AsyncStorage } from 'react-native';
+import { StyleSheet, Image, View, ActivityIndicator, AsyncStorage, RefreshControl } from 'react-native';
 
 export default class CampaignsScreen extends Component {
   
@@ -14,9 +14,21 @@ export default class CampaignsScreen extends Component {
     super(props);
     this.state = {
       isLoading: true,
-      companies:{}
+      companies:{},
+      refreshing: false,
     }
   }
+
+  _onRefresh() { 
+    this.setState({refreshing: true}); 
+    setTimeout(() => {
+      this.componentDidMount();
+      this.setState({
+        refreshing: false
+      }); 
+    },3000); 
+  }
+
 
   componentDidMount = async () => {
     let token = await AsyncStorage.getItem('token');
@@ -60,7 +72,14 @@ export default class CampaignsScreen extends Component {
     return (
       <Container style={styles.container} >
         <Content>
-          <List dataArray={this.state.companies}
+          <List 
+            refreshControl={ 
+                <RefreshControl 
+                  refreshing={this.state.refreshing} 
+                  onRefresh={this._onRefresh.bind(this)} 
+                  /> 
+                } 
+            dataArray={this.state.companies}
             renderRow={(camp) =>
             <ListItem onPress={() => navigate('CampaignsDetScreen', { id: `${camp.company_id}`, name: `${camp.name}`})}>
               <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />

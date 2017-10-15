@@ -22,35 +22,11 @@ export default class CampaignsScreen extends Component {
   _onRefresh() { 
     this.setState({refreshing: true}); 
     setTimeout(() => {
-      /*let token = await AsyncStorage.getItem('token');
-      
-      fetch('http://byld.tech/plans',{
-          method: 'GET',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token,
-            'Host': 'byld.tech'
-          }
-        })
-        .then((response) => response.json())
-        .then((responseJson) => {
-          this.setState({
-            isLoading: false,
-            plans: responseJson.data,
-            
-          }, function() {
-            console.log(this.state.plans)
-          });
-        })
-        .catch((error) => {
-          console.error(error);
-        });*/
-        this.componentDidMount();
+      this.componentDidMount();
       this.setState({
         refreshing: false
       }); 
-    },5000); 
+    },3000); 
   }
 
   componentDidMount = async () => {
