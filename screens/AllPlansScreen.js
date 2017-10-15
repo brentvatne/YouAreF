@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Icon } from 'native-base';
-import { StyleSheet, Image, View, TabNavigator, ListView, ActivityIndicator, AsyncStorage, TouchableOpacity } from 'react-native';
+import { StyleSheet, Image, View, TabNavigator, ListView, ActivityIndicator, AsyncStorage, TouchableOpacity, RefreshControl } from 'react-native';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 export default class CampaignsScreen extends Component {
@@ -14,9 +14,45 @@ export default class CampaignsScreen extends Component {
     super(props);
     this.state = {
       isLoading: true,
-      plans:{}
+      plans:{},
+      refreshing: false,
     }
   }
+
+  _onRefresh() { 
+    this.setState({refreshing: true}); 
+    setTimeout(() => {
+      /*let token = await AsyncStorage.getItem('token');
+      
+      fetch('http://byld.tech/plans',{
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token,
+            'Host': 'byld.tech'
+          }
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+          this.setState({
+            isLoading: false,
+            plans: responseJson.data,
+            
+          }, function() {
+            console.log(this.state.plans)
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+        });*/
+        this.componentDidMount();
+      this.setState({
+        refreshing: false
+      }); 
+    },5000); 
+  }
+
   componentDidMount = async () => {
     let token = await AsyncStorage.getItem('token');
     
@@ -89,7 +125,14 @@ export default class CampaignsScreen extends Component {
     return (
       <Container style={styles.container} >
         <Content>
-          <List dataArray={this.state.plans}
+          <List 
+            refreshControl={ 
+                <RefreshControl 
+                  refreshing={this.state.refreshing} 
+                  onRefresh={this._onRefresh.bind(this)} 
+                  /> 
+                } 
+            dataArray={this.state.plans}
             renderRow={(plan) =>
             <ListItem onPress={() => navigate('PlansScreen', { id: `${plan.id}`, name: `${plan.name}`})}>
               <Image style={styles.thumbnailStyle} source={{ uri: plan.logo }} />

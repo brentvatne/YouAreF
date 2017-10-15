@@ -3,7 +3,6 @@ import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Sepa
 import { ScrollView, StyleSheet, View, Image, TextInput, Button, AsyncStorage, ActivityIndicator } from 'react-native';
 
 export default class SingleDiscussion extends Component {
-
   static navigationOptions = ({ navigation }) => ({
     title:`${navigation.state.params.question}`,
     
@@ -82,6 +81,13 @@ export default class SingleDiscussion extends Component {
   }); 
   }
 
+  _onRefresh() {
+    this.setState({refreshing: true});
+    fetchData().then(() => {
+      this.setState({refreshing: false});
+    });
+ }
+
   render() {
     
     if (this.state.isLoading) {
@@ -96,8 +102,17 @@ export default class SingleDiscussion extends Component {
       <Container style={styles.container} >
         <Content>
           <View>
-            <List dataArray={this.state.answers}
-              renderRow={(answer) =>
+            <List
+              refreshControl={ 
+                <RefreshControl 
+                  refreshing={this.state.refreshing} 
+                  onRefresh={this._onRefresh.bind(this)} 
+                  /> 
+                } 
+                
+                dataArray={this.state.answers}
+                renderRow={(answer) =>
+                
                 <ListItem>
                   <Body> 
                     <View style={styles.viewTextStyle}>
