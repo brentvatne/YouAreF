@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Input, Item } from 'native-base';
-import { ScrollView, StyleSheet, View, Image, TextInput, Button } from 'react-native';
+import { ScrollView, StyleSheet, View, Image, TextInput, Button, AsyncStorage } from 'react-native';
 
 export default class SingleDiscussion extends Component {
 
@@ -14,30 +14,29 @@ export default class SingleDiscussion extends Component {
     this.sampleProps = this.props;
     this.state = {
       isLoading: true,
-      discuss:{
+      answers:{
       },
-      answers:'',
     };
   }
 
   componentDidMount = async () => {
     let token = await AsyncStorage.getItem('token');
     
-    fetch(`http://192.168.43.217/api/public/plan/1`,
+    fetch(`http://byld.tech/discussionAnswer/22`,
     {
        method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + token,
-          'Host': '192.168.43.217'
+          'Host': 'byld.tech'
         }
       })
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
           isLoading: false,
-          answers: responseJson.data.discussions.data.answers.data,
+          answers: responseJson.data,
           
         }, function() {
           console.log(this.state.plans)
@@ -49,8 +48,9 @@ export default class SingleDiscussion extends Component {
   }
 
   render() {
-    
+
     console.log(this.state.answers);
+    console.log(this.state.answers.answer);
 
     return (
       <Container style={styles.container} >
@@ -61,10 +61,10 @@ export default class SingleDiscussion extends Component {
                 <ListItem>
                   <Body> 
                     <View style={styles.viewTextStyle}>
-                      <Text>{answers.answer}</Text>
+                      <Text>{answer.answer}</Text>
                     </View>
                     <View style={styles.viewTextStyle}>
-                      <Text note>{answers.user_name}</Text>
+                      <Text note>{answer.user_name}</Text>
                     </View>
                   </Body>
                 </ListItem>

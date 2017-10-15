@@ -16,6 +16,7 @@ export default class PlanTabDiscuss extends Component {
       discuss:{
       },
       question:'',
+      res:{}
     };
   }
 
@@ -47,30 +48,32 @@ export default class PlanTabDiscuss extends Component {
       });
   }
 
-
-
-  /*onButtonPress() {
-  fetch('http://byld.tech/plan/2', {
+  onButtonPress= async () => {
+  let token = await AsyncStorage.getItem('token');   
+  fetch(`http://byld.tech/discussPlanQuestion/${this.sampleProps.sampleProps}`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+      'Host': 'byld.tech'
     },
     body: JSON.stringify({
-      google_id: this.props.navigation.state.params.id,
-      user_name: this.props.navigation.state.params.name,
-      college: this.state.college,
-      gender: this.state.gender,
-      email: this.props.navigation.state.params.email,
-      phone: this.state.contact,
-      address: this.state.address,
-      degree: this.state.degree,
-      cv: this.state.cv,
+      question: this.state.question,
     })
-  });
-  console.log(this.props.navigation.state.params.id);
-     
-  }*/
+
+  })
+  .then((response) => response.json())
+  .then((responseJson) => {
+      this.setState({
+        res: responseJson
+       }, function() {
+        if(this.state.res.status === "ok"){
+          this.popupDialog.dismiss();
+        }        
+    });
+  }); 
+  }
 
 
   render() {
@@ -83,7 +86,8 @@ export default class PlanTabDiscuss extends Component {
       );
     }
 
-   // console.log(this.state.discuss);
+   console.log(this.state.discuss);
+
 
     return (
       <Container style={styles.container} >
@@ -103,9 +107,12 @@ export default class PlanTabDiscuss extends Component {
           </View>
           
           <View style={ {flex:1, flexDirection:'row', alignSelf:'stretch' ,position:'relative',paddingTop: 15,paddingLeft:5} }>
-            <View style={{ flex:3,height:60, alignSelf:'stretch', position:'relative' }}>
+            <View style={ { flex:3,height:60, alignSelf:'stretch', position:'relative' } }>
               <Item regular>
-                <Input placeholder='Ask a question' />
+                <Input 
+                  placeholder='Ask a question' 
+                  onChangeText={(question) => this.setState({question})}
+                />
               </Item>
             </View>
             <View style={{ flex:1, alignSelf:'stretch',position:'relative',paddingTop:9,paddingLeft:10}}> 
