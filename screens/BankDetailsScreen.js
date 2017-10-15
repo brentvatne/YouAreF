@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator} from 'native-base';
-import { ScrollView, StyleSheet, View, Image, TextInput, AsyncStorage, Button } from 'react-native';
+import { ScrollView, StyleSheet, View, Image, TextInput, AsyncStorage } from 'react-native';
+import { Button } from 'react-native-elements';
 
 export default class BankDetailsScreen extends Component {
   
@@ -81,7 +82,7 @@ export default class BankDetailsScreen extends Component {
             style={styles.textInputStyle}
             onChangeText={(bankname) => this.setState({bankname})}
             value={this.state.bankname}
-            placeholder = 'Bank Name'
+            placeholder = 'Bank Name'reload each time api is called in react native
             />
             <TextInput
             style={styles.textInputStyle}
@@ -104,7 +105,6 @@ export default class BankDetailsScreen extends Component {
           </View>
 
           <Button 
-              large
               title="SAVE"
               color='white'
               backgroundColor='black'
@@ -151,5 +151,12 @@ const styles = StyleSheet.create({
     marginBottom:12,
     height:50,
     fontWeight: '100'
+  },
+  signupButton: {
+    marginTop: 15,
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 300,
   },
 });
