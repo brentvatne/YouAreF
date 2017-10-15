@@ -31,7 +31,6 @@ export default class CampaignsScreen extends Component {
 
   componentDidMount = async () => {
     let token = await AsyncStorage.getItem('token');
-    
     fetch('http://byld.tech/plans',{
         method: 'GET',
         headers: {

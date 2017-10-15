@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, Icon, ListItem, Thumbnail, Body, Card, CardItem, Text } from 'native-base';
-import { View, Image, StyleSheet, AsyncStorage, ActivityIndicator, TouchableOpacity} from 'react-native';
+import { View, Image, StyleSheet, AsyncStorage, ActivityIndicator, TouchableOpacity, RefreshControl} from 'react-native';
 import StarRating from 'react-native-star-rating';
 import { Button } from 'react-native-elements';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
@@ -16,15 +16,24 @@ constructor(props) {
     this.state = {
       starCount: 0,
       isLoading: true,
-      company:{
-      },
-      plans:{
-      },
-      res:{}
+      company:{},
+      plans:{},
+      res:{},
+      refreshing: false,
     };
   }  
 
-componentDidMount = async () => {
+  _onRefresh() { 
+    this.setState({refreshing: true}); 
+    setTimeout(() => {
+      this.componentDidMount();
+      this.setState({
+        refreshing: false
+      }); 
+    },3000); 
+  }
+
+  componentDidMount = async () => {
     let token = await AsyncStorage.getItem('token');
     fetch(`http://byld.tech/company/${this.props.navigation.state.params.id}`,
     {
@@ -120,9 +129,6 @@ componentDidMount = async () => {
     });
   }); 
   }
-
-
-            
 
   render() {
 

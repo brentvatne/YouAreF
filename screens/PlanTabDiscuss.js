@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Input, Item } from 'native-base';
-import { ScrollView, StyleSheet, View, Image, TextInput, Button, AsyncStorage,TabNavigator, ActivityIndicator} from 'react-native';
+import { ScrollView, StyleSheet, View, Image, TextInput, Button, AsyncStorage,TabNavigator, ActivityIndicator, RefreshControl} from 'react-native';
 
 export default class PlanTabDiscuss extends Component {
 
@@ -16,8 +16,19 @@ export default class PlanTabDiscuss extends Component {
       discuss:{
       },
       question:'',
-      res:{}
+      res:{},
+      refreshing: false,
     };
+  }
+
+  _onRefresh() { 
+    this.setState({refreshing: true}); 
+    setTimeout(() => {
+      this.componentDidMount();
+      this.setState({
+        refreshing: false
+      }); 
+    },3000); 
   }
 
   componentDidMount = async () => {
@@ -77,7 +88,6 @@ export default class PlanTabDiscuss extends Component {
 
 
   render() {
-      
     if (this.state.isLoading) {
       return (
         <View style={{flex: 1, paddingTop: 20}}>
@@ -90,7 +100,13 @@ export default class PlanTabDiscuss extends Component {
       <Container style={styles.container} >
         <Content>
           <View>
-            <List dataArray={this.state.discuss}
+            <List 
+              refreshControl={ 
+                <RefreshControl 
+                  refreshing={this.state.refreshing} 
+                  onRefresh={this._onRefresh.bind(this)} 
+                /> } 
+              dataArray={this.state.discuss}
               renderRow={(discussions) =>
                 <ListItem onPress={() => this.props.navigation.navigate('SingleDiscussion',{ id: `${discussions.id}`, question: `${discussions.question}`})}>
                   <Body> 

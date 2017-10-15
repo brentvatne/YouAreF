@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Button } from 'native-base';
-import { ScrollView, StyleSheet, View, Image, TextInput, AsyncStorage, ActivityIndicator } from 'react-native';
+import { ScrollView, StyleSheet, View, Image, TextInput, AsyncStorage, ActivityIndicator, RefreshControl } from 'react-native';
 import PlansScreen from './PlansScreen';
 
 export default class PlanTabAbout extends Component {
@@ -10,13 +10,23 @@ export default class PlanTabAbout extends Component {
     this.sampleProps = this.props;
     this.state = {
       isLoading: true,
-      About:{}
+      About:{},
+      refreshing: false,
     }
+  }
+
+  _onRefresh() { 
+    this.setState({refreshing: true}); 
+    setTimeout(() => {
+      this.componentDidMount();
+      this.setState({
+        refreshing: false
+      }); 
+    },3000); 
   }
 
   componentDidMount = async () => {
     let token = await AsyncStorage.getItem('token');
-    
     fetch(`http://byld.tech/plan/${this.sampleProps.sampleProps}`,{
        method: 'GET',
         headers: {
@@ -31,7 +41,6 @@ export default class PlanTabAbout extends Component {
         this.setState({
           isLoading: false,
           About: responseJson.data,
-          
         }, function() {
          // console.log(this.state.plans)
         });
@@ -41,21 +50,25 @@ export default class PlanTabAbout extends Component {
       });
   }
 
- 
   render() {
-
     if (this.state.isLoading) {
       return (
         <View style={{flex: 1, paddingTop: 20}}>
           <ActivityIndicator />
         </View>
       );
-    }
+  }
 
     return (
       <Container style={styles.container} >
         <Content>
-          <List>
+          <List
+            refreshControl={ 
+              <RefreshControl 
+                refreshing={this.state.refreshing} 
+                onRefresh={this._onRefresh.bind(this)} 
+              /> 
+            }>
             <ListItem>
               <Body>
                 <View>
@@ -89,7 +102,6 @@ export default class PlanTabAbout extends Component {
               </Body>
             </ListItem>
           </List>
-
         </Content>
       </Container>
     );

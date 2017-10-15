@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Input, Item, Label } from 'native-base';
-import { ScrollView, StyleSheet, View, Image, TextInput, Button, AsyncStorage, ActivityIndicator } from 'react-native';
+import { ScrollView, StyleSheet, View, Image, TextInput, Button, AsyncStorage, ActivityIndicator, RefreshControl } from 'react-native';
 import PopupDialog, { DialogTitle } from 'react-native-popup-dialog';
 
 export default class PlanTabReviews extends Component {
@@ -10,18 +10,26 @@ export default class PlanTabReviews extends Component {
     this.sampleProps = this.props;
     this.state = {
       isLoading: true,
-      reviews:{
-
-      },
+      reviews:{},
       title:'',
       message:'',
-      res:{}
+      res:{},
+      refreshing: false,
     }
+  }
+
+  _onRefresh() { 
+    this.setState({refreshing: true}); 
+    setTimeout(() => {
+      this.componentDidMount();
+      this.setState({
+        refreshing: false
+      }); 
+    },3000); 
   }
 
   componentDidMount = async () => {
     let token = await AsyncStorage.getItem('token');
-    
     fetch(`http://byld.tech/plan/${this.sampleProps.sampleProps}`,{
        method: 'GET',
         headers: {
@@ -36,7 +44,6 @@ export default class PlanTabReviews extends Component {
         this.setState({
           isLoading: false,
           reviews: responseJson.data.reviews.data,
-          
         }, function() {
         });
       })
@@ -46,9 +53,7 @@ export default class PlanTabReviews extends Component {
   }
 
   onButtonPress= async () => {
-  
   let token = await AsyncStorage.getItem('token');
-    
   fetch(`http://byld.tech/reviewPlan/${this.sampleProps.sampleProps}`, {
     method: 'POST',
     headers: {
@@ -79,7 +84,6 @@ export default class PlanTabReviews extends Component {
   }
 
   render() {
-
     if (this.state.isLoading) {
       return (
         <View style={{flex: 1, paddingTop: 20}}>
@@ -87,7 +91,6 @@ export default class PlanTabReviews extends Component {
         </View>
       );
     }
-
     return (
       <Container style={styles.container}>
       
@@ -99,7 +102,15 @@ export default class PlanTabReviews extends Component {
           />
         </View>
           <View>
-            <List dataArray = {this.state.reviews}
+            <List 
+              refreshControl={ 
+                <RefreshControl 
+                  refreshing={this.state.refreshing} 
+                  onRefresh={this._onRefresh.bind(this)} 
+                  title="Loading..."
+                  /> 
+              } 
+              dataArray = {this.state.reviews}
               renderRow = {(review) =>
                 <ListItem>
                   <Body> 
