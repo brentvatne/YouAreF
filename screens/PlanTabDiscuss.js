@@ -86,16 +86,13 @@ export default class PlanTabDiscuss extends Component {
       );
     }
 
-   console.log(this.state.discuss);
-
-
     return (
       <Container style={styles.container} >
         <Content>
           <View>
             <List dataArray={this.state.discuss}
               renderRow={(discussions) =>
-                <ListItem onPress={() => this.props.navigation.navigate('SingleDiscussion',{ id: `${this.sampleProps.sampleProps}`, question: `${discussions.question}`})}>
+                <ListItem onPress={() => this.props.navigation.navigate('SingleDiscussion',{ id: `${discussions.id}`, question: `${discussions.question}`})}>
                   <Body> 
                     <View style={styles.viewTextStyle}>
                       <Text>{discussions.question}</Text>

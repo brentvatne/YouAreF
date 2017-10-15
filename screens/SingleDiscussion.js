@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Input, Item } from 'native-base';
-import { ScrollView, StyleSheet, View, Image, TextInput, Button, AsyncStorage } from 'react-native';
+import { ScrollView, StyleSheet, View, Image, TextInput, Button, AsyncStorage, ActivityIndicator } from 'react-native';
 
 export default class SingleDiscussion extends Component {
 
@@ -16,13 +16,16 @@ export default class SingleDiscussion extends Component {
       isLoading: true,
       answers:{
       },
+      comment:'',
+      res:{},
     };
   }
 
   componentDidMount = async () => {
     let token = await AsyncStorage.getItem('token');
-    
-    fetch(`http://byld.tech/discussionAnswer/22`,
+    console.log("1123");
+    console.log(this.props.navigation.state.params.id);
+    fetch(`http://byld.tech/discussionAnswer/${this.props.navigation.state.params.id}`,
     {
        method: 'GET',
         headers: {
@@ -47,10 +50,47 @@ export default class SingleDiscussion extends Component {
       });
   }
 
-  render() {
+  onButtonPress= async () => {
+    console.log("ButtonPressed");
+    console.log(this.props.navigation.state.params.id);
+    console.log(this.state.comment);
+  let token = await AsyncStorage.getItem('token');   
+  fetch(`http://byld.tech/discussPlanAnswer/${this.props.navigation.state.params.id}`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+      'Host': 'byld.tech'
+    },
+    body: JSON.stringify({
+      answer: this.state.comment,
+    })
 
-    console.log(this.state.answers);
-    console.log(this.state.answers.answer);
+  })
+  .then((response) => response.json())
+  .then((responseJson) => {
+      this.setState({
+        res: responseJson
+       }, function() {
+          console.log(this.state.res);
+        if(this.state.res.status === "ok"){
+          console.log("ok");
+          this.refs.commentInput.setNativeProps({text:''})
+        }        
+    });
+  }); 
+  }
+
+  render() {
+    
+    if (this.state.isLoading) {
+      return (
+        <View style={{flex: 1, paddingTop: 20}}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
 
     return (
       <Container style={styles.container} >
@@ -64,7 +104,7 @@ export default class SingleDiscussion extends Component {
                       <Text>{answer.answer}</Text>
                     </View>
                     <View style={styles.viewTextStyle}>
-                      <Text note>{answer.user_name}</Text>
+                      <Text note>By {answer.user_name}</Text>
                     </View>
                   </Body>
                 </ListItem>
@@ -75,7 +115,11 @@ export default class SingleDiscussion extends Component {
           <View style={ {flex:1, flexDirection:'row', alignSelf:'stretch' ,position:'relative',paddingTop: 15,paddingLeft:5} }>
             <View style={{ flex:3,height:60, alignSelf:'stretch', position:'relative' }}>
               <Item regular>
-                <Input placeholder='Your comment here' />
+                <Input 
+                  ref='commentInput'
+                  placeholder='Your comment here'
+                  onChangeText={(comment) => this.setState({comment})} 
+                />
               </Item>
             </View>
             <View style={{ flex:1, alignSelf:'stretch',position:'relative',paddingTop:9,paddingLeft:10}}> 
