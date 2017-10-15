@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Input, Item } from 'native-base';
-import { ScrollView, StyleSheet, View, Image, TextInput, Button, AsyncStorage, ActivityIndicator } from 'react-native';
+import { ScrollView, StyleSheet, View, Image, TextInput, Button, AsyncStorage, ActivityIndicator, RefreshControl } from 'react-native';
 
 export default class SingleDiscussion extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -17,7 +17,18 @@ export default class SingleDiscussion extends Component {
       },
       comment:'',
       res:{},
+      refreshing: false,
     };
+  }
+
+  _onRefresh() { 
+    this.setState({refreshing: true}); 
+    setTimeout(() => {
+      this.componentDidMount();
+      this.setState({
+        refreshing: false
+      }); 
+    },3000); 
   }
 
   componentDidMount = async () => {
@@ -103,16 +114,15 @@ export default class SingleDiscussion extends Component {
         <Content>
           <View>
             <List
-              refreshControl={ 
+                refreshControl={ 
                 <RefreshControl 
                   refreshing={this.state.refreshing} 
                   onRefresh={this._onRefresh.bind(this)} 
+                  title="Loading..."
                   /> 
                 } 
-                
                 dataArray={this.state.answers}
                 renderRow={(answer) =>
-                
                 <ListItem>
                   <Body> 
                     <View style={styles.viewTextStyle}>

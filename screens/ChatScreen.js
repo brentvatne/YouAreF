@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body } from 'native-base';
-import { ScrollView, StyleSheet, View, Image, TextInput, WebView } from 'react-native';
+import { ScrollView, StyleSheet, View, Image, TextInput, WebView, ActivityIndicator } from 'react-native';
 
 export default class FaqScreen extends Component {
   
@@ -8,13 +8,34 @@ export default class FaqScreen extends Component {
     title: 'Chat',
   };
 
-  render() {
-    
-    const { navigate } = this.props.navigation;
+  constructor() {
+    super();
+    this.state = {
+      isLoading: true,
+    };
+  }
 
+  componentDidMount() {
+    setTimeout(() => {
+        this.setState({
+          isLoading: false
+        }); 
+      },6000); 
+  }
+
+  render() {  
+    console.log("Chat");
+    if (this.state.isLoading) {
+      return (
+        <View style={{flex: 1, paddingTop: 20}}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
+    const { navigate } = this.props.navigation;
     return (
       <Container style={styles.container} >
-        <WebView source={{uri: 'https://github.com/singhalok641'}} style={{marginTop: 20}} />
+        <WebView source={{uri: 'https://tawk.to/chat/59de80164854b82732ff5012/default/?$_tawk_popout=true'}} style={{marginTop: 20}} />
       </Container>
     );
   }

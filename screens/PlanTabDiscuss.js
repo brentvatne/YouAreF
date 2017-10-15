@@ -22,6 +22,7 @@ export default class PlanTabDiscuss extends Component {
   }
 
   _onRefresh() { 
+    console.log("refresh1");
     this.setState({refreshing: true}); 
     setTimeout(() => {
       this.componentDidMount();
@@ -29,6 +30,8 @@ export default class PlanTabDiscuss extends Component {
         refreshing: false
       }); 
     },3000); 
+
+    console.log("refresh2");
   }
 
   componentDidMount = async () => {
@@ -105,7 +108,9 @@ export default class PlanTabDiscuss extends Component {
                 <RefreshControl 
                   refreshing={this.state.refreshing} 
                   onRefresh={this._onRefresh.bind(this)} 
-                /> } 
+                  title="Loading..."
+                /> 
+              } 
               dataArray={this.state.discuss}
               renderRow={(discussions) =>
                 <ListItem onPress={() => this.props.navigation.navigate('SingleDiscussion',{ id: `${discussions.id}`, question: `${discussions.question}`})}>
