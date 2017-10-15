@@ -18,7 +18,7 @@ export default class SplashScreen extends Component {
 
 
   componentDidMount = async () => {
-    const resetActionLogin = NavigationActions.reset({
+    const resetActionMain = NavigationActions.reset({
       index: 0,
       actions: [
         NavigationActions.navigate({ routeName: 'Main'})
@@ -29,6 +29,13 @@ export default class SplashScreen extends Component {
       index: 0,
       actions: [
         NavigationActions.navigate({ routeName: 'approveScreen'})
+      ]
+    });
+
+    const resetActionLogin = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'Login'})
       ]
     });
 
@@ -51,7 +58,7 @@ export default class SplashScreen extends Component {
           checkstatus: responseJson
         }, function() {
           if(this.state.checkstatus.status === "accepted"){
-          this.props.navigation.dispatch(resetActionLogin);  
+          this.props.navigation.dispatch(resetActionMain);  
           }
           else {
            this.props.navigation.dispatch(resetActionApprove); 
@@ -66,7 +73,7 @@ export default class SplashScreen extends Component {
 
       }
       else {
-       this.props.navigation.navigate('Login'); 
+       this.props.navigation.dispatch(resetActionLogin); 
       }
     } 
     catch (error) {
