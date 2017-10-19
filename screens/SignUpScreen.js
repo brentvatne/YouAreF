@@ -76,7 +76,7 @@ export default class SignUpScreen extends Component {
         <Content>
           <View style={styles.view}>
             <Text style={styles.text}>
-              Become an Ambassador
+              Become a Gabby
             </Text>
             <TextInput
               style={{height: 50}}
