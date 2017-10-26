@@ -138,7 +138,7 @@ export default class SingleDiscussion extends Component {
           </View>
           
           <View style={ {flex:1, flexDirection:'row', alignSelf:'stretch' ,position:'relative',paddingTop: 15,paddingLeft:5} }>
-            <View style={{ flex:3,height:60, alignSelf:'stretch', position:'relative' }}>
+            <View style={{ flex:4,height:60, alignSelf:'stretch', position:'relative' }}>
               <Item regular>
                 <Input 
                   ref='commentInput'
@@ -147,12 +147,11 @@ export default class SingleDiscussion extends Component {
                 />
               </Item>
             </View>
-            <View style={{ flex:1, alignSelf:'stretch',position:'relative',paddingTop:9,paddingLeft:10}}> 
+            <View style={{ flex:2, alignSelf:'stretch',position:'relative',paddingTop:9,paddingLeft:10}}> 
               <Button
                 onPress={this.onButtonPress}
                 title="Comment"
                 color="#000000"
-                accessibilityLabel="Learn more about this purple button"
               />
             </View>
           </View>

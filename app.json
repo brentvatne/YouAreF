@@ -23,6 +23,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.youaref.client",
+      "buildNumber": "1.0.0",
       "config":{
         "googleSignIn":{
           "reservedClientId":"com.googleusercontent.apps.612669964630-79dju4toak9f4svrbp8n8f0ns27o1ldq"

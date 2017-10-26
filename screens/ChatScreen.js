@@ -20,7 +20,7 @@ export default class FaqScreen extends Component {
         this.setState({
           isLoading: false
         }); 
-      },6000); 
+      },10000); 
   }
 
   render() {  

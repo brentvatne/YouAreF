@@ -6,7 +6,7 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 export default class CampaignsScreen extends Component {
   
   static navigationOptions = {
-    title: 'Plans',
+    title: 'Missions',
     headerLeft: null,
   }
 
@@ -100,6 +100,7 @@ export default class CampaignsScreen extends Component {
     return (
       <Container style={styles.container} >
         <Content>
+        {this.state.plans.length > 0 ? (
           <List 
             refreshControl={ 
                 <RefreshControl 
@@ -133,6 +134,13 @@ export default class CampaignsScreen extends Component {
             </ListItem>
           }>
           </List>
+          ):
+          ( 
+            <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+              <Text note style={{fontSize: 20}}> No missions assigned yet ! </Text>
+            </View>
+          )
+          }
         </Content>
       </Container>
     );

@@ -170,7 +170,7 @@ export default class HomeScreen extends React.Component {
               <View style={{ flex:1,height: 80, alignSelf:'stretch',position:'relative'}}>
                 <Body style={{ alignItems:"center",justifyContent:"center"}}>
                   <Text style={{fontSize: 30}}> {this.state.home.my_plans} </Text>
-                  <Text  style={styles.smallText}>My plans</Text>
+                  <Text  style={styles.smallText}>My missions</Text>
                 </Body>
               </View>  
               <View style={{ flex:1,height: 80, alignSelf:'stretch',position:'relative'}}>
@@ -181,7 +181,7 @@ export default class HomeScreen extends React.Component {
               </View>
             </View>
           <View>
-            <Text style={{padding:16}}> My Plans </Text>
+            <Text style={{padding:16}}> My Missions </Text>
             {
               this.state.myplans.length > 0 ? (
                 <List dataArray={this.state.myplans}
@@ -214,7 +214,7 @@ export default class HomeScreen extends React.Component {
               </List>
                 ):
               ( <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
-                  <Text note style={{fontSize: 20}}> No plans yet ! </Text>
+                  <Text note style={{fontSize: 20}}> No missions yet ! </Text>
                 </View>
                 )
             } 

@@ -5,7 +5,7 @@ import { StyleSheet, Image, View, ActivityIndicator, AsyncStorage, RefreshContro
 export default class CampaignsScreen extends Component {
   
   static navigationOptions = {
-    title: 'Companies',
+    title: 'Brands',
     headerLeft: null,
     headerTitleStyle: { alignSelf: 'center' },
   }
@@ -72,6 +72,8 @@ export default class CampaignsScreen extends Component {
     return (
       <Container style={styles.container} >
         <Content>
+        {
+          this.state.companies.length > 0 ? (
           <List 
             refreshControl={ 
                 <RefreshControl 
@@ -96,6 +98,13 @@ export default class CampaignsScreen extends Component {
             </ListItem>
           }>
           </List>
+          ):
+          (
+            <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+              <Text note style={{fontSize: 20}}> No brands assigned yet ! </Text>
+            </View>
+          )
+        }
         </Content>
       </Container>
     );
