@@ -20,6 +20,8 @@ export default class SignUpScreen extends Component {
       cv: '',
       address:'',
       contact:'',
+      college:'',
+      degree:'',
       auth:{},
       types1: [{label: 'Male', value: 0}, {label: 'Female', value: 1}],
       value3: 0,
@@ -37,7 +39,11 @@ export default class SignUpScreen extends Component {
         NavigationActions.navigate({ routeName: 'approveScreen'})
       ]
     });
-    
+
+  handleNameChange = (event) => {
+    this.setState({ name: event.target.value });
+  };
+  
   fetch('http://byld.tech/signup', {
     method: 'POST',
     headers: {
@@ -71,10 +77,21 @@ export default class SignUpScreen extends Component {
   }
 
   render() {
+    const isEnabled = (this.state.college.length>0
+      && this.state.address.length>0 && this.state.degree.length>0 && this.state.cv.length && this.state.contact.length);
+
+    console.log(this.state.college.length>0);
+    console.log(this.state.address.length>0);
+    console.log(this.state.degree.length>0);
+    console.log(this.state.cv.length>0);
+    console.log(this.state.contact.length>0);
+    console.log("hey");
+    console.log(true && true && true && true && true);
+    console.log(isEnabled);
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
 
-    console.log(this.state.gender);
+    //console.log(this.state.gender);
 
     return (
       <Container style={styles.container} >
@@ -176,6 +193,7 @@ export default class SignUpScreen extends Component {
             </View>
 
             <Button 
+              disabled = {!isEnabled}
               title="SIGN UP"
               color='white'
               backgroundColor='black'
