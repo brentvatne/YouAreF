@@ -16,12 +16,12 @@ export default class SignUpScreen extends Component {
     this.state = {
       name:'',
       email: '',
-      gender: '',
+      gender: 'Male',
       cv: '',
       address:'',
       contact:'',
       auth:{},
-      types1: [{label: 'Male', value: 1}, {label: 'Female', value: 0}],
+      types1: [{label: 'Male', value: 0}, {label: 'Female', value: 1}],
       value3: 0,
       value3Index: 0,
     };
@@ -54,15 +54,14 @@ export default class SignUpScreen extends Component {
       address: this.state.address,
       degree: this.state.degree,
       cv: this.state.cv,
-
     })
-
   })
   .then((response) => response.json())
   .then((responseJson) => {
       this.setState({
         auth: responseJson
        }, function() {
+        console.log(this.state.auth);
       AsyncStorage.setItem("token",this.state.auth.token);
       this.props.navigation.dispatch(resetActionApprove);
     });
