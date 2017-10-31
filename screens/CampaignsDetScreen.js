@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
   aboutViewStyle: {
     alignItems: 'center',
     justifyContent: 'center',
-
+    flexDirection: 'row',
   },
   aboutTextStyle: {
     textAlign: 'justify',

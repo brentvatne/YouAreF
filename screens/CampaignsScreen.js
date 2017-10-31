@@ -59,6 +59,8 @@ export default class CampaignsScreen extends Component {
 
   render() {
 
+    //var company_logo = this.state.companies.logo;
+
     if (this.state.isLoading) {
       return (
         <View style={{flex: 1, paddingTop: 20}}>
@@ -84,7 +86,7 @@ export default class CampaignsScreen extends Component {
             dataArray={this.state.companies}
             renderRow={(camp) =>
             <ListItem onPress={() => navigate('CampaignsDetScreen', { id: `${camp.company_id}`, name: `${camp.name}`})}>
-              <Image style={styles.thumbnailStyle} source={{ uri: 'http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg' }} />
+              <Image style={styles.thumbnailStyle} source={{ uri: camp.logo }} />
               <Body>
                 <View style={styles.viewTextStyle}>
                   <Text>{camp.name}</Text>

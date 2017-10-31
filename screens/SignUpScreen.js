@@ -3,6 +3,7 @@ import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Sepa
 import { ScrollView, StyleSheet, View, Image, TextInput, AsyncStorage } from 'react-native';
 import { Button } from 'react-native-elements';
 import { NavigationActions } from 'react-navigation';
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
 export default class SignUpScreen extends Component {
   
@@ -20,6 +21,7 @@ export default class SignUpScreen extends Component {
       address:'',
       contact:'',
       auth:{},
+      value: 0,
     };
     this.onButtonPress = this.onButtonPress.bind(this);
   }
@@ -32,8 +34,12 @@ export default class SignUpScreen extends Component {
         NavigationActions.navigate({ routeName: 'approveScreen'})
       ]
     });
-    
 
+  var radio_props = [
+  {label: 'Male', value: 0 },
+  {label: 'Female', value: 1 }
+  ];
+    
   fetch('http://byld.tech/signup', {
     method: 'POST',
     headers: {
@@ -93,14 +99,22 @@ export default class SignUpScreen extends Component {
             <TextInput
               style={{height: 50}}
               placeholder="Contact Number"
+              keyboardType = 'numeric'
               onChangeText={(contact) => this.setState({contact})}
               value={this.state.contact}
+              maxLength = {10}
             />
             <TextInput
               style={{height: 50}}
               placeholder="Gender"
               onChangeText={(gender) => this.setState({gender})}
               value={this.state.gender}
+            />
+
+            <RadioForm
+              radio_props={radio_props}
+              initial={0}
+              onPress={(value) => {this.setState({value:value})}}
             />
             <TextInput
               style={{height: 50}}
@@ -126,7 +140,7 @@ export default class SignUpScreen extends Component {
               onChangeText={(cv) => this.setState({cv})}
               value={this.state.cv}
             />
-          </View>
+            </View>
 
             <Button 
               title="SIGN UP"
