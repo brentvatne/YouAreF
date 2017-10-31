@@ -21,8 +21,11 @@ export default class SignUpScreen extends Component {
       address:'',
       contact:'',
       auth:{},
-      value: 0,
+      types1: [{label: 'Male', value: 1}, {label: 'Female', value: 0}],
+      value3: 0,
+      value3Index: 0,
     };
+
     this.onButtonPress = this.onButtonPress.bind(this);
   }
 
@@ -34,11 +37,6 @@ export default class SignUpScreen extends Component {
         NavigationActions.navigate({ routeName: 'approveScreen'})
       ]
     });
-
-  var radio_props = [
-  {label: 'Male', value: 0 },
-  {label: 'Female', value: 1 }
-  ];
     
   fetch('http://byld.tech/signup', {
     method: 'POST',
@@ -56,6 +54,7 @@ export default class SignUpScreen extends Component {
       address: this.state.address,
       degree: this.state.degree,
       cv: this.state.cv,
+
     })
 
   })
@@ -73,9 +72,10 @@ export default class SignUpScreen extends Component {
   }
 
   render() {
-    
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
+
+    console.log(this.state.gender);
 
     return (
       <Container style={styles.container} >
@@ -104,18 +104,52 @@ export default class SignUpScreen extends Component {
               value={this.state.contact}
               maxLength = {10}
             />
-            <TextInput
+            {/*<TextInput
               style={{height: 50}}
               placeholder="Gender"
               onChangeText={(gender) => this.setState({gender})}
               value={this.state.gender}
-            />
+            />*/}
+            <View style={{ flex:1,flexDirection:'row',paddingTop: 12}}>
+              <Text>Gender: </Text>
+              <RadioForm formHorizontal={true} animation={true} >
+                {this.state.types1.map((obj, i) => {
+                var onPress = (value, index) => {
+                    this.setState({
+                      value3: value,
+                      value3Index: index,
+                      gender: obj.label,
+                    })
+                  }
 
-            <RadioForm
-              radio_props={radio_props}
-              initial={0}
-              onPress={(value) => {this.setState({value:value})}}
-            />
+                return (
+                  <RadioButton labelHorizontal={true} key={i} >
+                    {/*  You can set RadioButtonLabel before RadioButtonInput */}
+                    <RadioButtonInput
+                      obj={obj}
+                      index={i}
+                      isSelected={this.state.value3Index === i}
+                      onPress={onPress}
+                      buttonInnerColor={'#fad30a'}
+                      buttonOuterColor={this.state.value3Index === i ? '#000' : '#000'}
+                      buttonSize={12}
+                      buttonOuterSize={20}
+                      buttonStyle={{}}
+                      buttonWrapStyle={{marginLeft: 10}}
+                    />
+                    <RadioButtonLabel
+                      obj={obj}
+                      index={i}
+                      onPress={onPress}
+                      labelStyle={{fontWeight: 'normal', color: '#000'}}
+                      labelWrapStyle={{}}
+                    />
+                  </RadioButton>
+                    )
+                  })}
+              </RadioForm>
+            </View>
+
             <TextInput
               style={{height: 50}}
               placeholder="Address"
