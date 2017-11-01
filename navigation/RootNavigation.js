@@ -20,11 +20,15 @@ import TutorialsScreen from '../screens/TutorialsScreen';
 import approveScreen from '../screens/approveScreen';
 import ChatScreen from '../screens/ChatScreen';
 import SplashScreen from '../screens/SplashScreen';
+import AppIntroScreen from '../screens/AppIntroScreen';
 
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
 const RootStackNavigator = StackNavigator(
   {
+    AppIntro: {
+      screen: AppIntroScreen,
+    },
     Splash: {
       screen: SplashScreen,
     },

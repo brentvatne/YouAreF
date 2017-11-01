@@ -7,7 +7,7 @@ import AppIntro from 'react-native-app-intro';
 const windowsWidth = Dimensions.get('window').width;
 const windowsHeight = Dimensions.get('window').height;
 
-export default class SplashScreen extends Component {
+export default class AppIntroScreen extends Component {
   
   static navigationOptions = {
     header: null,
@@ -19,6 +19,7 @@ export default class SplashScreen extends Component {
       checkstatus:{},
     }
   }
+
 
   componentDidMount = async () => {
     const resetActionMain = NavigationActions.reset({
@@ -42,15 +43,7 @@ export default class SplashScreen extends Component {
       ]
     });
 
-    const resetActionAppIntro = NavigationActions.reset({
-      index:0,
-      actions:[
-        NavigationActions.navigate({ routeName: 'AppIntro'})
-      ]
-    });
-
-
-    try {
+    /*try {
       let token = await AsyncStorage.getItem('token');
       console.log(token);
       if(token!== null) {
@@ -84,24 +77,23 @@ export default class SplashScreen extends Component {
 
       }
       else {
-       //this.props.navigation.dispatch(resetActionLogin);
-       this.props.navigation.dispatch(resetActionAppIntro); 
+       this.props.navigation.dispatch(resetActionLogin); 
       }
     } 
     catch (error) {
       alert(error);
-    }
+    }*/
   }
 
   onSkipBtnHandle = (index) => {
-    Alert.alert('Skip');
+    NavigationActions.navigate({ routeName: 'Login'});    
     console.log(index);
   }
   doneBtnHandle = () => {
-    Alert.alert('Done');
+    NavigationActions.navigate({ routeName: 'Login'});
   }
   nextBtnHandle = (index) => {
-    Alert.alert('Next');
+    //Alert.alert('Next');
     console.log(index);
   }
   onSlideChangeHandle = (index, total) => {
@@ -112,10 +104,6 @@ export default class SplashScreen extends Component {
 	render() {	
     const { navigate } = this.props.navigation;
     return (
-
-      <Text> Loading </Text>
-
-      /*
        <AppIntro
         onNextBtnClick={this.nextBtnHandle}
         onDoneBtnClick={this.doneBtnHandle}
@@ -158,7 +146,7 @@ export default class SplashScreen extends Component {
           <View level={15}><Text style={styles.description}>searching for you.</Text></View>
         </View>
       </View>
-  </AppIntro>*/
+  </AppIntro>
     );
   }
 }
