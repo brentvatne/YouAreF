@@ -3,7 +3,7 @@ import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Icon
 import { StyleSheet, Image, View, TabNavigator, ListView, ActivityIndicator, AsyncStorage, TouchableOpacity, RefreshControl } from 'react-native';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
-export default class CampaignsScreen extends Component {
+export default class AllPlansScreen extends Component {
   
   static navigationOptions = {
     title: 'Missions',

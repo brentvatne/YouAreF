@@ -3,6 +3,11 @@ import { Container, Header, Content, Thumbnail, Text, Body, Icon } from 'native-
 import { StyleSheet, Image, View, TabNavigator, ListView, ActivityIndicator, AsyncStorage,Alert,Dimensions } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import AppIntro from 'react-native-app-intro';
+import {
+    Dialog,
+    ProgressDialog,
+    ConfirmDialog,
+} from 'react-native-simple-dialogs';
 
 const windowsWidth = Dimensions.get('window').width;
 const windowsHeight = Dimensions.get('window').height;
@@ -19,6 +24,39 @@ export default class SplashScreen extends Component {
       checkstatus:{},
     }
   }
+
+  state = {}
+
+    openDialog(show) {
+        this.setState({ showDialog: show })
+    }
+
+    openConfirm(show) {
+        this.setState({ showConfirm: show })
+    }
+
+    openProgress() {
+        this.setState({ showProgress: true })
+
+        setTimeout(
+            () => this.setState({ showProgress: false }),
+            2500
+        );
+    }
+
+    optionYes() {
+        this.openConfirm(false);
+        // Yes, this is a workaround :(
+        // Why? See this https://github.com/facebook/react-native/issues/10471
+        setTimeout(() => alert("Yes touched!"), 100);
+    }
+
+    optionNo() {
+        this.openConfirm(false);
+        // Yes, this is a workaround :(
+        // Why? See this https://github.com/facebook/react-native/issues/10471
+        setTimeout(() => alert("No touched!"), 100);
+    }
 
   componentDidMount = async () => {
     const resetActionMain = NavigationActions.reset({
@@ -48,7 +86,6 @@ export default class SplashScreen extends Component {
         NavigationActions.navigate({ routeName: 'AppIntro'})
       ]
     });
-
 
     try {
       let token = await AsyncStorage.getItem('token');
@@ -93,72 +130,15 @@ export default class SplashScreen extends Component {
     }
   }
 
-  onSkipBtnHandle = (index) => {
-    Alert.alert('Skip');
-    console.log(index);
-  }
-  doneBtnHandle = () => {
-    Alert.alert('Done');
-  }
-  nextBtnHandle = (index) => {
-    Alert.alert('Next');
-    console.log(index);
-  }
-  onSlideChangeHandle = (index, total) => {
-    console.log(index, total);
-}
-
-
 	render() {	
     const { navigate } = this.props.navigation;
     return (
-
-      <Text> Loading </Text>
-
-      /*
-       <AppIntro
-        onNextBtnClick={this.nextBtnHandle}
-        onDoneBtnClick={this.doneBtnHandle}
-        onSkipBtnClick={this.onSkipBtnHandle}
-        onSlideChange={this.onSlideChangeHandle}
-      >
-      <View style={[styles.slide, { backgroundColor: '#fad30a' }]}>
-        <View style={[styles.header, {width: windowsWidth}]}>
-          <View>
-            <Image style={styles.imageStyle} source={require('../assets/images/YOUAREF.png')} />
-          </View>
-        </View>
-        <View style={styles.info}>
-          <View level={10}><Text style={styles.title}>You Are F</Text></View>
-          <View level={15}><Text style={styles.description}>Where F Stands For Found</Text></View>
-        </View>
-      </View>
-      <View style={[styles.slide, { backgroundColor: '#fad30a' }]}>
-        <View style={[styles.header, {width: windowsWidth}]}>
-          <View>
-            <Image style={styles.imageStyle} source={require('../assets/images/youarefChotu.png')} />
-          </View>
-        </View>
-        <View style={styles.info}>
-          <View level={10}><Text style={styles.title}>Are You A Bakchod?</Text></View>
-          <View level={10}><Text style={styles.title}>A Gabby?</Text></View>
-          <View level={10}><Text style={styles.title}>A Social Butterfly?</Text></View>
-        </View>
-      </View>
-      <View style={[styles.slide, { backgroundColor: '#fad30a' }]}>
-        <View style={[styles.header, {width: windowsWidth}]}>
-          <View>
-            <Image style={styles.imageStyle} source={require('../assets/images/youarefChotu.png')} />
-          </View>
-        </View>
-        <View style={styles.info}>
-          <View level={10}><Text style={styles.title}>Walk and talk for ₹100</Text></View>
-          <View level={10}><Text style={styles.title}>and more and more</Text></View>
-          <View level={15}><Text style={styles.description}>Top employers are</Text></View>
-          <View level={15}><Text style={styles.description}>searching for you.</Text></View>
-        </View>
-      </View>
-  </AppIntro>*/
+      <ProgressDialog
+              visible={this.state.showProgress}
+              message="Loading..."
+              activityIndicatorSize="large"
+              activityIndicatorColor="black"
+            />
     );
   }
 }

@@ -8,7 +8,7 @@ import {
     Dialog,
     ProgressDialog,
     ConfirmDialog,
-} from 'react-native-simple-dialogs'
+} from 'react-native-simple-dialogs';
 
 export default class LoginScreen extends React.Component {
 

@@ -26,11 +26,11 @@ import registerForPushNotificationsAsync from '../api/registerForPushNotificatio
 
 const RootStackNavigator = StackNavigator(
   {
-    AppIntro: {
-      screen: AppIntroScreen,
-    },
     Splash: {
       screen: SplashScreen,
+    },
+    AppIntro: {
+      screen: AppIntroScreen,
     },
     Login: {
       screen: LoginScreen,

@@ -24,7 +24,6 @@ export default class FaqScreen extends Component {
   }
 
   render() {  
-    console.log("Chat");
     if (this.state.isLoading) {
       return (
         <View style={{flex: 1, paddingTop: 20}}>

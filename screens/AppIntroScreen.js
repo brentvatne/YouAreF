@@ -20,95 +20,34 @@ export default class AppIntroScreen extends Component {
     }
   }
 
-
-  componentDidMount = async () => {
-    const resetActionMain = NavigationActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate({ routeName: 'Main'})
-      ]
-    });
-
-    const resetActionApprove = NavigationActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate({ routeName: 'approveScreen'})
-      ]
-    });
-
-    const resetActionLogin = NavigationActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate({ routeName: 'Login'})
-      ]
-    });
-
-    /*try {
-      let token = await AsyncStorage.getItem('token');
-      console.log(token);
-      if(token!== null) {
-      fetch('http://byld.tech/checkstatus',{
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + token,
-          'Host': 'byld.tech'
-        }
-      })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          checkstatus: responseJson
-        }, function() {
-          if(this.state.checkstatus.status === "accepted"){
-          this.props.navigation.dispatch(resetActionMain);  
-          }
-          else {
-           this.props.navigation.dispatch(resetActionApprove); 
-          }
-          
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-        
-
-      }
-      else {
-       this.props.navigation.dispatch(resetActionLogin); 
-      }
-    } 
-    catch (error) {
-      alert(error);
-    }*/
-  }
-
   onSkipBtnHandle = (index) => {
-    NavigationActions.navigate({ routeName: 'Login'});    
+    NavigationActions.navigate({ routeName: 'Login'}); 
     console.log(index);
   }
   doneBtnHandle = () => {
-    NavigationActions.navigate({ routeName: 'Login'});
+      this.props.navigation.dispatch(resetActionLogin);
+      console.log("DonePressed");
+      NavigationActions.navigate({ routeName: 'Login'});
   }
   nextBtnHandle = (index) => {
-    //Alert.alert('Next');
-    console.log(index);
+      //Alert.alert('Next');
+      console.log(index);
   }
   onSlideChangeHandle = (index, total) => {
-    console.log(index, total);
-}
-
+      console.log(index, total);
+  }
 
 	render() {	
     const { navigate } = this.props.navigation;
     return (
        <AppIntro
         onNextBtnClick={this.nextBtnHandle}
-        onDoneBtnClick={this.doneBtnHandle}
-        onSkipBtnClick={this.onSkipBtnHandle}
+        onDoneBtnClick={() => navigate('Login')}
+        onSkipBtnClick={() => navigate('Login')}
         onSlideChange={this.onSlideChangeHandle}
+        activeDotColor={'#000'}
+        rightTextColor={'#666666'}
+        leftTextColor={'#666666'}
       >
       <View style={[styles.slide, { backgroundColor: '#fad30a' }]}>
         <View style={[styles.header, {width: windowsWidth}]}>
