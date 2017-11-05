@@ -21,6 +21,7 @@ import approveScreen from '../screens/approveScreen';
 import ChatScreen from '../screens/ChatScreen';
 import SplashScreen from '../screens/SplashScreen';
 import AppIntroScreen from '../screens/AppIntroScreen';
+import AboutUsScreen from '../screens/AboutUsScreen';
 
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
@@ -82,6 +83,9 @@ const RootStackNavigator = StackNavigator(
     },
     ChatScreen: {
       screen: ChatScreen,
+    },
+    AboutUsScreen: {
+      screen: AboutUsScreen,
     },
   },
   {

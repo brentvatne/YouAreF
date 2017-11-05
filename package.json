@@ -12,6 +12,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@expo/react-native-read-more-text": "^1.1.0",
     "@expo/samples": "^2.0.2",
     "expo": "^20.0.3",
     "express": "^4.16.1",
