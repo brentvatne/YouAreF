@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Separator, Input, Item } from 'native-base';
-import { ScrollView, StyleSheet, View, Image, TextInput, Button, AsyncStorage, ActivityIndicator } from 'react-native';
+import { ScrollView, StyleSheet, View, Image, TextInput, Button, AsyncStorage, ActivityIndicator, RefreshControl } from 'react-native';
 
 export default class SingleDiscussion extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -17,7 +17,18 @@ export default class SingleDiscussion extends Component {
       },
       comment:'',
       res:{},
+      refreshing: false,
     };
+  }
+
+  _onRefresh() { 
+    this.setState({refreshing: true}); 
+    setTimeout(() => {
+      this.componentDidMount();
+      this.setState({
+        refreshing: false
+      }); 
+    },3000); 
   }
 
   componentDidMount = async () => {
@@ -103,16 +114,15 @@ export default class SingleDiscussion extends Component {
         <Content>
           <View>
             <List
-              refreshControl={ 
+                refreshControl={ 
                 <RefreshControl 
                   refreshing={this.state.refreshing} 
                   onRefresh={this._onRefresh.bind(this)} 
+                  title="Loading..."
                   /> 
                 } 
-                
                 dataArray={this.state.answers}
                 renderRow={(answer) =>
-                
                 <ListItem>
                   <Body> 
                     <View style={styles.viewTextStyle}>
@@ -128,7 +138,7 @@ export default class SingleDiscussion extends Component {
           </View>
           
           <View style={ {flex:1, flexDirection:'row', alignSelf:'stretch' ,position:'relative',paddingTop: 15,paddingLeft:5} }>
-            <View style={{ flex:3,height:60, alignSelf:'stretch', position:'relative' }}>
+            <View style={{ flex:4,height:60, alignSelf:'stretch', position:'relative' }}>
               <Item regular>
                 <Input 
                   ref='commentInput'
@@ -137,12 +147,11 @@ export default class SingleDiscussion extends Component {
                 />
               </Item>
             </View>
-            <View style={{ flex:1, alignSelf:'stretch',position:'relative',paddingTop:9,paddingLeft:10}}> 
+            <View style={{ flex:2, alignSelf:'stretch',position:'relative',paddingTop:9,paddingLeft:10}}> 
               <Button
                 onPress={this.onButtonPress}
                 title="Comment"
                 color="#000000"
-                accessibilityLabel="Learn more about this purple button"
               />
             </View>
           </View>

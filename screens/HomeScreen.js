@@ -41,22 +41,22 @@ import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
 import IconBadge from 'react-native-icon-badge';
 import { NavigationActions } from 'react-navigation'
 
-
-
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   }
+  
   constructor() {
     super();
     this.state = {
+      isLoading: true,
       active: 'true',
       home:{},
       myplans:{},
       username:'',
-
     };
   }
+
   componentDidMount = async () => {
     let token = await AsyncStorage.getItem('token');
     
@@ -111,7 +111,6 @@ export default class HomeScreen extends React.Component {
   }
 
   render() {
-
     if (this.state.isLoading) {
       return (
         <View style={{flex: 1, paddingTop: 20}}>
@@ -171,7 +170,7 @@ export default class HomeScreen extends React.Component {
               <View style={{ flex:1,height: 80, alignSelf:'stretch',position:'relative'}}>
                 <Body style={{ alignItems:"center",justifyContent:"center"}}>
                   <Text style={{fontSize: 30}}> {this.state.home.my_plans} </Text>
-                  <Text  style={styles.smallText}>My plans</Text>
+                  <Text  style={styles.smallText}>My missions</Text>
                 </Body>
               </View>  
               <View style={{ flex:1,height: 80, alignSelf:'stretch',position:'relative'}}>
@@ -182,7 +181,7 @@ export default class HomeScreen extends React.Component {
               </View>
             </View>
           <View>
-            <Text style={{padding:16}}> My Plans </Text>
+            <Text style={{padding:16}}> My Missions </Text>
             {
               this.state.myplans.length > 0 ? (
                 <List dataArray={this.state.myplans}
@@ -215,7 +214,7 @@ export default class HomeScreen extends React.Component {
               </List>
                 ):
               ( <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
-                  <Text note style={{fontSize: 20}}> No plans yet ! </Text>
+                  <Text note style={{fontSize: 20}}> No missions yet ! </Text>
                 </View>
                 )
             } 
@@ -223,13 +222,13 @@ export default class HomeScreen extends React.Component {
             </View>
           </Content>
           
-          <ActionButton buttonColor="rgba(250,211,10,1)" degrees={0} icon={<Ionicons name="md-call" style={styles.floatingActionButtonIcon} /> } onPress={() => call(args).catch(console.error)} >
-            {/*<ActionButton.Item buttonColor='#9b59b6' title="Call" onPress={() => call(args).catch(console.error)}>
+          <ActionButton buttonColor="rgba(250,211,10,1)" degrees={0} icon={<Ionicons name="md-call" style={styles.floatingActionButtonIcon} /> }  >
+            <ActionButton.Item buttonColor='#9b59b6' title="Call" onPress={() => call(args).catch(console.error)}>
               <Ionicons name="md-call" style={styles.actionButtonIcon} />
             </ActionButton.Item>
             <ActionButton.Item buttonColor='#1abc9c' title="Chat" onPress={() => navigate('ChatScreen')}>
               <Ionicons name="md-chatboxes" style={styles.actionButtonIcon} />
-            </ActionButton.Item>*/}
+            </ActionButton.Item>
           </ActionButton>
         </Container>
     );

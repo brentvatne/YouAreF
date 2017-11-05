@@ -13,6 +13,15 @@ export default class App extends React.Component {
     this._loadAssetsAsync();
   }
 
+  /*_loadAssetsAsync = async () => {
+    return Font.loadAsync({
+      ...Ionicons.font,
+      'OpenSans-Light': require('./assets/fonts/OpenSans-Light.ttf'),
+      'OpenSans': require('./assets/fonts/OpenSans-Regular.ttf'),
+      'OpenSans-Bold': require('./assets/fonts/OpenSans-Semibold.ttf'),
+    });
+  };*/
+
   render() {
     if (!this.state.assetsAreLoaded && !this.props.skipLoadingScreen) {
       return <AppLoading />;

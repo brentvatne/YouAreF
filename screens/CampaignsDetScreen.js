@@ -68,10 +68,9 @@ constructor(props) {
 }
 
   onsubmitrating = async () => {
-  
   let token = await AsyncStorage.getItem('token');
     
-  fetch(`http://byld.tech/ratecompany/${this.props.navigation.state.params.id}`, {
+    fetch(`http://byld.tech/ratecompany/${this.props.navigation.state.params.id}`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -249,7 +248,7 @@ const styles = StyleSheet.create({
   aboutViewStyle: {
     alignItems: 'center',
     justifyContent: 'center',
-
+    flexDirection: 'row',
   },
   aboutTextStyle: {
     textAlign: 'justify',
