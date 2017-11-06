@@ -19,16 +19,7 @@ export default class AppIntroScreen extends Component {
       checkstatus:{},
     }
   }
-
-  onSkipBtnHandle = (index) => {
-    NavigationActions.navigate({ routeName: 'Login'}); 
-    console.log(index);
-  }
-  doneBtnHandle = () => {
-      this.props.navigation.dispatch(resetActionLogin);
-      console.log("DonePressed");
-      NavigationActions.navigate({ routeName: 'Login'});
-  }
+  
   nextBtnHandle = (index) => {
       //Alert.alert('Next');
       console.log(index);

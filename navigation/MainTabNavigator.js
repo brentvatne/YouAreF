@@ -9,7 +9,6 @@ import MenuScreen from '../screens/MenuScreen';
 import HomeScreen from '../screens/HomeScreen';
 import CampaignsScreen from '../screens/CampaignsScreen';
 import AllPlansScreen from '../screens/AllPlansScreen';
-import DealsScreen from '../screens/DealsScreen';
 
 export default TabNavigator(
   {

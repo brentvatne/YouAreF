@@ -32,7 +32,7 @@
     },
     "android": {
       "package": "com.youaref.client",
-      "versionCode": 3,
+      "versionCode": 4,
       "config": {
         "googleSignIn": {
           "apiKey": "AIzaSyBHzyuKFyzQPdVsg126zD4u_x4lIHIe34o",
